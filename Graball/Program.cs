@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Graball
 {
@@ -27,7 +28,8 @@ namespace Graball
         /// <param name="args">Argumentos de linha de comando.</param>
         public Program(string[] args)
         {
-            LoadInputOutput();            
+            ExtractAssemblies();
+            LoadInputOutput();
             LoadTranslate(CultureInfo.CurrentUICulture.Name);
         }
 
@@ -40,6 +42,47 @@ namespace Graball
         /// Exibidor de informações para o usuário.
         /// </summary>
         private OutputManager Output { get; } = new OutputManager();
+
+        /// <summary>
+        /// Extrai assemblies obrigatórios para a mesma pasta do executável.
+        /// </summary>
+        private void ExtractAssemblies()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resources = assembly.GetManifestResourceNames();
+            foreach (var resource in resources)
+            {
+                var match = Regex.Match(resource, @"(?<=Properties\.).*\.dll$", RegexOptions.IgnoreCase);
+                if (match.Success)
+                {
+                    var file = new FileInfo(Path.Combine(Definitions.DirectoryForExecutable.FullName, match.Value));
+                    if (file.Exists && AssemblyHelper.Load(file.FullName) == null)
+                    {
+                        try
+                        {
+                            file.Delete();
+                            file.Refresh();
+                        }
+                        catch
+                        {
+                            Output.Write($"!{Phrases.FILE_DELETE_ERROR}\n", file.Name);
+                        }
+                    }
+                    if (!file.Exists)
+                    {
+                        var bytes = assembly.ResourceBinary(resource);
+                        try
+                        {
+                            File.WriteAllBytes(file.FullName, bytes);
+                        }
+                        catch
+                        {
+                            Output.Write($"!{Phrases.FILE_WRITE_ERROR}\n", file.Name);
+                        }
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Carrega os módulos de entrada e saída de informações de/para o usuário.
@@ -85,7 +128,7 @@ namespace Graball
         /// <param name="language">Idioma.</param>
         private void LoadTranslate(string language)
         {
-            var resource = Assembly.GetEntryAssembly().Resource("Graball.Properties.Translates.json");
+            var resource = Assembly.GetExecutingAssembly().ResourceString("Graball.Properties.Translates.json");
             Translate.LoadAll(resource);
 
             new Translate(language, true);
