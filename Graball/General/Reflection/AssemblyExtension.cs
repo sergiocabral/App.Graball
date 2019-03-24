@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 
-namespace Graball.General.Reflection.Extensions
+namespace Graball.General.Reflection
 {
     /// <summary>
     /// Entensão de métodos para: Assembly
