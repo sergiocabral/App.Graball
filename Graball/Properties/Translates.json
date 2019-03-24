@@ -1,0 +1,15 @@
+[
+  {
+    "Key": "test",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "teste"
+      },
+      {
+        "Key": "fr-FR",
+        "Value": "ui"
+      }
+    ]
+  }
+]
