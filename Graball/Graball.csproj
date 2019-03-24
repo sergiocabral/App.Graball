@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\Graball.Input.Console.dll" />
+    <None Remove="Properties\Graball.Output.Console.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Graball.Input.Console.dll" />
+    <EmbeddedResource Include="Properties\Graball.Output.Console.dll" />
     <EmbeddedResource Include="Properties\Translates.json" />
   </ItemGroup>
 
@@ -37,8 +44,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="echo dotnet $(TargetFileName) %%1 &gt; bin\Debug\netcoreapp2.1\$(TargetName).bat&#xD;&#xA;echo dotnet $(TargetFileName) %%1 &gt; bin\Release\netcoreapp2.1\$(TargetName).bat" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="echo dotnet $(TargetFileName) %%1 &gt; $(OutDir)\$(TargetName).bat" />
   </Target>
 
 </Project>

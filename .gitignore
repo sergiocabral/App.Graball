@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Graball/Properties/Graball.Input.Console.dll
+/Graball/Properties/Graball.Output.Console.dll
