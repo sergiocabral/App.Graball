@@ -6,8 +6,8 @@
     /// Pode iniciar a frase ("#Por exemplo") ou conter palavras ("Outro *exemplo* aqui.")
     ///     Título:     ^
 	///     Destacado:  *
-	///     Detalhe:    _
-	///     Dica:       #
+	///     Detalhe:    #
+	///     Dica:       _
 	///     Erro:       !
 	///     Pergunta:   ?
 	///     Resposta:   @

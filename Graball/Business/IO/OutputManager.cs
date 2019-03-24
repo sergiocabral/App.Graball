@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Graball.General.Text;
+using System;
 using System.Collections.Generic;
 
 namespace Graball.Business.IO
@@ -27,9 +28,11 @@ namespace Graball.Business.IO
             }
             else
             {
-
+                foreach (var item in Items)
+                {
+                    item.Write(Translate.Default.Text(format), args);
+                }
             }
-
             return this;
         }
 

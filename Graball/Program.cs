@@ -61,7 +61,7 @@ namespace Graball
                             {
                                 manager.Add((T)instance);
                             }                            
-                            Output.Write($"!{Phrases.FILE_LOADED_ASSEMBLY}\n", assembly.Description());
+                            Output.Write($"#{Phrases.FILE_LOADED_ASSEMBLY}\n", assembly.Description());
                         }
                         else
                         {
