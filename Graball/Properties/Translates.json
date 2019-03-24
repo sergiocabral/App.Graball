@@ -1,14 +1,46 @@
 [
   {
-    "Key": "test",
+    "Key": "Module loaded: {0}",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "teste"
-      },
+        "Value": "Módulo carregado: {0}"
+      }
+    ]
+  },
+  {
+    "Key": "There was an error loading the file \"{0}\".",
+    "Value": [
       {
-        "Key": "fr-FR",
-        "Value": "ui"
+        "Key": "pt-BR",
+        "Value": "Ocorreu um erro ao carregar o arquivo \"{0}\"."
+      }
+    ]
+  },
+  {
+    "Key": "The contents of the file \"{0}\" are not valid.",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "O conteúdo do arquivo \"{0}\" não é válido."
+      }
+    ]
+  },
+  {
+    "Key": "There was an error writing file \"{0}\".",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Ocorreu um erro ao gravar o arquivo \"{0}\"."
+      }
+    ]
+  },
+  {
+    "Key": "There was an error deleting file \"{0}\".",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Ocorreu um erro ao apagar o arquivo \"{0}\"."
       }
     ]
   }

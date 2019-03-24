@@ -31,6 +31,7 @@ namespace Graball
             ExtractAssemblies();
             LoadInputOutput();
             LoadTranslate(CultureInfo.CurrentUICulture.Name);
+            Output.QueueFlush();
         }
 
         /// <summary>
@@ -118,8 +119,6 @@ namespace Graball
             }
             load<OutputInterface>(Output, Definitions.FileMaskForOutput);
             load<InputInterface>(Input, Definitions.FileMaskForInput);
-
-            Output.QueueFlush();
         }
 
         /// <summary>
