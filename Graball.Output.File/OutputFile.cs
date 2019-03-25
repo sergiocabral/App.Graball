@@ -1,21 +1,42 @@
-﻿using Graball.Business.IO;
+﻿using Graball.Business;
+using Graball.Business.IO;
+using Graball.General.IO;
+using System;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Graball.Output.File
 {
     /// <summary>
     /// Output para janela de console.
     /// </summary>
-    public class OutputFile : OutputBase
+    public class OutputFile : OutputBaseWithFormater
     {
         /// <summary>
-        /// Escreve um texto formatado.
+        /// Construtor.
         /// </summary>
-        /// <param name="format">Formato</param>
-        /// <param name="arg">Argumentos.</param>
-        /// <returns>Auto referência.</returns>
-        public override OutputInterface Write(string format, params object[] args)
+        public OutputFile()
         {
-            return this;
+            Filename = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, Regex.Match(this.GetType().FullName, ".*(?=" + this.GetType().Name + "$)").Value + string.Format("{0:yyyy-MM-dd-HH-mm-ss}.log", DateTime.Now)));
+            Filename.CreateEmpty();
+        }
+
+        /// <summary>
+        /// Arquivo de saída.
+        /// </summary>
+        public FileInfo Filename { get; }
+
+        /// <summary>
+        /// Solicita a escrita imediata.
+        /// </summary>
+        /// <param name="text">Texto.</param>
+        /// <param name="mark">Marcador.</param>
+        protected override void WriteNow(string text, char mark)
+        {
+            using(var stream = Filename.AppendText())
+            {
+                stream.Write(text);
+            }
         }
     }
 }

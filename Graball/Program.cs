@@ -1,4 +1,5 @@
-﻿using Graball.Business;
+﻿
+using Graball.Business;
 using Graball.Business.IO;
 using Graball.General.Reflection;
 using Graball.General.Text;
@@ -28,10 +29,15 @@ namespace Graball
         /// <param name="args">Argumentos de linha de comando.</param>
         public Program(string[] args)
         {
+            Output.Prevent = true;
             ExtractAssemblies();
             LoadInputOutput();
-            LoadTranslate(CultureInfo.CurrentUICulture.Name);
-            Output.QueueFlush();
+            LoadTranslate(CultureInfo.CurrentUICulture.Name);            
+            Run();
+
+#if DEBUG
+            System.Console.ReadKey();
+#endif
         }
 
         /// <summary>
@@ -66,7 +72,7 @@ namespace Graball
                         }
                         catch
                         {
-                            Output.Write($"!{Phrases.FILE_DELETE_ERROR.Translate()}\n", file.Name);
+                            Output.WriteLine($"!{Phrases.FILE_DELETE_ERROR.Translate()}", file.Name);
                         }
                     }
                     if (!file.Exists)
@@ -78,7 +84,7 @@ namespace Graball
                         }
                         catch
                         {
-                            Output.Write($"!{Phrases.FILE_WRITE_ERROR.Translate()}\n", file.Name);
+                            Output.WriteLine($"!{Phrases.FILE_WRITE_ERROR.Translate()}", file.Name);
                         }
                     }
                 }
@@ -104,7 +110,7 @@ namespace Graball
                             {
                                 manager.Add((T)instance);
                             }                            
-                            Output.Write($"#{Phrases.FILE_LOADED_ASSEMBLY.Translate()}\n", assembly.Description());
+                            Output.WriteLine($"#{Phrases.FILE_LOADED_ASSEMBLY.Translate()}", assembly.Description());
                         }
                         else
                         {
@@ -113,7 +119,7 @@ namespace Graball
                     }
                     catch
                     {
-                        Output.Write($"!{Phrases.FILE_LOAD_ERROR.Translate()}\n", file.Name);
+                        Output.WriteLine($"!{Phrases.FILE_LOAD_ERROR.Translate()}", file.Name);
                     }
                 }                
             }
@@ -146,15 +152,49 @@ namespace Graball
                     }
                     catch (Exception ex)
                     {
-                        Output.Write($"!{Phrases.FILE_CONTENT_INVALID.Translate()}\n", file.Name);
-                        Output.Write($"!{ex.Message}\n");
+                        Output.WriteLine($"!{Phrases.FILE_CONTENT_INVALID.Translate()}", file.Name);
+                        Output.WriteLine($"!{ex.Message}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Output.Write($"!{Phrases.FILE_LOAD_ERROR.Translate()}\n", file.Name);
-                    Output.Write($"!{ex.Message}\n");
+                    Output.WriteLine($"!{Phrases.FILE_LOAD_ERROR.Translate()}", file.Name);
+                    Output.WriteLine($"!{ex.Message}");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Funcionamento do programa.
+        /// </summary>
+        private void Run()
+        {
+            do
+            {
+                Welcome();
+
+                Output.WriteLine("Not implemented...").WriteLine();
+
+            } while (Console.ReadKey().Key != ConsoleKey.Escape);
+        }
+
+        /// <summary>
+        /// Mensagem de boas-vindas.
+        /// </summary>
+        private void Welcome()
+        {
+            Output.Prevent = false;
+
+            var name = Assembly.GetExecutingAssembly().Description();
+            Output.WriteLine("^+-{0}-+", new String('-', name.Length));
+            Output.WriteLine("^| {0} |", name);
+            Output.WriteLine("^+-{0}-+", new String('-', name.Length));
+            Output.WriteLine();
+
+            if (!Output.Flushed)
+            {
+                Output.QueueFlush();
+                Output.WriteLine();
             }
         }
     }

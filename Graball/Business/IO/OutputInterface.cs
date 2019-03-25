@@ -2,16 +2,6 @@
 {
     /// <summary>
     /// Interface para exibidor de informações para o usuário.
-    /// Implementar esses marcados ao escrever texto:
-    /// Pode iniciar a frase ("#Por exemplo") ou conter palavras ("Outro *exemplo* aqui.")
-    ///     Título:     ^
-	///     Destacado:  *
-	///     Detalhe:    #
-	///     Dica:       _
-	///     Erro:       !
-	///     Pergunta:   ?
-	///     Resposta:   @
-	///     Nova linha: \n
     /// </summary>
     public interface OutputInterface
     {
@@ -22,5 +12,13 @@
         /// <param name="arg">Argumentos.</param>
         /// <returns>Auto referência.</returns>
         OutputInterface Write(string format, params object[] arg);
+
+        /// <summary>
+        /// Escreve um texto formatado e adiciona nova uma linha.
+        /// </summary>
+        /// <param name="format">Formato</param>
+        /// <param name="arg">Argumentos.</param>
+        /// <returns>Auto referência.</returns>
+        OutputInterface WriteLine(string format = "", params object[] args);
     }
 }

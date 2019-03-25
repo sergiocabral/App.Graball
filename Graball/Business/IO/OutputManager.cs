@@ -27,6 +27,17 @@ namespace Graball.Business.IO
         }
 
         /// <summary>
+        /// Escreve um texto formatado e adiciona nova uma linha.
+        /// </summary>
+        /// <param name="format">Formato</param>
+        /// <param name="arg">Argumentos.</param>
+        /// <returns>Auto referência.</returns>
+        public OutputInterface WriteLine(string format = "", params object[] args)
+        {
+            return Write(format + "\n", args);
+        }
+
+        /// <summary>
         /// Escreve um texto formatado.
         /// </summary>
         /// <param name="text">Informações do texto.</param>
@@ -34,7 +45,7 @@ namespace Graball.Business.IO
         /// <returns>Auto referência.</returns>
         private OutputInterface Write(KeyValuePair<string, object[]> text, bool force = false)
         {
-            if (!force && (Items.Count == 0 || !Flushed))
+            if (!force && (Items.Count == 0 || Prevent))
             {
                 Queue.Add(text);
                 Flushed = false;
@@ -48,6 +59,11 @@ namespace Graball.Business.IO
             }
             return this;
         }
+
+        /// <summary>
+        /// Evita o output.
+        /// </summary>
+        public bool Prevent { get; set; }
 
         /// <summary>
         /// Sinaliza que não há intens para enviar (flush)

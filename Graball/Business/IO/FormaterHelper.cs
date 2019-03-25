@@ -10,6 +10,16 @@ namespace Graball.Business.IO
 
     /// <summary>
     /// Auxilia na formatação de textos para output
+    /// Implementar esses marcadores ao escrever texto:
+    /// Pode iniciar a frase ("#Por exemplo") ou conter palavras ("Outro *exemplo* aqui.")
+    ///     Título:     ^
+	///     Destacado:  *
+	///     Detalhe:    #
+	///     Dica:       _
+	///     Erro:       !
+	///     Pergunta:   ?
+	///     Resposta:   @
+	///     Nova linha: \n
     /// </summary>
     public static class FormaterHelper
     {
@@ -73,6 +83,31 @@ namespace Graball.Business.IO
                     chars = list.ToArray();
                 }
                 return chars;
+            }
+        }
+
+        /// <summary>
+        /// Solicita a escrita parte por parte formatada.
+        /// </summary>
+        /// <param name="text">Texto</param>
+        /// <param name="write">Função de escrita</param>
+        /// <param name="ignoreFormatter">Ignora o formatador. Aplica apenas NewLine.</param>
+        public static void Output(string text, Action<string, char> write)
+        {
+            text = (text + string.Empty).Replace(CharNewLine.ToString(), Environment.NewLine);
+
+            var firstCharIsMark =
+                !string.IsNullOrWhiteSpace(text) &&
+                Chars.Contains(text[0]) &&
+                (text.Length > 1 && text[0] != text[1]);
+
+            if (firstCharIsMark)
+            {
+                write(text.Substring(1), text[0]);
+            }
+            else
+            {
+                write(text, (char)0);
             }
         }
     }
