@@ -115,7 +115,7 @@ namespace Graball.General.Text
         /// <summary>
         /// Instância padrão.
         /// </summary>
-        public static Translate Default { get; set; }
+        public static Translate Default { get; set; } = new Translate(string.Empty);
 
         /// <summary>
         /// Retorna a tradução de um texto.
