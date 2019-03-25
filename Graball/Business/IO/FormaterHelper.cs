@@ -75,36 +75,5 @@ namespace Graball.Business.IO
                 return chars;
             }
         }
-
-        /// <summary>
-        /// Traduz um texto ignorando o caracter inicial se for um marcador.
-        /// </summary>
-        /// <param name="text">Texto.</param>
-        /// <returns>Texto traduzido.</returns>
-        public static string TranslateText(string text)
-        {
-            string prefix = string.Empty;
-            string suffix = string.Empty;
-
-            var firstCharIsMark =
-                !string.IsNullOrWhiteSpace(text) &&
-                Chars.Contains(text[0]) &&
-                (text.Length > 1 && text[0] != text[1]);
-
-            if (firstCharIsMark)
-            {
-                prefix = text[0].ToString();
-                text = text.Substring(1);
-            }
-
-            while (text.Length > 0 && text[text.Length - 1] == CharNewLine)
-            {
-                suffix += text[text.Length - 1];
-                text = text.Substring(0, text.Length - 1);
-            }
-
-            text = Translate.Default.Text(text);
-            return prefix + text + suffix;
-        }
     }
 }

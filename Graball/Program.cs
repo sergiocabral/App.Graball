@@ -66,7 +66,7 @@ namespace Graball
                         }
                         catch
                         {
-                            Output.Write($"!{Phrases.FILE_DELETE_ERROR}\n", file.Name);
+                            Output.Write($"!{Phrases.FILE_DELETE_ERROR.Translate()}\n", file.Name);
                         }
                     }
                     if (!file.Exists)
@@ -78,7 +78,7 @@ namespace Graball
                         }
                         catch
                         {
-                            Output.Write($"!{Phrases.FILE_WRITE_ERROR}\n", file.Name);
+                            Output.Write($"!{Phrases.FILE_WRITE_ERROR.Translate()}\n", file.Name);
                         }
                     }
                 }
@@ -104,7 +104,7 @@ namespace Graball
                             {
                                 manager.Add((T)instance);
                             }                            
-                            Output.Write($"#{Phrases.FILE_LOADED_ASSEMBLY}\n", assembly.Description());
+                            Output.Write($"#{Phrases.FILE_LOADED_ASSEMBLY.Translate()}\n", assembly.Description());
                         }
                         else
                         {
@@ -113,7 +113,7 @@ namespace Graball
                     }
                     catch
                     {
-                        Output.Write($"!{Phrases.FILE_LOAD_ERROR}\n", file.Name);
+                        Output.Write($"!{Phrases.FILE_LOAD_ERROR.Translate()}\n", file.Name);
                     }
                 }                
             }
@@ -146,13 +146,13 @@ namespace Graball
                     }
                     catch (Exception ex)
                     {
-                        Output.Write($"!{Phrases.FILE_CONTENT_INVALID}\n", file.Name);
+                        Output.Write($"!{Phrases.FILE_CONTENT_INVALID.Translate()}\n", file.Name);
                         Output.Write($"!{ex.Message}\n");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Output.Write($"!{Phrases.FILE_LOAD_ERROR}\n", file.Name);
+                    Output.Write($"!{Phrases.FILE_LOAD_ERROR.Translate()}\n", file.Name);
                     Output.Write($"!{ex.Message}\n");
                 }
             }

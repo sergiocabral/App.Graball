@@ -43,7 +43,7 @@ namespace Graball.Business.IO
             {
                 foreach (var item in Items)
                 {
-                    item.Write(FormaterHelper.TranslateText(text.Key), text.Value);
+                    item.Write(text.Key, text.Value);
                 }
             }
             return this;
