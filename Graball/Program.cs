@@ -173,7 +173,8 @@ namespace Graball
             {
                 Welcome();
 
-                Output.WriteLine("Not implemented...").WriteLine();
+                Output.WriteLine("_*teste* de codigo_ Qual #é#?? Meu chapa.").WriteLine();
+                Output.WriteLine("*Testando* essas implementações, ???hein??? - @Uau!!@").WriteLine();
 
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }

@@ -79,6 +79,15 @@ namespace Graball.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Graball.Module.*.dll.
+        /// </summary>
+        internal static string FileMaskModule {
+            get {
+                return ResourceManager.GetString("FileMaskModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Graball.Output.*.dll.
         /// </summary>
         internal static string FileMaskOutput {

@@ -77,7 +77,11 @@ namespace Graball.Business.IO
                     {
                         if (typeof(char) == property.PropertyType)
                         {
-                            list.Add((char)property.GetValue(null));
+                            var ch = (char)property.GetValue(null);
+                            if (ch != CharNewLine)
+                            {
+                                list.Add(ch);
+                            }
                         }
                     }
                     chars = list.ToArray();
@@ -93,21 +97,63 @@ namespace Graball.Business.IO
         /// <param name="write">Função de escrita</param>
         /// <param name="ignoreFormatter">Ignora o formatador. Aplica apenas NewLine.</param>
         public static void Output(string text, Action<string, char> write)
-        {
-            text = (text + string.Empty).Replace(CharNewLine.ToString(), Environment.NewLine);
+        { 
+            if (text == null) { return; }
 
-            var firstCharIsMark =
-                !string.IsNullOrWhiteSpace(text) &&
-                Chars.Contains(text[0]) &&
-                (text.Length > 1 && text[0] != text[1]);
+            const char NO_MARK = (char)0;
+            List<char> marks = new List<char>();
+            StringBuilder currentText = new StringBuilder();
 
-            if (firstCharIsMark)
+            char chr(string str, int index) => string.IsNullOrEmpty(str) || index >= str.Length ? NO_MARK : str[index];
+            char lastMask() => marks.Count == 0 ? NO_MARK : marks[marks.Count - 1];
+            bool isMark(char mark) => Chars.Contains(mark);
+
+            var i = 0;
+            while (i < text.Length)
             {
-                write(text.Substring(1), text[0]);
+                var currentChar = text[i];
+
+                if (currentChar == CharNewLine)                     //É marca de nova linha
+                {
+                    currentText.Append(Environment.NewLine);
+                }
+                else if (
+                    isMark(currentChar) &&                          //É uma marca
+                    currentChar == chr(text, i + 1)                 //Marca duplicada
+                    )
+                {
+                    currentText.Append(currentChar);
+                    i++;
+                }
+                else if (
+                    isMark(currentChar)                             //É uma marca
+                    )
+                {
+                     if (currentText.Length > 0)                    //Tem texto pendente
+                     {
+                         write(currentText.ToString(), lastMask());
+                         currentText.Clear();
+                     }
+                     if (currentChar != lastMask())                 //Abre marcação
+                     {
+                         marks.Add(currentChar);
+                     }
+                     else                                           //Fecha marcação em aberto
+                     {
+                         marks.RemoveAt(marks.Count - 1);
+                     }
+                }
+                else
+                {
+                    currentText.Append(currentChar);
+                }
+
+                i++;
             }
-            else
+            if (currentText.Length > 0)
             {
-                write(text, (char)0);
+                write(currentText.ToString(), lastMask());
+                currentText.Clear();
             }
         }
     }

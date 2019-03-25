@@ -123,6 +123,9 @@
   <data name="FileMaskInput" xml:space="preserve">
     <value>Graball.Input.*.dll</value>
   </data>
+  <data name="FileMaskModule" xml:space="preserve">
+    <value>Graball.Module.*.dll</value>
+  </data>
   <data name="FileMaskOutput" xml:space="preserve">
     <value>Graball.Output.*.dll</value>
   </data>
