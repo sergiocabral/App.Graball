@@ -24,6 +24,10 @@ namespace Graball.General.Text
         public Translate(string language, bool setAsDefault = false)
         {
             Language = language;
+            if (setAsDefault)
+            {
+                Default = this;
+            }
         }
 
         /// <summary>
@@ -115,7 +119,7 @@ namespace Graball.General.Text
         /// <summary>
         /// Instância padrão.
         /// </summary>
-        public static Translate Default { get; set; } = new Translate(string.Empty);
+        public static Translate Default { get; private set; } = new Translate(string.Empty);
 
         /// <summary>
         /// Retorna a tradução de um texto.

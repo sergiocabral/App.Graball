@@ -1,6 +1,7 @@
 ﻿using Graball.General.Text;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Graball.Business.IO
 {
@@ -42,7 +43,7 @@ namespace Graball.Business.IO
             {
                 foreach (var item in Items)
                 {
-                    item.Write(Translate.Default.Text(text.Key), text.Value);
+                    item.Write(FormaterHelper.TranslateText(text.Key), text.Value);
                 }
             }
             return this;
