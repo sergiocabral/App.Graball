@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\Graball.Input.CommandLine.dll" />
     <None Remove="Properties\Graball.Input.Console.dll" />
     <None Remove="Properties\Graball.Output.Console.dll" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Graball.Input.CommandLine.dll" />
     <EmbeddedResource Include="Properties\Graball.Input.Console.dll" />
     <EmbeddedResource Include="Properties\Graball.Output.Console.dll" />
     <EmbeddedResource Include="Properties\Translates.json" />

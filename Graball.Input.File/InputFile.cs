@@ -3,7 +3,7 @@
 namespace Graball.Input.File
 {
     /// <summary>
-    /// Output para janela de console.
+    /// Input pela janela de console.
     /// </summary>
     public class InputFile : InputBase
     {

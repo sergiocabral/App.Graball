@@ -43,5 +43,32 @@
         "Value": "Ocorreu um erro ao apagar o arquivo \"{0}\"."
       }
     ]
+  },
+  {
+    "Key": "Choose one or input blank to exit: ",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Escolha um ou deixe em branco para sair: "
+      }
+    ]
+  },
+  {
+    "Key": "List of modules loaded:",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Lista de módulos carregados:"
+      }
+    ]
+  },
+  {
+    "Key": "Finished.",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Finalizado."
+      }
+    ]
   }
 ]

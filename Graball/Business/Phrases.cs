@@ -29,5 +29,10 @@
         /// Ocorreu um erro ao apagar o arquivo \"{0}\".
         /// </summary>
         public const string FILE_DELETE_ERROR = "There was an error deleting file \"{0}\".";
+
+        /// <summary>
+        /// Escolha um ou deixe em branco para sair: 
+        /// </summary>
+        public const string CHOSE_ONE = "Choose one or input blank to exit: ";
     }
 }

@@ -1,4 +1,5 @@
-﻿using Graball.General.Reflection;
+﻿using Graball.Business.IO;
+using Graball.General.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -21,7 +22,7 @@ namespace Graball.Business.Module
         /// <summary>
         /// Nome de apresentação.
         /// </summary>
-        public string Name
+        public virtual string Name
         {
             get
             {
@@ -37,7 +38,7 @@ namespace Graball.Business.Module
         /// <summary>
         /// Traduções em formato JSON.
         /// </summary>
-        public string Translates
+        public virtual string Translates
         {
             get
             {
@@ -49,5 +50,27 @@ namespace Graball.Business.Module
                 return translates;
             }
         }
+
+        /// <summary>
+        /// Output padrão.
+        /// </summary>
+        protected OutputInterface Output { get; private set; }
+
+        /// <summary>
+        /// Define o output padrão.
+        /// </summary>
+        /// <param name="output">Instância.</param>
+        public void SetOutput(OutputInterface output) => Output = output;
+
+        /// <summary>
+        /// Input padrão.
+        /// </summary>
+        protected InputInterface Input { get; private set; }
+
+        /// <summary>
+        /// Define o input padrão.
+        /// </summary>
+        /// <param name="input">Instância.</param>
+        public void SetInput(InputInterface input) => Input = input;
     }
 }

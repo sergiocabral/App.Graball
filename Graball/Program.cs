@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -35,10 +36,6 @@ namespace Graball
             ExtractAssemblies();
             LoadModules();
             Run();
-
-#if DEBUG
-            System.Console.ReadKey();
-#endif
         }
 
         /// <summary>
@@ -167,11 +164,13 @@ namespace Graball
 
             void loadModule(ModuleInterface instance)
             {
-                Modules.Add(instance);
+                instance.SetOutput(Output);
+                instance.SetInput(Input);
                 if (!string.IsNullOrWhiteSpace(instance.Translates))
                 {
                     Translate.LoadAll(instance.Translates);
                 }
+                Modules.Add(instance);
             }
 
             LoadAndCreate<ModuleInterface>(Definitions.FileMaskForOutput, false, loadModule);
@@ -203,13 +202,24 @@ namespace Graball
             {
                 Welcome();
 
-                var d1 = Modules[1].Name;
-                var d2 = Modules[1].Translates;
+                Output.WriteLine("List of modules loaded:".Translate());
+                var options = Output.WriteOptionsToSelect(Modules.Select(a => a.Name).ToList());
+                Output.Write("\n?{0}", Phrases.CHOSE_ONE.Translate());
+                var answer = Input.ReadLine();
+                Output.WriteLine(answer);
 
-                Output.WriteLine("_*teste* de codigo_ Qual #é#?? Meu chapa.").WriteLine();
-                Output.WriteLine("*Testando* essas implementações, ???hein??? - @Uau!!@").WriteLine();
+                if (string.IsNullOrWhiteSpace(answer))
+                {
+                    break;
+                }
 
-            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+                Output.WriteLine();
+            } while (false);
+
+            Output.WriteLine("Finished.");
+#if DEBUG
+            System.Console.ReadKey();
+#endif
         }
 
         /// <summary>

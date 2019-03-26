@@ -1,6 +1,7 @@
 ﻿using Graball.General.Text;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Graball.Business.IO
@@ -85,6 +86,22 @@ namespace Graball.Business.IO
                 }
             } while (Queue.Count > 0);
             Flushed = true;
+        }
+
+        /// <summary>
+        /// Exibe um lista para seleção.
+        /// </summary>
+        /// <typeparam name="T">Tipo do conteúdo da lista.</typeparam>
+        /// <param name="options">Opções.</param>
+        /// <param name="format">Formatação da exibição.</param>
+        /// <returns>Auto referência para a lista passada.</returns>
+        public IList<T> WriteOptionsToSelect<T>(IList<T> options, string format = null)
+        {
+            foreach (var item in Items)
+            {
+                item.WriteOptionsToSelect<T>(options);
+            }
+            return options;
         }
     }
 }

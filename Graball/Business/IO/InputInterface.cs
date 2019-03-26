@@ -5,5 +5,10 @@
     /// </summary>
     public interface InputInterface
     {
+        /// <summary>
+        /// Recebe uma entrada do usuário.
+        /// </summary>
+        /// <returns>Entrada do usuário</returns>
+        string ReadLine();
     }
 }
