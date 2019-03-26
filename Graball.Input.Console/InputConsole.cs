@@ -1,4 +1,5 @@
 ﻿using Graball.Business.IO;
+using System;
 
 namespace Graball.Input.Console
 {
@@ -13,7 +14,22 @@ namespace Graball.Input.Console
         /// <returns>Entrada do usuário</returns>
         public override string Read()
         {
-            return System.Console.ReadLine();
+            var cursorLeft = System.Console.CursorLeft;
+            var answer = System.Console.ReadLine();
+            var cursorTop = System.Console.CursorTop - 1;
+
+            var lengthExtra = answer.Length - (System.Console.BufferWidth - cursorLeft);
+
+            if (lengthExtra > 0)
+            {
+                cursorTop -= (int)Math.Floor((double)lengthExtra / System.Console.BufferWidth) + 1;
+            }
+            
+            System.Console.SetCursorPosition(cursorLeft, cursorTop);
+            System.Console.WriteLine(new String(' ', answer.Length));
+            System.Console.SetCursorPosition(cursorLeft, cursorTop);
+
+            return answer;
         }
 
         /// <summary>

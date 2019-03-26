@@ -198,6 +198,7 @@ namespace Graball
         /// </summary>
         private void Run()
         {
+            string answer;
             do
             {
                 Welcome();
@@ -205,16 +206,11 @@ namespace Graball
                 Output.WriteLine("List of modules loaded:".Translate());
                 var options = Output.WriteOptionsToSelect(Modules.Select(a => a.Name).ToList());
                 Output.Write("\n?{0}", Phrases.CHOSE_ONE.Translate());
-                var answer = Input.Read();
-                Output.WriteLine(answer);
-
-                if (string.IsNullOrWhiteSpace(answer))
-                {
-                    break;
-                }
+                answer = Input.Read();
+                Output.WriteLine(string.IsNullOrWhiteSpace(answer) ? "_" + Phrases.CHOSE_BLANK.Translate() : "@" + answer);
 
                 Output.WriteLine();
-            } while (true);
+            } while (!string.IsNullOrWhiteSpace(answer));
 
             Output.WriteLine("Finished.");
 #if DEBUG

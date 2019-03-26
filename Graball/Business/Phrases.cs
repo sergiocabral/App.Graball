@@ -34,5 +34,10 @@
         /// Escolha um ou deixe em branco para sair: 
         /// </summary>
         public const string CHOSE_ONE = "Choose one or input blank to exit: ";
+
+        /// <summary>
+        /// (em branco)
+        /// </summary>
+        public const string CHOSE_BLANK = "(blank)";
     }
 }
