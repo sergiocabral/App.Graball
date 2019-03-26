@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Graball.General.Text;
+using System.IO;
 using System.Reflection;
 
 namespace Graball.General.Reflection
@@ -16,7 +17,7 @@ namespace Graball.General.Reflection
         public static string Description(this Assembly assembly)
         {
             var name = assembly.GetName();
-            return string.Format("{0} version {1}.{2}", name.Name, name.Version.Major, name.Version.Minor);
+            return string.Format("{0} v{1}.{2}", name.Name, name.Version.Major, name.Version.Minor);
         }
 
         /// <summary>

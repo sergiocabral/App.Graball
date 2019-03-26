@@ -1,6 +1,7 @@
 ﻿
 using Graball.Business;
 using Graball.Business.IO;
+using Graball.Business.Module;
 using Graball.General.Reflection;
 using Graball.General.Text;
 using System;
@@ -30,25 +31,15 @@ namespace Graball
         public Program(string[] args)
         {
             Output.Prevent = true;
+            LoadTranslate(CultureInfo.CurrentUICulture.Name);
             ExtractAssemblies();
-            LoadInputOutput();
-            LoadTranslate(CultureInfo.CurrentUICulture.Name);            
+            LoadModules();
             Run();
 
 #if DEBUG
             System.Console.ReadKey();
 #endif
         }
-
-        /// <summary>
-        /// Recebedor de informações do usuário.
-        /// </summary>
-        private InputManager Input { get; } = new InputManager();
-
-        /// <summary>
-        /// Exibidor de informações para o usuário.
-        /// </summary>
-        private OutputManager Output { get; } = new OutputManager();
 
         /// <summary>
         /// Extrai assemblies obrigatórios para a mesma pasta do executável.
@@ -92,42 +83,6 @@ namespace Graball
         }
 
         /// <summary>
-        /// Carrega os módulos de entrada e saída de informações de/para o usuário.
-        /// </summary>
-        private void LoadInputOutput()
-        {
-            void load<T>(ManagerInterface<T> manager, string mask)
-            {
-                foreach (var file in Definitions.DirectoryForExecutable.GetFiles(mask))
-                {
-                    var assembly = AssemblyHelper.Load(file.FullName);
-                    try
-                    {
-                        var instances = AssemblyHelper.Load(assembly, typeof(T));
-                        if (instances.Length > 0)
-                        {
-                            foreach (var instance in instances)
-                            {
-                                manager.Add((T)instance);
-                            }                            
-                            Output.WriteLine($"#{Phrases.FILE_LOADED_ASSEMBLY.Translate()}", assembly.Description());
-                        }
-                        else
-                        {
-                            throw new Exception();
-                        }
-                    }
-                    catch
-                    {
-                        Output.WriteLine($"!{Phrases.FILE_LOAD_ERROR.Translate()}", file.Name);
-                    }
-                }                
-            }
-            load<OutputInterface>(Output, Definitions.FileMaskForOutput);
-            load<InputInterface>(Input, Definitions.FileMaskForInput);
-        }
-
-        /// <summary>
         /// Carrega as traduções de texto.
         /// </summary>
         /// <param name="language">Idioma.</param>
@@ -165,6 +120,81 @@ namespace Graball
         }
 
         /// <summary>
+        /// Carrega um assembly de um arquivo e instancia a class.
+        /// </summary>
+        /// <typeparam name="T">Tipo para instanciar.</typeparam>
+        /// <param name="fileMask">Filtro para localizar os arquivos.</param>
+        /// <param name="verbose">Quando true, exibe mensagem sobre a criação da instância.</param>
+        /// <param name="action">Método que recebe a instância.</param>
+        private void LoadAndCreate<T>(string fileMask, bool verbose, Action<T> action)
+        {
+            foreach (var file in Definitions.DirectoryForExecutable.GetFiles(fileMask))
+            {
+                var assembly = AssemblyHelper.Load(file.FullName);
+                try
+                {
+                    var instances = AssemblyHelper.Load(assembly, typeof(T));
+                    if (instances.Length > 0)
+                    {
+                        foreach (var instance in instances)
+                        {
+                            action((T)instance);
+                        }
+                        if (verbose)
+                        {
+                            Output.WriteLine($"#{Phrases.FILE_LOADED_ASSEMBLY.Translate()}", assembly.Description());
+                        }
+                    }
+                    else if (verbose)
+                    {
+                        throw new Exception();
+                    }
+                }
+                catch
+                {
+                    Output.WriteLine($"!{Phrases.FILE_LOAD_ERROR.Translate()}", file.Name);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Carrega os módulos de entrada e saída de informações de/para o usuário.
+        /// </summary>
+        private void LoadModules()
+        {
+            LoadAndCreate<OutputInterface>(Definitions.FileMaskForOutput, true, (OutputInterface instance) => Output.Add(instance));
+            LoadAndCreate<InputInterface>(Definitions.FileMaskForInput, true, (InputInterface instance) => Input.Add(instance));
+
+            void loadModule(ModuleInterface instance)
+            {
+                Modules.Add(instance);
+                if (!string.IsNullOrWhiteSpace(instance.Translates))
+                {
+                    Translate.LoadAll(instance.Translates);
+                }
+            }
+
+            LoadAndCreate<ModuleInterface>(Definitions.FileMaskForOutput, false, loadModule);
+            LoadAndCreate<ModuleInterface>(Definitions.FileMaskForInput, false, loadModule);
+            LoadAndCreate<ModuleInterface>(Definitions.FileMaskForModule, true, loadModule);
+        }
+
+        /// <summary>
+        /// Recebedor de informações do usuário.
+        /// </summary>
+        private InputManager Input { get; } = new InputManager();
+
+        /// <summary>
+        /// Exibidor de informações para o usuário.
+        /// </summary>
+        private OutputManager Output { get; } = new OutputManager();
+
+        /// <summary>
+        /// Lista de módulos para execução.
+        /// </summary>
+        private IList<ModuleInterface> Modules { get; } = new List<ModuleInterface>();
+
+        /// <summary>
         /// Funcionamento do programa.
         /// </summary>
         private void Run()
@@ -173,10 +203,13 @@ namespace Graball
             {
                 Welcome();
 
+                var d1 = Modules[1].Name;
+                var d2 = Modules[1].Translates;
+
                 Output.WriteLine("_*teste* de codigo_ Qual #é#?? Meu chapa.").WriteLine();
                 Output.WriteLine("*Testando* essas implementações, ???hein??? - @Uau!!@").WriteLine();
 
-            } while (Console.ReadKey().Key != ConsoleKey.Escape);
+            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
         }
 
         /// <summary>

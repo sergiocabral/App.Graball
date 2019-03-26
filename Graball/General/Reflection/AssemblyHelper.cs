@@ -22,7 +22,7 @@ namespace Graball.General.Reflection
             {
                 return AssemblyLoadContext.Default.LoadFromAssemblyPath(filename);
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

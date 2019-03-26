@@ -32,5 +32,10 @@ namespace Graball.Business
         /// Máscara para localizar arquivos de Output.
         /// </summary>
         public static string FileMaskForOutput { get => Properties.Resources.FileMaskOutput; }
+
+        /// <summary>
+        /// Máscara para localizar arquivos de módulos em geral.
+        /// </summary>
+        public static string FileMaskForModule { get => Properties.Resources.FileMaskModule; }
     }
 }

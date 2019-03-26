@@ -1,4 +1,6 @@
-﻿namespace Graball.Business.IO
+﻿using Graball.General.Text;
+
+namespace Graball.Business.IO
 {
     /// <summary>
     /// Classe base para exibidor de informações para o usuário.
@@ -13,7 +15,7 @@
         /// <returns>Auto referência.</returns>
         public OutputInterface Write(string format, params object[] arg)
         {
-            var text = string.Format(format, arg);
+            var text = string.Format(format.Translate(), arg);
 
             FormaterHelper.Output(text, WriteNow);
 

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Graball.Business
+namespace Graball.Business.Module
 {
     /// <summary>
     /// Interface para módulos do sistema.
     /// </summary>
-    public interface RunInterface
+    public interface ModuleInterface
     {
         /// <summary>
         /// Nome de apresentação.
