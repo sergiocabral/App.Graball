@@ -18,7 +18,7 @@ namespace Graball.Output.File
         /// </summary>
         public OutputFile()
         {
-            Filename = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, this.GetType().GetNamespace() + string.Format("{0:yyyy-MM-dd-HH-mm-ss}.log", DateTime.Now)));
+            Filename = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, this.GetType().GetNamespace() + string.Format(".{0:yyyy-MM-dd-HH-mm-ss}.log", DateTime.Now)));
             Filename.CreateEmpty();
         }
 

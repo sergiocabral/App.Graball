@@ -214,7 +214,7 @@ namespace Graball
                 }
 
                 Output.WriteLine();
-            } while (false);
+            } while (true);
 
             Output.WriteLine("Finished.");
 #if DEBUG

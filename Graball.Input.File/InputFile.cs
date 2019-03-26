@@ -2,6 +2,7 @@
 using Graball.Business.IO;
 using Graball.General.IO;
 using Graball.General.Reflection;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -26,11 +27,22 @@ namespace Graball.Input.File
         public FileInfo Filename { get; }
 
         /// <summary>
+        /// Intervalo entre verificações de HasRead(). (para evitar acesso a disco muito frequente).
+        /// </summary>
+        public int Interval { get; set; } = 1000;
+
+        /// <summary>
+        /// Temporizador para evitar tentativas muito próximas.
+        /// </summary>
+        private Stopwatch Stopwatch { get; } = new Stopwatch();
+
+        /// <summary>
         /// Recebe uma entrada do usuário.
         /// </summary>
         /// <returns>Entrada do usuário</returns>
         public override string Read()
         {
+            Stopwatch.Stop();
             Filename.Refresh();
             if (Filename.Exists && Filename.Length > 0)
             {
@@ -47,16 +59,29 @@ namespace Graball.Input.File
         }
 
         /// <summary>
+        /// Resultado da última veriicação de HasRead()
+        /// </summary>
+        private bool lastHasRead = false;
+
+        /// <summary>
         /// Verifica se possui resposta prévia.
         /// </summary>
         public override bool HasRead()
         {
-            Filename.Refresh();
-            if (Filename.Exists && Filename.Length > 0)
+            if (!Stopwatch.IsRunning || Stopwatch.ElapsedMilliseconds > Interval)
             {
-                return 0 < System.IO.File.ReadAllLines(Filename.FullName).Where(a => !string.IsNullOrWhiteSpace(a)).Count();
+                Stopwatch.Restart();
+                Filename.Refresh();
+                if (Filename.Exists && Filename.Length > 0)
+                {
+                    lastHasRead = 0 < System.IO.File.ReadAllLines(Filename.FullName).Where(a => !string.IsNullOrWhiteSpace(a)).Count();
+                }
+                else
+                {
+                    lastHasRead = false;
+                }
             }
-            return false;
+            return lastHasRead;
         }
     }
 }

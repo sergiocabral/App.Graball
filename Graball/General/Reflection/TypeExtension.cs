@@ -18,7 +18,7 @@ namespace Graball.General.Reflection
         /// <returns>Nome descritivo.</returns>
         public static string GetNamespace(this Type type)
         {
-            return Regex.Match(type.FullName, ".*(?=" + type.Name + "$)").Value;
+            return Regex.Match(type.FullName, @".*(?=\." + type.Name + "$)").Value;
         }
     }
 }

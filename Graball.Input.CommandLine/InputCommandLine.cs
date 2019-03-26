@@ -9,7 +9,19 @@ namespace Graball.Input.CommandLine
     /// </summary>
     public class InputCommandLine : InputBase
     {
-        public List<string> CommandLineArgs { get; } = new List<string>(Environment.GetCommandLineArgs());
+        /// <summary>
+        /// Construtor.
+        /// </summary>
+        public InputCommandLine()
+        {
+            CommandLineArgs = new List<string>(Environment.GetCommandLineArgs());
+            CommandLineArgs.RemoveAt(0);
+        }
+
+        /// <summary>
+        /// Argumentos na fila.
+        /// </summary>
+        public List<string> CommandLineArgs { get; }
 
         /// <summary>
         /// Recebe uma entrada do usuário.

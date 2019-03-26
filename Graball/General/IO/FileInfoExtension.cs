@@ -27,7 +27,7 @@ namespace Graball.General.IO
             {
                 file.Directory.ForceCreate();
             }
-            file.Create().Close();
+            file.AppendText().Close();
             return true;
         }
     }

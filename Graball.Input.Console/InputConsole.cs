@@ -13,7 +13,7 @@ namespace Graball.Input.Console
         /// <returns>Entrada do usuário</returns>
         public override string Read()
         {
-            throw new System.NotImplementedException();
+            return System.Console.ReadLine();
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Graball.Input.Console
         /// </summary>
         public override bool HasRead()
         {
-            throw new System.NotImplementedException();
+            return System.Console.KeyAvailable;
         }
     }
 }
