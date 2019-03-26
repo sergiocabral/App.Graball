@@ -9,6 +9,11 @@
         /// Recebe uma entrada do usuário.
         /// </summary>
         /// <returns>Entrada do usuário</returns>
-        string ReadLine();
+        string Read();
+
+        /// <summary>
+        /// Verifica se possui resposta prévia.
+        /// </summary>
+        bool HasRead();
     }
 }

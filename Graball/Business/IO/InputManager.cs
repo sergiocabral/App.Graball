@@ -12,14 +12,33 @@ namespace Graball.Business.IO
         /// Recebe uma entrada do usuário.
         /// </summary>
         /// <returns>Entrada do usuário</returns>
-        public string ReadLine()
+        public string Read()
         {
-            string answer = "";
+            do
+            {
+                foreach (var item in Items)
+                {
+                    if (item.HasRead())
+                    {
+                        return item.Read();
+                    }
+                }
+            } while (true);
+        }
+
+        /// <summary>
+        /// Verifica se possui resposta prévia.
+        /// </summary>
+        public bool HasRead()
+        {
             foreach (var item in Items)
             {
-                answer += item.ReadLine() + ". ";
+                if (item.HasRead())
+                {
+                    return true;
+                }
             }
-            return answer;
+            return false;
         }
     }
 }

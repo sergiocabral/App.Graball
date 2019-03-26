@@ -1,6 +1,7 @@
 ﻿using Graball.Business;
 using Graball.Business.IO;
 using Graball.General.IO;
+using Graball.General.Reflection;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -17,7 +18,7 @@ namespace Graball.Output.File
         /// </summary>
         public OutputFile()
         {
-            Filename = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, Regex.Match(this.GetType().FullName, ".*(?=" + this.GetType().Name + "$)").Value + string.Format("{0:yyyy-MM-dd-HH-mm-ss}.log", DateTime.Now)));
+            Filename = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, this.GetType().GetNamespace() + string.Format("{0:yyyy-MM-dd-HH-mm-ss}.log", DateTime.Now)));
             Filename.CreateEmpty();
         }
 

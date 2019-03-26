@@ -45,7 +45,7 @@ namespace Graball.Business.Module
                 if (translates == null)
                 {
                     translates = Regex.Match(this.GetType().FullName, @".*(?=\.[^\.]*$)").Value;
-                    translates = ClassAssembly.ResourceString(translates + ".Properties.Translates.json");
+                    translates = ClassAssembly.GetResourceString(translates + ".Properties.Translates.json");
                 }
                 return translates;
             }

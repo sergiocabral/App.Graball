@@ -65,7 +65,7 @@ namespace Graball
                     }
                     if (!file.Exists)
                     {
-                        var bytes = assembly.ResourceBinary(resource);
+                        var bytes = assembly.GetResourceBinary(resource);
                         try
                         {
                             File.WriteAllBytes(file.FullName, bytes);
@@ -85,7 +85,7 @@ namespace Graball
         /// <param name="language">Idioma.</param>
         private void LoadTranslate(string language)
         {
-            var resource = Assembly.GetExecutingAssembly().ResourceString("Graball.Properties.Translates.json");
+            var resource = Assembly.GetExecutingAssembly().GetResourceString("Graball.Properties.Translates.json");
             Translate.LoadAll(resource);
 
             new Translate(language, true);
@@ -139,7 +139,7 @@ namespace Graball
                         }
                         if (verbose)
                         {
-                            Output.WriteLine($"#{Phrases.FILE_LOADED_ASSEMBLY.Translate()}", assembly.Description());
+                            Output.WriteLine($"#{Phrases.FILE_LOADED_ASSEMBLY.Translate()}", assembly.GetDescription());
                         }
                     }
                     else if (verbose)
@@ -205,7 +205,7 @@ namespace Graball
                 Output.WriteLine("List of modules loaded:".Translate());
                 var options = Output.WriteOptionsToSelect(Modules.Select(a => a.Name).ToList());
                 Output.Write("\n?{0}", Phrases.CHOSE_ONE.Translate());
-                var answer = Input.ReadLine();
+                var answer = Input.Read();
                 Output.WriteLine(answer);
 
                 if (string.IsNullOrWhiteSpace(answer))
@@ -229,7 +229,7 @@ namespace Graball
         {
             Output.Prevent = false;
 
-            var name = Assembly.GetExecutingAssembly().Description();
+            var name = Assembly.GetExecutingAssembly().GetDescription();
             Output.WriteLine("^+-{0}-+", new String('-', name.Length));
             Output.WriteLine("^| {0} |", name);
             Output.WriteLine("^+-{0}-+", new String('-', name.Length));

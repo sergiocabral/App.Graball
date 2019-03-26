@@ -14,7 +14,7 @@ namespace Graball.General.Reflection
         /// </summary>
         /// <param name="assembly">Assembly.</param>
         /// <returns>Nome descritivo.</returns>
-        public static string Description(this Assembly assembly)
+        public static string GetDescription(this Assembly assembly)
         {
             var name = assembly.GetName();
             return string.Format("{0} v{1}.{2}", name.Name, name.Version.Major, name.Version.Minor);
@@ -26,7 +26,7 @@ namespace Graball.General.Reflection
         /// <param name="assembly">Assembly.</param>
         /// <param name="name">Nome do recurso.</param>
         /// <returns>Conteúdo do recurso.</returns>
-        public static string ResourceString(this Assembly assembly, string name)
+        public static string GetResourceString(this Assembly assembly, string name)
         {
             using (var stream = assembly.GetManifestResourceStream(name))
             using (var reader = stream != null ? new StreamReader(stream) : null)
@@ -41,7 +41,7 @@ namespace Graball.General.Reflection
         /// <param name="assembly">Assembly.</param>
         /// <param name="name">Nome do recurso.</param>
         /// <returns>Conteúdo do recurso.</returns>
-        public static byte[] ResourceBinary(this Assembly assembly, string name)
+        public static byte[] GetResourceBinary(this Assembly assembly, string name)
         {
             using (var stream = assembly.GetManifestResourceStream(name))
             using (var reader = stream != null ? new BinaryReader(stream) : null)

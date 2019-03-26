@@ -11,9 +11,11 @@ namespace Graball.Business.IO
         /// Recebe uma entrada do usuário.
         /// </summary>
         /// <returns>Entrada do usuário</returns>
-        public string ReadLine()
-        {
-            return Console.ReadKey(true).Key.ToString();
-        }
+        public abstract string Read();
+
+        /// <summary>
+        /// Verifica se possui resposta prévia.
+        /// </summary>
+        public abstract bool HasRead();
     }
 }
