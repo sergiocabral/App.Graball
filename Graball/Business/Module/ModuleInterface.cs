@@ -31,5 +31,10 @@ namespace Graball.Business.Module
         /// </summary>
         /// <param name="input">Instância.</param>
         void SetInput(InputInterface input);
+
+        /// <summary>
+        /// Execução do módulo.
+        /// </summary>
+        void Run();
     }
 }

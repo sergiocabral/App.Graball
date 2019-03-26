@@ -17,7 +17,7 @@ namespace Graball
     /// <summary>
     /// Classe principal.
     /// </summary>
-    public sealed class Program
+    public sealed class Program: ModuleBase
     {
         /// <summary>
         /// Método de entrada do sistema operacional.
@@ -31,7 +31,8 @@ namespace Graball
         /// <param name="args">Argumentos de linha de comando.</param>
         public Program(string[] args)
         {
-            Output.Prevent = true;
+            SetInput(new InputManager());
+            SetOutput(new OutputManager() { Prevent = true });
             LoadTranslate(CultureInfo.CurrentUICulture.Name);
             ExtractAssemblies();
             LoadModules();
@@ -179,24 +180,30 @@ namespace Graball
         }
 
         /// <summary>
-        /// Recebedor de informações do usuário.
+        /// Referência para o assembly da instância.
         /// </summary>
-        private InputManager Input { get; } = new InputManager();
-
-        /// <summary>
-        /// Exibidor de informações para o usuário.
-        /// </summary>
-        private OutputManager Output { get; } = new OutputManager();
+        protected override Assembly ClassAssembly { get => Assembly.GetExecutingAssembly(); }
 
         /// <summary>
         /// Lista de módulos para execução.
         /// </summary>
         private IList<ModuleInterface> Modules { get; } = new List<ModuleInterface>();
 
+
         /// <summary>
-        /// Funcionamento do programa.
+        /// Recebedor de informações do usuário.
         /// </summary>
-        private void Run()
+        private new InputManager Input { get => base.Input as InputManager; }
+
+        /// <summary>
+        /// Exibidor de informações para o usuário.
+        /// </summary>
+        private new OutputManager Output { get => base.Output as OutputManager; }
+
+        /// <summary>
+        /// Execução do módulo.
+        /// </summary>
+        public override void Run()
         {
             string answer;
             do

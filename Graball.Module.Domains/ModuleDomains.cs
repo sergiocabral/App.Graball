@@ -9,5 +9,13 @@ namespace Graball.Module.Domains
         /// Referência para o assembly da instância.
         /// </summary>
         protected override Assembly ClassAssembly { get => Assembly.GetExecutingAssembly(); }
+
+        /// <summary>
+        /// Execução do módulo.
+        /// </summary>
+        public override void Run()
+        {
+
+        }
     }
 }
