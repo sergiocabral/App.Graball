@@ -1,4 +1,5 @@
 ﻿using Graball.Business.IO;
+using Graball.General.Data;
 using Graball.General.IO;
 using Graball.General.Reflection;
 using Graball.General.Text;
@@ -115,25 +116,35 @@ namespace Graball.Business.Module
             set => iniFile = value;
         }
 
-        private SQLiteConnection database = null;
+        private DatabaseSQLite database = null;
         /// <summary>
         /// Banco de dados.
         /// </summary>
-        protected SQLiteConnection Database
+        protected DatabaseSQLite Database
         {
             get
             {
                 if (database == null)
                 {
                     var file = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, this.GetType().GetNamespace() + ".sqlite"));
-                    database = new SQLiteConnection($"Data Source={file.FullName}");
-                    database.Open();
-                    database.Close();
+                    database = new DatabaseSQLite(file.FullName);
+                    if (DatabaseStructures != null)
+                    {
+                        foreach (var structure in DatabaseStructures)
+                        {
+                            database.AddStructure(structure);
+                        }
+                    }
                 }
                 return database;
             }
             set => database = value;
         }
+
+        /// <summary>
+        /// Lista de ações para ajustes na estrutura e invremento da versão do banco.
+        /// </summary>
+        protected virtual IList<Action<SQLiteConnection>> DatabaseStructures { get; } = null;
 
         /// <summary>
         /// Mensagem pronta para "Em desenvolvimento"
