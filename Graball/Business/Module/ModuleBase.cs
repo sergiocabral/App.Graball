@@ -1,4 +1,5 @@
 ﻿using Graball.Business.IO;
+using Graball.General.IO;
 using Graball.General.Reflection;
 using Graball.General.Text;
 using System;
@@ -95,6 +96,24 @@ namespace Graball.Business.Module
         /// </summary>
         /// <param name="input">Instância.</param>
         public void SetInput(InputInterface input) => Input = input;
+
+        private IniFile iniFile = null;
+        /// <summary>
+        /// Banco de dados.
+        /// </summary>
+        protected IniFile IniFile
+        {
+            get
+            {
+                if (iniFile == null)
+                {
+                    var file = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, Assembly.GetExecutingAssembly().GetName().Name + ".ini"));
+                    iniFile = new IniFile(file.FullName, this.GetType().FullName);
+                }
+                return iniFile;
+            }
+            set => iniFile = value;
+        }
 
         private SQLiteConnection database = null;
         /// <summary>
