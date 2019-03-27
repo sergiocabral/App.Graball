@@ -83,5 +83,15 @@ namespace Graball.Input.File
             }
             return lastHasRead;
         }
+
+        /// <summary>
+        /// Solicita uma tecla do usuário para continuar.
+        /// </summary>
+        /// <returns>Caracter recebido.</returns>
+        public override char ReadKey()
+        {
+            var read = Read();
+            return read.Length > 0 ? read[0] : (char)0;
+        }
     }
 }

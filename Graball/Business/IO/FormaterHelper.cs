@@ -19,7 +19,7 @@ namespace Graball.Business.IO
 	///     Erro:       !
 	///     Pergunta:   ?
 	///     Resposta:   @
-	///     Nova linha: \n
+	///     Nova linha: \n  (não é marcador, mas é usado para padronizar NewLine como Environment.NewLine)
     /// </summary>
     public static class FormaterHelper
     {

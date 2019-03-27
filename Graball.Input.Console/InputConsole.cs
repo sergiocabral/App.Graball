@@ -39,5 +39,14 @@ namespace Graball.Input.Console
         {
             return System.Console.KeyAvailable;
         }
+
+        /// <summary>
+        /// Solicita uma tecla do usuário para continuar.
+        /// </summary>
+        /// <returns>Caracter recebido.</returns>
+        public override char ReadKey()
+        {
+            return System.Console.ReadKey(true).KeyChar;
+        }
     }
 }

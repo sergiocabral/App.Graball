@@ -45,5 +45,14 @@ namespace Graball.Input.CommandLine
         /// Verifica se possui resposta prévia.
         /// </summary>
         public override bool HasRead() => CommandLineArgs.Count > 0;
+
+        /// <summary>
+        /// Solicita uma tecla do usuário para continuar.
+        /// </summary>
+        /// <returns>Caracter recebido.</returns>
+        public override char ReadKey()
+        {
+            return (char)0;
+        }
     }
 }

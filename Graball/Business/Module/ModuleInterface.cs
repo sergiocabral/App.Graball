@@ -11,6 +11,11 @@ namespace Graball.Business.Module
     public interface ModuleInterface
     {
         /// <summary>
+        /// Contexto do módulo. Apenas com Context vazio aparecem na listagem inicial do programa.
+        /// </summary>
+        string Context { get; }
+
+        /// <summary>
         /// Nome de apresentação.
         /// </summary>
         string Name { get; }

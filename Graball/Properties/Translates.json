@@ -18,6 +18,24 @@
     ]
   },
   {
+    "Key": "Under development.",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Em desenvolvimento."
+      }
+    ]
+  },
+  {
+    "Key": "Press any key to continue.",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Pressione qualquer tecla para continuar."
+      }
+    ]
+  },
+  {
     "Key": "Module loaded: {0}",
     "Value": [
       {

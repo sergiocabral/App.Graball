@@ -40,5 +40,23 @@ namespace Graball.Business.IO
             }
             return false;
         }
+
+        /// <summary>
+        /// Solicita uma tecla do usuário para continuar.
+        /// </summary>
+        /// <returns>Caracter recebido.</returns>
+        public char ReadKey()
+        {
+            do
+            {
+                foreach (var item in Items)
+                {
+                    if (item.HasRead())
+                    {
+                        return item.ReadKey();
+                    }
+                }
+            } while (true);
+        }
     }
 }

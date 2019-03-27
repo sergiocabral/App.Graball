@@ -173,7 +173,6 @@ namespace Graball
                 {
                     Translate.LoadAll(instance.Translates);
                 }
-                Modules.Add(instance);
             }
 
             LoadAndCreate<ModuleInterface>(Definitions.FileMaskForOutput, false, loadModule);
@@ -187,12 +186,6 @@ namespace Graball
         protected override Assembly ClassAssembly { get => Assembly.GetExecutingAssembly(); }
 
         /// <summary>
-        /// Lista de módulos para execução.
-        /// </summary>
-        private IList<ModuleInterface> Modules { get; } = new List<ModuleInterface>();
-
-
-        /// <summary>
         /// Recebedor de informações do usuário.
         /// </summary>
         private new InputManager Input { get => base.Input as InputManager; }
@@ -203,24 +196,29 @@ namespace Graball
         private new OutputManager Output { get => base.Output as OutputManager; }
 
         /// <summary>
+        /// Contexto do módulo. Apenas com Context vazio aparecem na listagem inicial do programa.
+        /// </summary>
+        public override string Context { get => "{2FE98BB0-1485-4146-9DC3-D67DDF309E3C}"; }
+
+        /// <summary>
         /// Execução do módulo.
         /// </summary>
         public override void Run()
         {
-            int option;
+            ModuleInterface module;
             do
             {
                 Welcome();
 
-                option = ChoseOption(Modules.Select(a => a.Name).ToList(), "List of modules loaded:").Key;
+                module = ChooseModule(string.Empty, "List of modules loaded:");
 
-                if (option >= 0)
+                if (module != null)
                 {
-                    Modules[option].Run();
+                    module.Run();
                 }
-            } while (option >= 0);
+            } while (module != null);
 
-            Output.WriteLine("Finished.");
+            Output.WriteLine("_Finished.".Translate());
 #if DEBUG
             System.Console.ReadKey();
 #endif

@@ -1,5 +1,14 @@
 [
   {
+    "Key": "Internet domains",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Domínios de internet"
+      }
+    ]
+  },
+  {
     "Key": "Service providers:",
     "Value": [
       {

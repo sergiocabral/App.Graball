@@ -15,5 +15,11 @@
         /// Verifica se possui resposta prévia.
         /// </summary>
         bool HasRead();
+
+        /// <summary>
+        /// Solicita uma tecla do usuário para continuar.
+        /// </summary>
+        /// <returns>Caracter recebido.</returns>
+        char ReadKey();
     }
 }

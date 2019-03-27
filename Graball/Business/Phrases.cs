@@ -44,5 +44,15 @@
         /// (em branco)
         /// </summary>
         public const string CHOOSE_BLANK = "(blank)";
+
+        /// <summary>
+        /// Em desenvolvimento.
+        /// </summary>
+        public const string NOT_IMPLEMENTED = "Under development.";
+
+        /// <summary>
+        /// Pressione qualquer tecla para continuar.
+        /// </summary>
+        public const string PRESS_ANY_KEY = "Press any key to continue.";
     }
 }

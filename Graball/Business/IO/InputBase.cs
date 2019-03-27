@@ -17,5 +17,11 @@ namespace Graball.Business.IO
         /// Verifica se possui resposta prévia.
         /// </summary>
         public abstract bool HasRead();
+
+        /// <summary>
+        /// Solicita uma tecla do usuário para continuar.
+        /// </summary>
+        /// <returns>Caracter recebido.</returns>
+        public abstract char ReadKey();
     }
 }

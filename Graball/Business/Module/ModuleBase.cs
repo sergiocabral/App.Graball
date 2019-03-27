@@ -17,6 +17,24 @@ namespace Graball.Business.Module
     public abstract class ModuleBase: ModuleInterface
     {
         /// <summary>
+        /// Construtor.
+        /// </summary>
+        public ModuleBase()
+        {
+            AllModules.Add(this);
+        }
+
+        /// <summary>
+        /// Lista de todos os módulos instanciados.
+        /// </summary>
+        public static IList<ModuleInterface> AllModules { get; } = new List<ModuleInterface>();
+
+        /// <summary>
+        /// Contexto do módulo. Apenas com Context vazio aparecem na listagem inicial do programa.
+        /// </summary>
+        public virtual string Context { get => string.Empty; }
+
+        /// <summary>
         /// Referência para o assembly da instância.
         /// </summary>
         protected abstract Assembly ClassAssembly { get; }
@@ -77,6 +95,17 @@ namespace Graball.Business.Module
         public void SetInput(InputInterface input) => Input = input;
         
         /// <summary>
+        /// Mensagem pronta para "Em desenvolvimento"
+        /// </summary>
+        protected void NotImplementedException()
+        {
+            Output.WriteLine($"#{Phrases.NOT_IMPLEMENTED.Translate()}").WriteLine();
+            Output.Write($"?{Phrases.PRESS_ANY_KEY.Translate()}");
+            Input.ReadKey();
+            Output.WriteLine().WriteLine();
+        }
+
+        /// <summary>
         /// Formata uma lista para exibição.
         /// </summary>
         /// <param name="options">Lista de opções.</param>
@@ -113,8 +142,8 @@ namespace Graball.Business.Module
         /// <typeparam name="T">Tipo do conteúdo da lista.</typeparam>
         /// <param name="options">Lista de opções.</param>
         /// <param name="title">Título.</param>
-        /// <returns>Auto referência para a lista passada.</returns>
-        public KeyValuePair<int, T> ChoseOption<T>(IList<T> options, string title)
+        /// <returns>Resposta com índice e opção selecionada. Índice -1 para nenhuma seleção.</returns>
+        public KeyValuePair<int, T> ChooseOption<T>(IList<T> options, string title)
         {
             IList<string> getNames(T option)
             {
@@ -182,6 +211,27 @@ namespace Graball.Business.Module
                 }
             } while (!string.IsNullOrWhiteSpace(answer) && result.Key < 0);
             return result;
+        }
+
+
+        /// <summary>
+        /// Exibe uma lista de módulos para seleção.
+        /// </summary>
+        /// <param name="context">Contexto dos módulos para exibição.</param>
+        /// <param name="title">Título.</param>
+        /// <returns>Módulo selecionado. Ou null para nenhuma seleção.</returns>
+        public ModuleInterface ChooseModule(string context, string title)
+        {
+            var option = ChooseOption(ModuleBase.AllModules.Where(a => a.Context == context).Select(a => a.Name).ToList(), title);
+
+            if (option.Key >= 0)
+            {
+                return ModuleBase.AllModules.Single(a => a.Name == option.Value);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
