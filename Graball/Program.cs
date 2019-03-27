@@ -213,6 +213,11 @@ namespace Graball
                 Welcome();
 
                 option = ChoseOption(Modules.Select(a => a.Name).ToList(), "List of modules loaded:").Key;
+
+                if (option >= 0)
+                {
+                    Modules[option].Run();
+                }
             } while (option >= 0);
 
             Output.WriteLine("Finished.");

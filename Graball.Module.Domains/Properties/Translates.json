@@ -1,10 +1,10 @@
 [
   {
-    "Key": "test",
+    "Key": "Service providers:",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "teste"
+        "Value": "Provedores de serviço:"
       }
     ]
   }

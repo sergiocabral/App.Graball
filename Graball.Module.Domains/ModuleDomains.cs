@@ -15,7 +15,15 @@ namespace Graball.Module.Domains
         /// </summary>
         public override void Run()
         {
-
+            string option;
+            do
+            {
+                option = ChoseOption(new string[] {
+                    "registro.br",
+                    "expireddomains.net",
+                    "instantdomainsearch.com"
+                }, "Service providers:").Value;
+            } while (!string.IsNullOrWhiteSpace(option));
         }
     }
 }

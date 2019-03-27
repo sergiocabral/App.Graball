@@ -26,7 +26,17 @@ namespace Graball.Output.Console
         protected override void WriteNow(string text, char mark)
         {
             SetColors(mark);
-            System.Console.Write(text);
+            foreach (var ch in text)
+            {
+                if (ch == '\b')
+                {
+                    System.Console.Write("\b \b");
+                }
+                else
+                {
+                    System.Console.Write(ch);
+                }
+            }
             SetColors();
         }
 

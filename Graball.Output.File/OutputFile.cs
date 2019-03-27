@@ -34,9 +34,29 @@ namespace Graball.Output.File
         /// <param name="mark">Marcador.</param>
         protected override void WriteNow(string text, char mark)
         {
-            using(var stream = Filename.AppendText())
+            using (var stream = new FileStream(Filename.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
             {
-                stream.Write(text);
+                stream.Position = stream.Length;
+                foreach (var ch in text)
+                {
+                    if (ch == '\b')
+                    {
+                        if (stream.Position > 0)
+                        {
+                            stream.Position--;
+                            var chr = (char)stream.ReadByte();
+                            if (chr != '\n')
+                            {
+                                stream.Position--;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        stream.WriteByte((byte)ch);
+                    }
+                }
+                stream.SetLength(stream.Position);
             }
         }
     }
