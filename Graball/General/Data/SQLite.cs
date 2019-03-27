@@ -63,7 +63,7 @@ namespace Graball.General.Data
             {
                 using (var command = Connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT version FROM database";
+                    command.CommandText = "SELECT Version FROM Database";
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
             }
@@ -73,19 +73,13 @@ namespace Graball.General.Data
                 {
                     if (value == 0)
                     {
-                        command.CommandText = @"INSERT INTO database (version) VALUES(:version);";
+                        command.CommandText = @"INSERT INTO Database (Version) VALUES(:Version);";
                     }
                     else
                     {
-                        command.CommandText = @"UPDATE database SET version = :version;";
+                        command.CommandText = @"UPDATE Database SET Version = :Version;";
                     }
-
-                    var parameterVersion = command.CreateParameter();
-                    parameterVersion.ParameterName = "version";
-                    parameterVersion.DbType = System.Data.DbType.Int32;
-                    parameterVersion.Value = value;
-                    command.Parameters.Add(parameterVersion);
-
+                    command.AddParameter("Version", value);
                     command.ExecuteNonQuery();
                 }
             }
@@ -105,7 +99,7 @@ namespace Graball.General.Data
                 }
                 catch
                 {
-                    command.CommandText = @"CREATE TABLE database (version INT);";
+                    command.CommandText = @"CREATE TABLE Database (Version INT);";
                     command.ExecuteNonQuery();
 
                     Version = 0;

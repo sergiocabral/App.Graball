@@ -10,7 +10,7 @@ namespace Graball.General.Data
     /// <summary>
     /// Base para classes que manipulam tabelas.
     /// </summary>
-    public abstract class SQLiteTable<TTypeOfIdentity, TTypeOfTable>
+    public class SQLiteTable<TTypeOfIdentity, TTypeOfTable>
     {
         /// <summary>
         /// Construtor.
@@ -33,7 +33,7 @@ namespace Graball.General.Data
         /// <summary>
         /// SQLiteConnection.
         /// </summary>
-        protected SQLiteConnection Connection { get; }
+        protected SQLiteConnection Connection { get => SQLite.Connection; }
 
         /// <summary>
         /// Nome da tabela
@@ -110,7 +110,8 @@ DELETE
                 if (toInsert)
                 {
                     command.CommandText = $@"
-INSERT INTO domains (
+INSERT 
+  INTO {NameOfTable} (
     {string.Join(',', fields.ToArray())}
 ) VALUES (
     {string.Join(',', fields.Select(a => ":" + a).ToArray())}
@@ -120,7 +121,7 @@ INSERT INTO domains (
                 else
                 {
                     command.CommandText = $@"
-UPDATE domains 
+UPDATE {NameOfTable}
 SET
     {string.Join(',', fields.Select(a => a + " = :" + a).ToArray())}
 WHERE
@@ -150,7 +151,7 @@ WHERE
                     foreach (var field in fields)
                     {
                         var property = typeof(TTypeOfTable).GetProperty(field.Key);
-                        command.AddParameter("field", property.GetValue(entity));
+                        command.AddParameter(field.Key, property.GetValue(entity));
                     }
                 }
 
@@ -171,19 +172,22 @@ SELECT COUNT(*)
         /// </summary>
         /// <param name="reader">Méetodo que recebe cada registro. Retorna false para parar.</param>
         /// <param name="orderBy">Texto para o ORDER BY</param>
-        /// <param name="fields">Campos usados no filtro com sua máscra de comparação.</param>
         /// <param name="entity">Entidade</param>
+        /// <param name="fields">Campos usados no filtro com sua máscra de comparação.</param>
         /// <param name="conjunction">Junção dos termos comparados: AND ou OR</param>
         /// <returns>Total de registros.</returns>
-        public virtual long Search(Func<SQLiteDataReader, bool> reader, string orderBy = "1 ASC", IDictionary<string, string> fields = null, TTypeOfTable entity = default(TTypeOfTable), string conjunction = "AND")
+        public virtual long Search(Func<SQLiteDataReader, bool> reader, IDictionary<string, string> fields = null, TTypeOfTable entity = default(TTypeOfTable), string orderBy = "1 ASC", string conjunction = "AND")
         {
             long count = 0;
             using (var command = Connection.CreateCommand())
             {
-                foreach (var field in fields)
+                if (fields != null)
                 {
-                    var property = typeof(TTypeOfTable).GetProperty(field.Key);
-                    command.AddParameter("field", property.GetValue(entity));
+                    foreach (var field in fields)
+                    {
+                        var property = typeof(TTypeOfTable).GetProperty(field.Key);
+                        command.AddParameter(field.Key, property.GetValue(entity));
+                    }
                 }
 
                 var where = fields == null || fields.Keys.Count == 0 ? "(1 = 1)" : string.Join(conjunction, fields.Select(a => "(" + string.Format(a.Value, a.Key, ":" + a.Key) + ")").ToArray());
