@@ -38,17 +38,16 @@ namespace Graball.Module.Domains
         /// </summary>
         public override void Run()
         {
-            KeyValuePair<int, string> option;
             do
             {
-                option = ChooseOption<string>(new string[]
+                switch (ChooseOption<string>(new string[]
                 {
                     "Search on internet",
                     "Search the local database"
-                }, "Operations:");
-
-                switch (option.Key)
+                }).Key)
                 {
+                    case -1:
+                        return;
                     case 0:
                         CollectDataFromInternet();
                         break;
@@ -56,7 +55,7 @@ namespace Graball.Module.Domains
                         QueryLocalDatabase();
                         break;
                 }
-            } while (option.Key >= 0);
+            } while (true);
         }
 
         /// <summary>
@@ -67,7 +66,7 @@ namespace Graball.Module.Domains
             ModuleInterface module;
             do
             {
-                module = ChooseModule(Properties.Resources.ContextModuleProvider, "Data origin:");
+                module = ChooseModule(Properties.Resources.ContextModuleProvider);
 
                 if (module != null)
                 {

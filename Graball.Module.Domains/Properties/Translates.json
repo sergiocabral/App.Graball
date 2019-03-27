@@ -18,15 +18,6 @@
     ]
   },
   {
-    "Key": "Operations:",
-    "Value": [
-      {
-        "Key": "pt-BR",
-        "Value": "Operações:"
-      }
-    ]
-  },
-  {
     "Key": "Search on internet",
     "Value": [
       {
@@ -41,6 +32,24 @@
       {
         "Key": "pt-BR",
         "Value": "Pesquisar no banco de dados local"
+      }
+    ]
+  },
+  {
+    "Key": "View released domain lists",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Ver listas de domínios liberados"
+      }
+    ]
+  },
+  {
+    "Key": "Consult WHOIS",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Consultar WHOIS"
       }
     ]
   }

@@ -54,5 +54,15 @@
         /// Pressione qualquer tecla para continuar.
         /// </summary>
         public const string PRESS_ANY_KEY = "Press any key to continue.";
+
+        /// <summary>
+        /// Recursos:
+        /// </summary>
+        public const string RESOURCES = "Resources:";
+
+        /// <summary>
+        /// Operações:
+        /// </summary>
+        public const string OPERATIONS = "Operations:";
     }
 }

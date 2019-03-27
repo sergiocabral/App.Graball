@@ -1,4 +1,6 @@
-﻿using Graball.Business.Module;
+﻿using Graball.Business;
+using Graball.Business.Module;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Graball.Module.Domains
@@ -24,6 +26,39 @@ namespace Graball.Module.Domains
         /// Execução do módulo.
         /// </summary>
         public override void Run()
+        {
+            do
+            {
+                switch (ChooseOption<string>(new string[]
+                {
+                    "View released domain lists",
+                    "Consult WHOIS"
+                }).Key)
+                {
+                    case -1:
+                        return;
+                    case 0:
+                        ViewReleasedLists();
+                        break;
+                    case 1:
+                        ConsultWHOIS();
+                        break;
+                }
+            } while (true);
+        }
+
+        /// <summary>
+        /// Operaçoes de consulta ao banco de dados local.
+        /// </summary>
+        public void ViewReleasedLists()
+        {
+            NotImplemented();
+        }
+
+        /// <summary>
+        /// Operaçoes de consulta ao banco de dados local.
+        /// </summary>
+        public void ConsultWHOIS()
         {
             NotImplemented();
         }

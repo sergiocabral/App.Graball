@@ -195,7 +195,7 @@ namespace Graball.Business.Module
         /// <param name="options">Lista de opções.</param>
         /// <param name="title">Título.</param>
         /// <returns>Resposta com índice e opção selecionada. Índice -1 para nenhuma seleção.</returns>
-        public KeyValuePair<int, T> ChooseOption<T>(IList<T> options, string title)
+        public KeyValuePair<int, T> ChooseOption<T>(IList<T> options, string title = Phrases.OPERATIONS)
         {
             IList<string> getNames(T option)
             {
@@ -272,7 +272,7 @@ namespace Graball.Business.Module
         /// <param name="context">Contexto dos módulos para exibição.</param>
         /// <param name="title">Título.</param>
         /// <returns>Módulo selecionado. Ou null para nenhuma seleção.</returns>
-        public ModuleInterface ChooseModule(string context, string title)
+        public ModuleInterface ChooseModule(string context, string title = Phrases.RESOURCES)
         {
             var option = ChooseOption(ModuleBase.AllModules.Where(a => a.Context == context).Select(a => a.Name).ToList(), title);
 
