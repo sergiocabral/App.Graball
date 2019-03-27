@@ -200,19 +200,8 @@ namespace Graball
         /// </summary>
         public override void Run()
         {
-            ModuleInterface module;
-            do
-            {
-                Welcome();
-
-                module = ChooseModule(string.Empty, "Available modules:");
-
-                if (module != null)
-                {
-                    module.Run();
-                }
-            } while (module != null);
-
+            Welcome();
+            ChooseModule(string.Empty, "Available modules:");
             Output.WriteLine("_Finished.".Translate());
 #if DEBUG
             System.Console.ReadKey();

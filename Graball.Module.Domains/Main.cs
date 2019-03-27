@@ -38,49 +38,10 @@ namespace Graball.Module.Domains
         /// </summary>
         public override void Run()
         {
-            do
-            {
-                switch (ChooseOption<string>(new string[]
-                {
-                    "Search on internet",
-                    "Search the local database"
-                }).Key)
-                {
-                    case -1:
-                        return;
-                    case 0:
-                        CollectDataFromInternet();
-                        break;
-                    case 1:
-                        QueryLocalDatabase();
-                        break;
-                }
-            } while (true);
-        }
-
-        /// <summary>
-        /// Opções para carregar dados da internet.
-        /// </summary>
-        public void CollectDataFromInternet()
-        {
-            ModuleInterface module;
-            do
-            {
-                module = ChooseModule(Properties.Resources.ContextModuleProvider);
-
-                if (module != null)
-                {
-                    module.Run();
-                }
-            } while (module != null);
-        }
-
-        /// <summary>
-        /// Operaçoes de consulta ao banco de dados local.
-        /// </summary>
-        public void QueryLocalDatabase()
-        {
-            NotImplemented();
+            ChooseOption(new Dictionary<string, Action>() {
+                { "Search on internet", () => ChooseModule(Properties.Resources.ContextModuleProvider) },
+                { "Search the local database", NotImplemented }
+            });
         }
     }
 }

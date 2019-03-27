@@ -195,7 +195,7 @@ namespace Graball.Business.Module
         /// <param name="options">Lista de opções.</param>
         /// <param name="title">Título.</param>
         /// <returns>Resposta com índice e opção selecionada. Índice -1 para nenhuma seleção.</returns>
-        public KeyValuePair<int, T> ChooseOption<T>(IList<T> options, string title = Phrases.OPERATIONS)
+        public KeyValuePair<int, T> ChooseOption<T>(IList<T> options, string title)
         {
             IList<string> getNames(T option)
             {
@@ -265,25 +265,46 @@ namespace Graball.Business.Module
             return result;
         }
 
+        /// <summary>
+        /// Exibe uma lista para seleção.
+        /// </summary>
+        /// <param name="options">Opções.</param>
+        /// <param name="title">Título.</param>
+        public void ChooseOption(IDictionary<string, Action> options, string title = Phrases.OPERATIONS)
+        {
+            do
+            {
+                var option = ChooseOption<string>(options.Select(a => a.Key).ToArray(), title);
+                if (option.Key == -1)
+                {
+                    return;
+                }
+                else
+                {
+                    options[option.Value]();
+                }
+            } while (true);
+        }
 
         /// <summary>
         /// Exibe uma lista de módulos para seleção.
         /// </summary>
         /// <param name="context">Contexto dos módulos para exibição.</param>
         /// <param name="title">Título.</param>
-        /// <returns>Módulo selecionado. Ou null para nenhuma seleção.</returns>
-        public ModuleInterface ChooseModule(string context, string title = Phrases.RESOURCES)
+        public void ChooseModule(string context, string title = Phrases.RESOURCES)
         {
-            var option = ChooseOption(ModuleBase.AllModules.Where(a => a.Context == context).Select(a => a.Name).ToList(), title);
-
-            if (option.Key >= 0)
+            do
             {
-                return ModuleBase.AllModules.Single(a => a.Name == option.Value);
-            }
-            else
-            {
-                return null;
-            }
+                var option = ChooseOption(ModuleBase.AllModules.Where(a => a.Context == context).Select(a => a.Name).ToList(), title);
+                if (option.Key == -1)
+                {
+                    return;
+                }
+                else
+                {
+                    ModuleBase.AllModules.Single(a => a.Name == option.Value).Run();
+                }
+            } while (true);
         }
 
         /// <summary>
