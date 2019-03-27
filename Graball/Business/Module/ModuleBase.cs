@@ -4,6 +4,8 @@ using Graball.General.Text;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -93,7 +95,27 @@ namespace Graball.Business.Module
         /// </summary>
         /// <param name="input">Instância.</param>
         public void SetInput(InputInterface input) => Input = input;
-        
+
+        private SQLiteConnection database = null;
+        /// <summary>
+        /// Banco de dados.
+        /// </summary>
+        protected SQLiteConnection Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    var file = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, this.GetType().GetNamespace() + ".sqlite"));
+                    database = new SQLiteConnection($"Data Source={file.FullName}");
+                    database.Open();
+                    database.Close();
+                }
+                return database;
+            }
+            set => database = value;
+        }
+
         /// <summary>
         /// Mensagem pronta para "Em desenvolvimento"
         /// </summary>
