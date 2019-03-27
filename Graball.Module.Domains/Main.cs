@@ -1,5 +1,6 @@
 ﻿using Graball.Business.Module;
 using Graball.General.Text;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Graball.Module.Domains
@@ -21,6 +22,32 @@ namespace Graball.Module.Domains
         /// </summary>
         public override void Run()
         {
+            KeyValuePair<int, string> option;
+            do
+            {
+                option = ChooseOption<string>(new string[]
+                {
+                    "Search on internet services",
+                    "Search the local database"
+                }, "Available operations:");
+
+                switch (option.Key)
+                {
+                    case 0:
+                        CollectDataFromInternet();
+                        break;
+                    case 1:
+                        QueryLocalDatabase();
+                        break;
+                }
+            } while (option.Key >= 0);
+        }
+
+        /// <summary>
+        /// Opções para carregar dados da internet.
+        /// </summary>
+        public void CollectDataFromInternet()
+        {
             ModuleInterface module;
             do
             {
@@ -31,6 +58,14 @@ namespace Graball.Module.Domains
                     module.Run();
                 }
             } while (module != null);
+        }
+
+        /// <summary>
+        /// Operaçoes de consulta ao banco de dados local.
+        /// </summary>
+        public void QueryLocalDatabase()
+        {
+            NotImplemented();
         }
     }
 }

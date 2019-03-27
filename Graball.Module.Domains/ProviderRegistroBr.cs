@@ -26,7 +26,7 @@ namespace Graball.Module.Domains
         /// </summary>
         public override void Run()
         {
-            NotImplementedException();
+            NotImplemented();
         }
     }
 }

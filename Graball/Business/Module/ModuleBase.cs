@@ -149,7 +149,7 @@ namespace Graball.Business.Module
         /// <summary>
         /// Mensagem pronta para "Em desenvolvimento"
         /// </summary>
-        protected void NotImplementedException()
+        protected void NotImplemented()
         {
             Output.WriteLine($"#{Phrases.NOT_IMPLEMENTED.Translate()}").WriteLine();
             Output.Write($"?{Phrases.PRESS_ANY_KEY.Translate()}");

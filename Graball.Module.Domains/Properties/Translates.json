@@ -16,5 +16,32 @@
         "Value": "Orígem dos dados:"
       }
     ]
+  },
+  {
+    "Key": "Available operations:",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Operações disponíveis:"
+      }
+    ]
+  },
+  {
+    "Key": "Search on internet services",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Pesquisar em serviços na internet"
+      }
+    ]
+  },
+  {
+    "Key": "Search the local database",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Pesquisar no banco de dados local"
+      }
+    ]
   }
 ]
