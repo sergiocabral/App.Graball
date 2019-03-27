@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Graball.Business.IO
+﻿namespace Graball.Business.IO
 {
     /// <summary>
     /// Interface para gerenciadores de Input ou Output.

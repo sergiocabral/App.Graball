@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Graball.General.Data;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Text;
 
 namespace Graball.Module.Domains
 {
@@ -11,9 +11,14 @@ namespace Graball.Module.Domains
     internal static class Database
     {
         /// <summary>
+        /// Referência ao banco de dados SQLite.
+        /// </summary>
+        public static SQLite SQLite { get; set; }
+
+        /// <summary>
         /// Lista de ações para ajustes na estrutura e invremento da versão do banco.
         /// </summary>
-        public static IList<Action<SQLiteConnection>> Structures => new List<Action<SQLiteConnection>>(new Action<SQLiteConnection>[] {
+        public static IList<Action<SQLiteConnection>> SQLiteStructures => new List<Action<SQLiteConnection>>(new Action<SQLiteConnection>[] {
             (SQLiteConnection connection) =>
             {
                 using (var command = connection.CreateCommand())

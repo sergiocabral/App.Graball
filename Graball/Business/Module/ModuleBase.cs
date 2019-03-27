@@ -116,35 +116,35 @@ namespace Graball.Business.Module
             set => iniFile = value;
         }
 
-        private DatabaseSQLite database = null;
+        private SQLite sqlite = null;
         /// <summary>
         /// Banco de dados.
         /// </summary>
-        protected DatabaseSQLite DatabaseSQLite
+        protected SQLite SQLite
         {
             get
             {
-                if (database == null)
+                if (sqlite == null)
                 {
                     var file = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, this.GetType().GetNamespace() + ".sqlite"));
-                    database = new DatabaseSQLite(file.FullName);
-                    if (DatabaseSQLiteStructures != null)
+                    sqlite = new SQLite(file.FullName);
+                    if (SQLiteStructures != null)
                     {
-                        foreach (var structure in DatabaseSQLiteStructures)
+                        foreach (var structure in SQLiteStructures)
                         {
-                            database.AddStructure(structure);
+                            sqlite.AddStructure(structure);
                         }
                     }
                 }
-                return database;
+                return sqlite;
             }
-            set => database = value;
+            set => sqlite = value;
         }
 
         /// <summary>
         /// Lista de ações para ajustes na estrutura e invremento da versão do banco.
         /// </summary>
-        protected virtual IList<Action<SQLiteConnection>> DatabaseSQLiteStructures { get; } = null;
+        protected virtual IList<Action<SQLiteConnection>> SQLiteStructures { get; } = null;
 
         /// <summary>
         /// Mensagem pronta para "Em desenvolvimento"

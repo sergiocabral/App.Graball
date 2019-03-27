@@ -4,7 +4,6 @@ using Graball.General.IO;
 using Graball.General.Reflection;
 using System;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Graball.Output.File
 {

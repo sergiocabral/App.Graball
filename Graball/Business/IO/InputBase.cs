@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Graball.Business.IO
+﻿namespace Graball.Business.IO
 {
     /// <summary>
     /// Classe base para recebedor de informações do usuário.

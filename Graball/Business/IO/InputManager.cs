@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Graball.Business.IO
+﻿namespace Graball.Business.IO
 {
     /// <summary>
     /// Gerenciador de inputs

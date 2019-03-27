@@ -1,9 +1,4 @@
-﻿using Graball.General.Text;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Graball.Business.IO
+﻿namespace Graball.Business.IO
 {
     /// <summary>
     /// Classe base para exibidor de informações para o usuário.

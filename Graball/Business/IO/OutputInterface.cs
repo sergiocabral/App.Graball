@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Graball.Business.IO
+﻿namespace Graball.Business.IO
 {
     /// <summary>
     /// Interface para exibidor de informações para o usuário.

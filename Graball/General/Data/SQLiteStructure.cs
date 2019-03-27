@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Text;
 
 namespace Graball.General.Data
 {
     /// <summary>
     /// Criação de estrutura do banco de dados.
     /// </summary>
-    public abstract class DatabaseSQLiteStructure
+    public abstract class SQLiteStructure
     {
         /// <summary>
         /// Construtor.
         /// </summary>
         /// <param name="database">Instância do banco de dados.</param>
-        public DatabaseSQLiteStructure(DatabaseSQLite database)
+        public SQLiteStructure(SQLite database)
         {
             Database = database;
             foreach (var create in ToCreate)
@@ -26,7 +24,7 @@ namespace Graball.General.Data
         /// <summary>
         /// Banco de dados.
         /// </summary>
-        public DatabaseSQLite Database { get; }
+        public SQLite Database { get; }
 
         /// <summary>
         /// Lista de estruturas para criar.

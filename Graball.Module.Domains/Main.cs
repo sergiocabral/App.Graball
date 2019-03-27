@@ -10,6 +10,14 @@ namespace Graball.Module.Domains
     public class Main : ModuleBase
     {
         /// <summary>
+        /// Construtor.
+        /// </summary>
+        public Main()
+        {
+            Database.SQLite = SQLite;
+        }
+ 
+        /// <summary>
         /// Nome de apresentação.
         /// </summary>
         public override string Name { get => "Internet domains".Translate(); }
@@ -22,7 +30,7 @@ namespace Graball.Module.Domains
         /// <summary>
         /// Lista de ações para ajustes na estrutura e invremento da versão do banco.
         /// </summary>
-        protected override IList<Action<SQLiteConnection>> DatabaseSQLiteStructures => Database.Structures;
+        protected override IList<Action<SQLiteConnection>> SQLiteStructures => Database.SQLiteStructures;
 
         /// <summary>
         /// Execução do módulo.
@@ -72,7 +80,6 @@ namespace Graball.Module.Domains
         /// </summary>
         public void QueryLocalDatabase()
         {
-            var d = DatabaseSQLite;
             NotImplemented();
         }
     }

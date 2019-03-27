@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace Graball.General.Text.Formatter
 {

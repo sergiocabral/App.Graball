@@ -1,28 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.IO;
-using System.Text;
 
 namespace Graball.General.Data
 {
     /// <summary>
     /// Banco de dados SQLite
     /// </summary>
-    public class DatabaseSQLite
+    public class SQLite
     {
         /// <summary>
         /// Construtor.
         /// </summary>
         /// <param name="filename">Arquivo em disco.</param>
-        public DatabaseSQLite(string filename)
+        public SQLite(string filename)
         {
             Filename = filename;
 
             var directory = new FileInfo(filename).Directory;
             if (!directory.Exists) { directory.Create(); }
 
-            Connection = new SQLiteConnection($"Data Source={filename}");
+            Connection = new System.Data.SQLite.SQLiteConnection($"Data Source={filename}");
             Connection.Open();
             CreateInitialStructure();
         }
@@ -35,18 +33,18 @@ namespace Graball.General.Data
         /// <summary>
         /// Conexão.
         /// </summary>
-        public SQLiteConnection Connection { get; }
+        public System.Data.SQLite.SQLiteConnection Connection { get; }
 
         /// <summary>
         /// Lista de ações para ajustes na estrutura e invremento da versão do banco.
         /// </summary>
-        private IList<Action<SQLiteConnection>> Structures { get; } = new List<Action<SQLiteConnection>>();
+        private IList<Action<System.Data.SQLite.SQLiteConnection>> Structures { get; } = new List<Action<System.Data.SQLite.SQLiteConnection>>();
 
         /// <summary>
         /// Adiciona estrutura para ser criada e incrementar a versão do banco.
         /// </summary>
         /// <param name="createStructure"></param>
-        public void AddStructure(Action<SQLiteConnection> createStructure)
+        public void AddStructure(Action<System.Data.SQLite.SQLiteConnection> createStructure)
         {
             Structures.Add(createStructure);
             if (Structures.Count > Version)
