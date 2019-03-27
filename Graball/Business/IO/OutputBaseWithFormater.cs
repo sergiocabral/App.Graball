@@ -32,6 +32,19 @@
         }
 
         /// <summary>
+        /// Escreve um texto formatado e adiciona nova uma linha.
+        /// Desconsidera os caracteres de marcação.
+        /// </summary>
+        /// <param name="text">Texto</param>
+        /// <param name="mark">Marcador usado para o texto.</param>
+        /// <returns>Auto referência.</returns>
+        public OutputInterface WriteRaw(string text, char mark = (char)0)
+        {
+            FormaterHelper.Output(text, WriteNow, true, mark);
+            return this;
+        }
+
+        /// <summary>
         /// Solicita a escrita imediata.
         /// </summary>
         /// <param name="text">Texto.</param>

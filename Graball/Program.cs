@@ -30,6 +30,7 @@ namespace Graball
         {
             SetInput(new InputManager());
             SetOutput(new OutputManager() { Prevent = true });
+
             LoadTranslate(CultureInfo.CurrentUICulture.Name);
             ExtractAssemblies();
             LoadModules();
@@ -202,7 +203,7 @@ namespace Graball
         {
             Welcome();
             ChooseModule(string.Empty, "Available modules:");
-            Output.WriteLine("_Finished.".Translate());
+            Output.WriteLine("_{0}", "Finished.".Translate());
 #if DEBUG
             System.Console.ReadKey();
 #endif

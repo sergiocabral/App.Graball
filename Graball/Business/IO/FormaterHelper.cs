@@ -89,18 +89,43 @@ namespace Graball.Business.IO
         }
 
         /// <summary>
+        /// Escapa o texto para exibir todos os caracteres de marcadores.
+        /// </summary>
+        /// <param name="text">Texto.</param>
+        /// <returns>Texto.</returns>
+        public static string Escape(string text)
+        {
+            StringBuilder result = new StringBuilder(text);
+            foreach (var item in Chars)
+            {
+                result.Replace(item.ToString(), item.ToString() + item.ToString());
+            }
+            return result.ToString();
+        }
+
+        /// <summary>
         /// Solicita a escrita parte por parte formatada.
         /// </summary>
         /// <param name="text">Texto</param>
         /// <param name="write">Função de escrita</param>
-        /// <param name="ignoreFormatter">Ignora o formatador. Aplica apenas NewLine.</param>
-        public static void Output(string text, Action<string, char> write)
+        /// <param name="raw">Ignora o formatador. Aplica apenas NewLine.</param>
+        /// <param name="rawMark">Marcador padrão usado para o texto raw.</param>
+        public static void Output(string text, Action<string, char> write, bool raw = false, char rawMark = (char)0)
         { 
             if (text == null) { return; }
+
+            text = text.Replace("\r", string.Empty);
 
             const char NO_MARK = (char)0;
             List<char> marks = new List<char>();
             StringBuilder currentText = new StringBuilder();
+
+            if (raw)
+            {
+                currentText.Append(Escape(text));
+                text = string.Empty;
+                marks.Add(rawMark);
+            }
 
             char chr(string str, int index) => string.IsNullOrEmpty(str) || index >= str.Length ? NO_MARK : str[index];
             char lastMask() => marks.Count == 0 ? NO_MARK : marks[marks.Count - 1];
