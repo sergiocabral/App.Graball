@@ -9,11 +9,11 @@
     ]
   },
   {
-    "Key": "Service providers:",
+    "Key": "Data origin:",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Provedores de serviço:"
+        "Value": "Orígem dos dados:"
       }
     ]
   }

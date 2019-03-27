@@ -210,7 +210,7 @@ namespace Graball
             {
                 Welcome();
 
-                module = ChooseModule(string.Empty, "List of modules loaded:");
+                module = ChooseModule(string.Empty, "Functions available:");
 
                 if (module != null)
                 {

@@ -108,11 +108,11 @@
     ]
   },
   {
-    "Key": "List of modules loaded:",
+    "Key": "Functions available:",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Lista de módulos carregados:"
+        "Value": "Funções disponíveis:"
       }
     ]
   },

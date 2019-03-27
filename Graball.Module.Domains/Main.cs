@@ -24,7 +24,7 @@ namespace Graball.Module.Domains
             ModuleInterface module;
             do
             {
-                module = ChooseModule(Properties.Resources.ContextModuleProvider, "Service providers:");
+                module = ChooseModule(Properties.Resources.ContextModuleProvider, "Data origin:");
 
                 if (module != null)
                 {
