@@ -100,7 +100,7 @@ namespace Graball.General.Data
         private int CreateInitialStructure()
         {
             using (var command = Connection.CreateCommand())
-            {                
+            {
                 try
                 {
                     return Version;
@@ -115,14 +115,6 @@ namespace Graball.General.Data
                     return 0;
                 }
             }
-        }
-
-        /// <summary>
-        /// Fecha a conexão.
-        /// </summary>
-        public void Close()
-        {
-            Connection.Close();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Graball.Business.Module;
 using Graball.General.Text;
+using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Reflection;
 
 namespace Graball.Module.Domains
@@ -16,6 +18,11 @@ namespace Graball.Module.Domains
         /// Referência para o assembly da instância.
         /// </summary>
         protected override Assembly ClassAssembly { get => Assembly.GetExecutingAssembly(); }
+
+        /// <summary>
+        /// Lista de ações para ajustes na estrutura e invremento da versão do banco.
+        /// </summary>
+        protected override IList<Action<SQLiteConnection>> DatabaseSQLiteStructures => Database.Structures;
 
         /// <summary>
         /// Execução do módulo.
@@ -65,6 +72,7 @@ namespace Graball.Module.Domains
         /// </summary>
         public void QueryLocalDatabase()
         {
+            var d = DatabaseSQLite;
             NotImplemented();
         }
     }

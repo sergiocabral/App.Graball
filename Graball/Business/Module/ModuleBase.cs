@@ -120,7 +120,7 @@ namespace Graball.Business.Module
         /// <summary>
         /// Banco de dados.
         /// </summary>
-        protected DatabaseSQLite Database
+        protected DatabaseSQLite DatabaseSQLite
         {
             get
             {
@@ -128,9 +128,9 @@ namespace Graball.Business.Module
                 {
                     var file = new FileInfo(Path.Combine(Definitions.DirectoryForUserData.FullName, this.GetType().GetNamespace() + ".sqlite"));
                     database = new DatabaseSQLite(file.FullName);
-                    if (DatabaseStructures != null)
+                    if (DatabaseSQLiteStructures != null)
                     {
-                        foreach (var structure in DatabaseStructures)
+                        foreach (var structure in DatabaseSQLiteStructures)
                         {
                             database.AddStructure(structure);
                         }
@@ -144,7 +144,7 @@ namespace Graball.Business.Module
         /// <summary>
         /// Lista de ações para ajustes na estrutura e invremento da versão do banco.
         /// </summary>
-        protected virtual IList<Action<SQLiteConnection>> DatabaseStructures { get; } = null;
+        protected virtual IList<Action<SQLiteConnection>> DatabaseSQLiteStructures { get; } = null;
 
         /// <summary>
         /// Mensagem pronta para "Em desenvolvimento"
