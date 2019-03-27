@@ -229,12 +229,17 @@ namespace Graball
         /// </summary>
         private void Welcome()
         {
+
             Output.Prevent = false;
 
+            var space = '#';
             var name = Assembly.GetExecutingAssembly().GetDescription();
-            Output.WriteLine("^+-{0}-+", new String('-', name.Length));
-            Output.WriteLine("^| {0} |", name);
-            Output.WriteLine("^+-{0}-+", new String('-', name.Length));
+            name = new String(space, 3) + " " + name + " " + new String(space, 3);
+            var line = new String(space, Console.BufferWidth - name.Length - 2);
+
+            Output.WriteLine("^" + (new String(space, name.Length) + " " + line).Replace(space.ToString(), space.ToString() + space.ToString()));
+            Output.WriteLine("^" + (name + " " + line).Replace(space.ToString(), space.ToString() + space.ToString()));
+            Output.WriteLine("^" + (new String(space, name.Length) + " " + line).Replace(space.ToString(), space.ToString() + space.ToString()));
             Output.WriteLine();
 
             if (!Output.Flushed)
