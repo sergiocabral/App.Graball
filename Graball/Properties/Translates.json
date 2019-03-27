@@ -36,11 +36,11 @@
     ]
   },
   {
-    "Key": "Module loaded: {0}",
+    "Key": "System component loaded: {0}",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Módulo carregado: {0}"
+        "Value": "Componente do sistema carregado: {0}"
       }
     ]
   },
@@ -81,11 +81,11 @@
     ]
   },
   {
-    "Key": "Choose one or input blank to exit: ",
+    "Key": "Choose or input blank to exit: ",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Escolha um ou deixe em branco para sair: "
+        "Value": "Escolha ou deixe em branco para sair: "
       }
     ]
   },
@@ -108,11 +108,11 @@
     ]
   },
   {
-    "Key": "Functions available:",
+    "Key": "Available modules:",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Funções disponíveis:"
+        "Value": "Módulos disponíveis:"
       }
     ]
   },

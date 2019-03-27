@@ -27,9 +27,9 @@ namespace Graball.Module.Domains
             {
                 option = ChooseOption<string>(new string[]
                 {
-                    "Search on internet services",
+                    "Search on internet",
                     "Search the local database"
-                }, "Available operations:");
+                }, "Operations:");
 
                 switch (option.Key)
                 {

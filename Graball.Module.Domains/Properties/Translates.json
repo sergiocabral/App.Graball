@@ -18,20 +18,20 @@
     ]
   },
   {
-    "Key": "Available operations:",
+    "Key": "Operations:",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Operações disponíveis:"
+        "Value": "Operações:"
       }
     ]
   },
   {
-    "Key": "Search on internet services",
+    "Key": "Search on internet",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Pesquisar em serviços na internet"
+        "Value": "Pesquisar na internet"
       }
     ]
   },

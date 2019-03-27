@@ -8,7 +8,7 @@
         /// <summary>
         /// Módulo carregado: {0}
         /// </summary>
-        public const string FILE_LOADED_ASSEMBLY = "Module loaded: {0}";
+        public const string FILE_LOADED_ASSEMBLY = "System component loaded: {0}";
 
         /// <summary>
         /// Ocorreu um erro ao carregar o arquivo \"{0}\".
@@ -33,7 +33,7 @@
         /// <summary>
         /// Escolha um ou deixe em branco para sair: 
         /// </summary>
-        public const string CHOOSE_ONE = "Choose one or input blank to exit: ";
+        public const string CHOOSE_ONE = "Choose or input blank to exit: ";
 
         /// <summary>
         /// Escolha errada, cara
