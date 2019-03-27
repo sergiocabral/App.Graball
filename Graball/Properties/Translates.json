@@ -1,5 +1,23 @@
 [
   {
+    "Key": "Yes",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Sim"
+      }
+    ]
+  },
+  {
+    "Key": "No",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Não"
+      }
+    ]
+  },
+  {
     "Key": "Module loaded: {0}",
     "Value": [
       {
@@ -50,6 +68,15 @@
       {
         "Key": "pt-BR",
         "Value": "Escolha um ou deixe em branco para sair: "
+      }
+    ]
+  },
+  {
+    "Key": "Wrong choice, dude",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Escolha errada, cara"
       }
     ]
   },

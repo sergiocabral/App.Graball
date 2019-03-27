@@ -9,7 +9,7 @@ namespace Graball.Business.IO
     /// <summary>
     /// Gerenciador de outputs
     /// </summary>
-    public sealed class OutputManager: ManagerBase<OutputInterface>, OutputInterface
+    public sealed class OutputManager : ManagerBase<OutputInterface>, OutputInterface
     {
         /// <summary>
         /// Fila de mensagens não exibidas por não haver output.
@@ -86,22 +86,6 @@ namespace Graball.Business.IO
                 }
             } while (Queue.Count > 0);
             Flushed = true;
-        }
-
-        /// <summary>
-        /// Exibe um lista para seleção.
-        /// </summary>
-        /// <typeparam name="T">Tipo do conteúdo da lista.</typeparam>
-        /// <param name="options">Opções.</param>
-        /// <param name="format">Formatação da exibição.</param>
-        /// <returns>Auto referência para a lista passada.</returns>
-        public IList<T> WriteOptionsToSelect<T>(IList<T> options, string format = null)
-        {
-            foreach (var item in Items)
-            {
-                item.WriteOptionsToSelect<T>(options);
-            }
-            return options;
         }
     }
 }

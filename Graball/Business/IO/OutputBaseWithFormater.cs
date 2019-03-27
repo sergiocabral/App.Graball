@@ -42,37 +42,5 @@ namespace Graball.Business.IO
         /// <param name="text">Texto.</param>
         /// <param name="mark">Marcador.</param>
         protected abstract void WriteNow(string text, char mark = (char)0);
-
-        /// <summary>
-        /// Exibe um lista para seleção.
-        /// </summary>
-        /// <typeparam name="T">Tipo do conteúdo da lista.</typeparam>
-        /// <param name="options">Opções.</param>
-        /// <param name="format">Formatação da exibição.</param>
-        /// <returns>Auto referência para a lista passada.</returns>
-        public IList<T> WriteOptionsToSelect<T>(IList<T> options, string format = null)
-        {
-            format = format ?? " {1}) {0}";
-            var padding = options.Count.ToString().Length;
-            var i = 0;
-            foreach (var option in options)
-            {
-                string text = null;
-                if (typeof(T) != typeof(string) && typeof(IEnumerable).IsInstanceOfType(option))
-                {
-                    foreach (var first in (IEnumerable)option)
-                    {
-                        text = Convert.ToString(first);
-                        break;
-                    }                    
-                }
-                else
-                {
-                    text = Convert.ToString(option);
-                }
-                WriteLine(format, text, (++i).ToString().PadLeft(padding));
-            }
-            return options;
-        }
     }
 }

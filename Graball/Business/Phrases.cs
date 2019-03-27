@@ -33,11 +33,16 @@
         /// <summary>
         /// Escolha um ou deixe em branco para sair: 
         /// </summary>
-        public const string CHOSE_ONE = "Choose one or input blank to exit: ";
+        public const string CHOOSE_ONE = "Choose one or input blank to exit: ";
+
+        /// <summary>
+        /// Escolha errada, cara
+        /// </summary>
+        public const string CHOOSE_WRONG = "Wrong choice, dude";
 
         /// <summary>
         /// (em branco)
         /// </summary>
-        public const string CHOSE_BLANK = "(blank)";
+        public const string CHOOSE_BLANK = "(blank)";
     }
 }

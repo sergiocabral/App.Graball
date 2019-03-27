@@ -5,11 +5,13 @@ using Graball.Business.Module;
 using Graball.General.Reflection;
 using Graball.General.Text;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Graball
@@ -205,19 +207,13 @@ namespace Graball
         /// </summary>
         public override void Run()
         {
-            string answer;
+            int option;
             do
             {
                 Welcome();
 
-                Output.WriteLine("List of modules loaded:".Translate());
-                var options = Output.WriteOptionsToSelect(Modules.Select(a => a.Name).ToList());
-                Output.Write("\n?{0}", Phrases.CHOSE_ONE.Translate());
-                answer = Input.Read();
-                Output.WriteLine(string.IsNullOrWhiteSpace(answer) ? "_" + Phrases.CHOSE_BLANK.Translate() : "@" + answer);
-
-                Output.WriteLine();
-            } while (!string.IsNullOrWhiteSpace(answer));
+                option = ChoseOption(Modules.Select(a => a.Name).ToList(), "List of modules loaded:").Key;
+            } while (option >= 0);
 
             Output.WriteLine("Finished.");
 #if DEBUG
