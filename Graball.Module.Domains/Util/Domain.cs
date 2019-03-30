@@ -61,9 +61,9 @@ namespace Graball.Module.Domains.Util
             StringBuilder result = new StringBuilder();
 
             result.AppendLine();
-            result.AppendLine(new String('%', 60));
+            result.AppendLine(new String('#', 60));
             result.AppendLine(string.Format("{0}:{1} - {2}", server, port, domain));
-            result.AppendLine(new String('%', 60));
+            result.AppendLine(new String('#', 60));
             result.AppendLine();
 
             using (var stream = new TcpClient(server, port).GetStream())

@@ -27,6 +27,11 @@ namespace Graball.Business.IO
         public static char CharNewLine { get; } = '\n';
 
         /// <summary>
+        /// Caracter marcado: Ignora formatação restante.
+        /// </summary>
+        public static char CharIgnore { get; } = '$';
+
+        /// <summary>
         /// Caracter marcado: Título
         /// </summary>
         public static char CharTitle { get; } = '^';
@@ -136,34 +141,41 @@ namespace Graball.Business.IO
             {
                 var currentChar = text[i];
 
-                if (currentChar == CharNewLine)                     //É marca de nova linha
-                {
-                    currentText.Append(Environment.NewLine);
-                }
-                else if (
-                    isMark(currentChar) &&                          //É uma marca
-                    currentChar == chr(text, i + 1)                 //Marca duplicada
+                if (currentChar == CharNewLine)                         //É marca de nova linha
+                {                                                      
+                    currentText.Append(Environment.NewLine);           
+                }                                                      
+                else if (                                              
+                    isMark(currentChar) &&                              //É uma marca
+                    currentChar == chr(text, i + 1)                     //Marca duplicada
+                    )                                                  
+                {                                                      
+                    currentText.Append(currentChar);                   
+                    i++;                                               
+                }                                                      
+                else if (                                              
+                    isMark(currentChar)                                 //É uma marca
                     )
                 {
-                    currentText.Append(currentChar);
-                    i++;
-                }
-                else if (
-                    isMark(currentChar)                             //É uma marca
-                    )
-                {
-                     if (currentText.Length > 0)                    //Tem texto pendente
-                     {
-                         write(currentText.ToString(), lastMask());
-                         currentText.Clear();
+                     if (currentChar == CharIgnore) {                   //Ignora (raw)
+                        currentText.Append(text.Substring(i + 1));
+                        break;
                      }
-                     if (currentChar != lastMask())                 //Abre marcação
-                     {
-                         marks.Add(currentChar);
-                     }
-                     else                                           //Fecha marcação em aberto
-                     {
-                         marks.RemoveAt(marks.Count - 1);
+                     else
+                     { 
+                         if (currentText.Length > 0)                    //Tem texto pendente
+                         {
+                             write(currentText.ToString(), lastMask());
+                             currentText.Clear();
+                         }
+                         if (currentChar != lastMask())                 //Abre marcação
+                         {
+                             marks.Add(currentChar);
+                         }
+                         else                                           //Fecha marcação em aberto
+                         {
+                             marks.RemoveAt(marks.Count - 1);
+                         }
                      }
                 }
                 else

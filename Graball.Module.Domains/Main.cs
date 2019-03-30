@@ -110,8 +110,8 @@ namespace Graball.Module.Domains
                         };
                         Database.TableDomain.InsertOrUpdate(entity);
 
-                        Output.WriteLine().WriteRaw(whois.Trim(), '#').WriteLine().WriteLine();
-                        Output.WriteRaw(entity.ToString(), '*').WriteLine();
+                        Output.WriteLine().WriteLine("#$" + whois.Trim()).WriteLine();
+                        Output.WriteLine("*$" + entity.ToString());
                     }
                     else
                     {

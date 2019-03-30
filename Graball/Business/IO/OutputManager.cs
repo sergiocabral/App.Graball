@@ -59,18 +59,6 @@ namespace Graball.Business.IO
         }
 
         /// <summary>
-        /// Escreve um texto formatado e adiciona nova uma linha.
-        /// Desconsidera os caracteres de marcação.
-        /// </summary>
-        /// <param name="text">Texto</param>
-        /// <param name="mark">Marcador usado para o texto.</param>
-        /// <returns>Auto referência.</returns>
-        public OutputInterface WriteRaw(string text, char mark = (char)0)
-        {
-            return Write(new KeyValuePair<string, object[]>((mark == (char)0 ? "" : mark.ToString()) + FormaterHelper.Escape(text), new object[] { }));
-        }
-
-        /// <summary>
         /// Evita o output.
         /// </summary>
         public bool Prevent { get; set; }
