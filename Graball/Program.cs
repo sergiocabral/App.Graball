@@ -84,7 +84,7 @@ namespace Graball
         /// <param name="language">Idioma.</param>
         private void LoadTranslate(string language)
         {
-            var resource = Assembly.GetExecutingAssembly().GetResourceString("Graball.Properties.Translates.json");
+            var resource = Assembly.GetExecutingAssembly().GetResourceString("Translates.json");
             Translate.LoadAll(resource);
 
             new Translate(language, true);

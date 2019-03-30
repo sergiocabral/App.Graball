@@ -14,9 +14,11 @@
 
   <ItemGroup>
     <None Remove="Properties\Translates.json" />
+    <None Remove="Properties\WhoisServers.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Properties\WhoisServers.json" />
     <EmbeddedResource Include="Properties\Translates.json" />
   </ItemGroup>
 

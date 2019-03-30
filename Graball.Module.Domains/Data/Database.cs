@@ -39,7 +39,7 @@ CREATE
        Name      TEXT     NOT NULL,
        Suffix    TEXT     NOT NULL,
        TLD       TEXT     NOT NULL,
-       Length    INT      NOT NULL,
+       Length    INTEGER  NOT NULL,
        Status    TEXT     NOT NULL,
        Updated   DATETIME NOT NULL
 )

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 
 namespace Graball.General.Reflection
@@ -27,7 +28,20 @@ namespace Graball.General.Reflection
         /// <returns>Conteúdo do recurso.</returns>
         public static string GetResourceString(this Assembly assembly, string name)
         {
-            using (var stream = assembly.GetManifestResourceStream(name))
+            string resource = null;
+            foreach (var item in assembly.GetManifestResourceNames())
+            {
+                if (item.IndexOf(name) >= 0)
+                {
+                    if (resource != null)
+                    {
+                        throw new ArgumentException();
+                    }
+                    resource = item;
+                }
+            }
+
+            using (var stream = assembly.GetManifestResourceStream(resource))
             using (var reader = stream != null ? new StreamReader(stream) : null)
             {
                 return reader?.ReadToEnd();

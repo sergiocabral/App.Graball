@@ -42,5 +42,14 @@ namespace Graball.Module.Domains.Data
         /// Última atualização na tabela.
         /// </summary>
         public virtual DateTime Updated { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// Representação da instância como texto.
+        /// </summary>
+        /// <returns>Texto.</returns>
+        public override string ToString()
+        {
+            return Fullname;
+        }
     }
 }
