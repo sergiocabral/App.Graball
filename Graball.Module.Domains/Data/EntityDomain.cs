@@ -1,7 +1,9 @@
-﻿using Graball.General.Text;
+﻿using Graball.General.Data;
+using Graball.General.Text;
 using Graball.Module.Domains.Util;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -12,6 +14,22 @@ namespace Graball.Module.Domains.Data
     /// </summary>
     public class EntityDomain : EntityDomainInterface
     {
+        /// <summary>
+        /// Construtor.
+        /// </summary>
+        public EntityDomain() { }
+
+        /// <summary>
+        /// Construtor.
+        /// </summary>
+        /// <param name="reader">DataReader</param>
+        public EntityDomain(SQLiteDataReader reader) : this()
+        {
+            Fullname = reader.GetString(reader.GetFieldIndex("Fullname"));
+            Status = (Domain.Status)Enum.Parse(typeof(Domain.Status), reader.GetString(reader.GetFieldIndex("Status")));
+            Updated = reader.GetDateTime(reader.GetFieldIndex("Updated"));
+        }
+
         private string fullname;
         /// <summary>
         /// Nome completo do domínio.

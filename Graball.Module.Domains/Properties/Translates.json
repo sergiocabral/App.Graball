@@ -133,5 +133,23 @@
         "Value": "Atualização"
       }
     ]
+  },
+  {
+    "Key": "Enter your search term:",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Digite o termo de pesquisa:"
+      }
+    ]
+  },
+  {
+    "Key": "The search returned no results.",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "A pesquisa não retornou resultados."
+      }
+    ]
   }
 ]

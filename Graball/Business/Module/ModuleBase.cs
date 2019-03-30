@@ -362,6 +362,35 @@ namespace Graball.Business.Module
         }
 
         /// <summary>
+        /// Inicia um loop
+        /// </summary>
+        /// <param name="action">Ação para exibir o datareader.</param>
+        /// <returns>Função para o Database.TableDomain.Search()</returns>
+        protected Func<SQLiteDataReader, bool> Loop(Action<SQLiteDataReader> action)
+        {
+            ConsoleLoading.Active(false);
+            Output.WriteLine("_" + Phrases.LOOP_CONTROL.Translate()).WriteLine();
+            return (SQLiteDataReader reader) =>
+            {
+                action(reader);
+                switch (Input.HasRead() ? Input.ReadKey() : (char)0)
+                {
+                    case (char)ConsoleKey.Escape:
+                        ConsoleLoading.Active(false);
+                        Output.WriteLine().WriteLine("_" + Phrases.LOOP_CANCELED.Translate());
+                        return false;
+                    case 'p':
+                    case 'P':
+                        ConsoleLoading.Active(false);
+                        Output.WriteLine().WriteLine("_" + Phrases.LOOP_PAUSED.Translate()).WriteLine();
+                        Input.ReadKey();
+                        break;
+                }
+                return true;
+            };
+        }
+
+        /// <summary>
         /// Execução do módulo.
         /// </summary>
         public abstract void Run();

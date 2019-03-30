@@ -42,10 +42,49 @@ namespace Graball.Module.Domains
         public override void Run()
         {
             ChooseOption(new Dictionary<string, Action>() {
-                { "Local database", NotImplemented },
+                { "Local database", LocalDatabase },
                 { "Services on the Internet", () => ChooseModule(Properties.Resources.ContextModuleProvider, "Services") },                
                 { "Consult WHOIS", Whois },
             });
+        }
+
+        /// <summary>
+        /// Consulta no banco de dados local
+        /// </summary>
+        private void LocalDatabase()
+        {
+            do
+            {
+                var domain = InputText("Enter your search term:");
+                if (!string.IsNullOrWhiteSpace(domain))
+                {
+                    ConsoleLoading.Active(true);
+                    Output.WriteLine();
+                    var count = Database.TableDomain.Search(Loop((SQLiteDataReader reader) =>
+                    {
+                        var entity = new EntityDomain(reader);
+                        Output.WriteLine("{2} ** {0} {1}", entity.Fullname.ToLower().Replace(domain.ToLower(), $"*{domain.ToLower()}*").PadRight(40), entity.Status, entity.Status == Domain.Status.Available ? "#" : "");
+                    }), new Dictionary<string, string>()
+                    {
+                        { "Fullname", "LOWER({0}) LIKE LOWER({1})" },
+                        { "Status", "{0} <> {1}" }
+                    }, new EntityDomain
+                    {
+                        Fullname = $"%{domain}%",
+                        Status = Domain.Status.Registered
+                    }, "Fullname ASC");
+
+                    if (count == 0)
+                    {
+                        Output.WriteLine("#" + "The search returned no results.".Translate());
+                    }
+                    Output.WriteLine();
+                }
+                else
+                {
+                    break;
+                }
+            } while (true);
         }
 
         /// <summary>

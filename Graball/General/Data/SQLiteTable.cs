@@ -151,11 +151,11 @@ WHERE
                     foreach (var field in fields)
                     {
                         var property = typeof(TTypeOfTable).GetProperty(field.Key);
-                        command.AddParameter(field.Key, property.GetValue(entity));
+                        command.AddParameter(field.Key, property.PropertyType.IsEnum ? property.GetValue(entity).ToString() : property.GetValue(entity));
                     }
                 }
 
-                var where = fields == null || fields.Keys.Count == 0 ? "(1 = 1)" : string.Join(conjunction, fields.Select(a => "(" + string.Format(a.Value, a.Key, ":" + a.Key) + ")").ToArray());
+                var where = fields == null || fields.Keys.Count == 0 ? "(1 = 1)" : string.Join($" {conjunction} ", fields.Select(a => "(" + string.Format(a.Value, a.Key, ":" + a.Key) + ")").ToArray());
 
                 command.CommandText = $@"
 SELECT {select}
@@ -184,11 +184,11 @@ SELECT {select}
                     foreach (var field in fields)
                     {
                         var property = typeof(TTypeOfTable).GetProperty(field.Key);
-                        command.AddParameter(field.Key, property.GetValue(entity));
+                        command.AddParameter(field.Key, property.PropertyType.IsEnum ? property.GetValue(entity).ToString() : property.GetValue(entity));
                     }
                 }
 
-                var where = fields == null || fields.Keys.Count == 0 ? "(1 = 1)" : string.Join(conjunction, fields.Select(a => "(" + string.Format(a.Value, a.Key, ":" + a.Key) + ")").ToArray());
+                var where = fields == null || fields.Keys.Count == 0 ? "(1 = 1)" : string.Join($" {conjunction} ", fields.Select(a => "(" + string.Format(a.Value, a.Key, ":" + a.Key) + ")").ToArray());
 
                 command.CommandText = $@"
 SELECT COUNT(*)
@@ -219,11 +219,11 @@ SELECT COUNT(*)
                     foreach (var field in fields)
                     {
                         var property = typeof(TTypeOfTable).GetProperty(field.Key);
-                        command.AddParameter(field.Key, property.GetValue(entity));
+                        command.AddParameter(field.Key, property.PropertyType.IsEnum ? property.GetValue(entity).ToString() : property.GetValue(entity));
                     }
                 }
 
-                var where = fields == null || fields.Keys.Count == 0 ? "(1 = 1)" : string.Join(conjunction, fields.Select(a => "(" + string.Format(a.Value, a.Key, ":" + a.Key) + ")").ToArray());
+                var where = fields == null || fields.Keys.Count == 0 ? "(1 = 1)" : string.Join($" {conjunction} ", fields.Select(a => "(" + string.Format(a.Value, a.Key, ":" + a.Key) + ")").ToArray());
 
                 command.CommandText = $@"
   SELECT *
