@@ -36,7 +36,8 @@ namespace Graball.Module.Domains.Util
         public enum WhoisService
         {
             Normal,
-            WebsiteWhoisCom
+            WebsiteWhoisCom,
+            WebsiteInstantDomainSearchCom,
         }
 
         public static IDictionary<string, string> whoisServers = null;
@@ -126,7 +127,7 @@ namespace Graball.Module.Domains.Util
         public static Status GetStatus(string whois)
         {
             var keys = ExtractWhoisKeys(whois);
-            if (keys.ContainsKey("domain name") || keys.ContainsKey("owner"))
+            if (keys.ContainsKey("domain name") || keys.ContainsKey("owner") || whois.IndexOf("\"availability\":\"registered\"") >= 0)
             {
                 return Status.Registered;
             }
@@ -134,7 +135,7 @@ namespace Graball.Module.Domains.Util
             {
                 return Status.WaitingRelease;
             }
-            else if (whois.IndexOf("reserved:") >= 0)
+            else if (whois.IndexOf("reserved:") >= 0 || whois.IndexOf("\"availability\":\"reserved\"") >= 0)
             {
                 return Status.Reserved;
             }
@@ -158,6 +159,8 @@ namespace Graball.Module.Domains.Util
                     return WhoisByServer(domain, true);
                 case WhoisService.WebsiteWhoisCom:
                     return WhoisByWebsiteWhoisCom(domain);
+                case WhoisService.WebsiteInstantDomainSearchCom:
+                    return WhoisByWebsiteInstantDomainSearchCom(domain);
                 default:
                     throw new NotImplementedException();
             }
@@ -250,5 +253,32 @@ namespace Graball.Module.Domains.Util
             var whois = Regex.Match(result.Html, @"(?<=\<pre[^\>]*\>).*(?=\</pre>)", RegexOptions.Singleline).Value;
             return string.IsNullOrWhiteSpace(whois) ? null : whois;
         }
+
+        /// <summary>
+        /// Consulta Whois. Usa o website instantdomainsearch.com
+        /// Usa Captcha
+        /// </summary>
+        /// <param name="domain">Domínio.</param>
+        /// <returns>Retorn do Whois.</returns>
+        public static string WhoisByWebsiteInstantDomainSearchCom(string domain)
+        {
+            string hash(string e, int t) {
+                int n, r, o;
+                for (n = t, r = e.Length, o = 0; o < r; o += 1)
+                {
+                    n = (n << 5) - n + (byte)e[o];
+                    n &= n;
+                }
+                return n.ToString();
+            }
+
+            var name = domain.Substring(0, domain.IndexOf("."));
+            var suffix = domain.Substring(domain.IndexOf(".") + 1);
+
+            var client = new WebClientWithCookie();
+            var result = client.Load($"https://check.instantdomainsearch.com/bulk/?names={name}&tlds={suffix}&hash={hash(domain, 27)}");
+            return string.IsNullOrWhiteSpace(result.Html) ? null : result.Html;
+        }
+        
     }
 }

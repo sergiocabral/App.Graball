@@ -178,5 +178,14 @@
         "Value": "Não foi possível consultar o sufixo: {0}"
       }
     ]
+  },
+  {
+    "Key": "Query modes:",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Modos de consulta:"
+      }
+    ]
   }
 ]

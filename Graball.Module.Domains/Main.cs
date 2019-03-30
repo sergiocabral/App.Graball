@@ -55,6 +55,12 @@ namespace Graball.Module.Domains
         /// </summary>
         private void WhoisBruteForce()
         {
+            var mode = ChooseOption<string>(new List<string>() {
+                { "WHOIS" },
+                { "instantdomainsearch.com" },
+            }, "Query modes:").Key;
+            if (mode < 0) { return; }
+
             var suffix = InputText("Enter suffix:").ToLower();
             if (string.IsNullOrWhiteSpace(suffix)) { return; }
             if (suffix[0] != '.')
@@ -75,7 +81,7 @@ namespace Graball.Module.Domains
 
                 if (values == null || ((DateTime)values["Updated"]).Date < DateTime.Now.Date.AddDays(-30))
                 {
-                    var whois = Domain.Whois(entity.Fullname);
+                    var whois = Domain.Whois(entity.Fullname, mode == 0 ? Domain.WhoisService.Normal : Domain.WhoisService.WebsiteInstantDomainSearchCom);
                     if (whois == null)
                     {
                         Output.WriteLine("!" + "Could not query suffix: {0}".Translate(), suffix.ToUpper());
@@ -171,7 +177,7 @@ namespace Graball.Module.Domains
                         };
                         Database.TableDomain.InsertOrUpdate(entity);
 
-                        Output.WriteLine().WriteLine("#$" + whois.Trim()).WriteLine();
+                        Output.WriteLine().WriteLine("#${0}", whois.Trim()).WriteLine();
                         Output.WriteLine("*$" + entity.ToString());
                     }
                     else
