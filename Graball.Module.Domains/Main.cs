@@ -42,10 +42,57 @@ namespace Graball.Module.Domains
         public override void Run()
         {
             ChooseOption(new Dictionary<string, Action>() {
-                { "Local database", LocalDatabase },
-                { "Services on the Internet", () => ChooseModule(Properties.Resources.ContextModuleProvider, "Services") },                
+                { "Local database", LocalDatabase },                
                 { "Consult WHOIS", Whois },
+                { "Consult WHOIS with Brute Force", WhoisBruteForce },
+                { "Services on the Internet", () => ChooseModule(Properties.Resources.ContextModuleProvider, "Services") },
             });
+        }
+
+        /// <summary>
+        /// Consulta Whois usando força bruta
+        /// </summary>
+        private void WhoisBruteForce()
+        {
+            var suffix = InputText("Enter suffix:").ToLower();
+            if (string.IsNullOrWhiteSpace(suffix)) { return; }
+            if (suffix[0] != '.')
+            {
+                suffix = "." + suffix;
+            }
+
+            Output.WriteLine();
+            var initial = InputText("Initial domain:");
+            if (string.IsNullOrWhiteSpace(initial)) { return; }
+            Output.WriteLine();
+
+            var i = 0;
+            Loop((string current) =>
+            {
+                var entity = new EntityDomain(current + suffix);
+                var values = Database.TableDomain.Values(new Dictionary<string, string> { { "Fullname", "{0} = {1}" } }, entity);
+
+                if (values == null || ((DateTime)values["Updated"]).Date < DateTime.Now.Date)
+                {
+                    var whois = Domain.Whois(entity.Fullname);
+                    if (whois == null)
+                    {
+                        Output.WriteLine("!" + "Could not query suffix: {0}".Translate(), suffix.ToUpper());
+                        return null;
+                    }
+                    entity.Status = Domain.GetStatus(whois);
+                    entity.Updated = DateTime.Now;
+                    Database.TableDomain.InsertOrUpdate(entity);
+                }
+                else
+                {
+                    entity.Status = (Domain.Status)Enum.Parse(typeof(Domain.Status), (string)values["Status"]);
+                    entity.Updated = (DateTime)values["Updated"];
+                }
+                Output.Write(entity.ToString(i++ == 0, Domain.Status.Available));
+                return Domain.Next(current);
+            }, initial);
+            Output.WriteLine();
         }
 
         /// <summary>

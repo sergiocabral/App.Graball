@@ -98,6 +98,39 @@ namespace Graball.Module.Domains.Util
         }
 
         /// <summary>
+        /// Calcula o próximo domínio.
+        /// </summary>
+        /// <param name="domain">Domínio.</param>
+        /// <returns>Nome de domínio.</returns>
+        public static string Next(string domain)
+        {
+            var result = new StringBuilder();
+
+            var chars = domain.ToLower().ToCharArray();
+            Array.Reverse(chars);
+
+            var overflow = true;
+            foreach (var c in chars)
+            {
+                var letter = !overflow ? c : (char)((byte)c + 1);
+
+                overflow = letter > 'z';
+                if (overflow)
+                {
+                    letter = 'a';
+                }
+
+                result.Insert(0, letter);
+            }
+            if (overflow)
+            {
+                result.Insert(0, 'a');
+            }
+
+            return result.ToString();
+        }
+        
+        /// <summary>
         /// Consulta o Whois para um domínio.
         /// </summary>
         /// <param name="domain">Domínio.</param>

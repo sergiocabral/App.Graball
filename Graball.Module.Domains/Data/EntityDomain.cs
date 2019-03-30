@@ -22,6 +22,14 @@ namespace Graball.Module.Domains.Data
         /// <summary>
         /// Construtor.
         /// </summary>
+        public EntityDomain(string domain) : this()
+        {
+            Fullname = domain;
+        }
+
+        /// <summary>
+        /// Construtor.
+        /// </summary>
         /// <param name="reader">DataReader</param>
         public EntityDomain(SQLiteDataReader reader) : this()
         {

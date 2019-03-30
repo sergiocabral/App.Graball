@@ -36,6 +36,15 @@
     ]
   },
   {
+    "Key": "Consult WHOIS with Brute Force",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Consultar WHOIS com Força Bruta"
+      }
+    ]
+  },
+  {
     "Key": "Local database",
     "Value": [
       {
@@ -158,6 +167,15 @@
       {
         "Key": "pt-BR",
         "Value": "A pesquisa não retornou resultados."
+      }
+    ]
+  },
+  {
+    "Key": "Could not query suffix: {0}",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Não foi possível consultar o sufixo: {0}"
       }
     ]
   }
