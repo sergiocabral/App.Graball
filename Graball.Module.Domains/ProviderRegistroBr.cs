@@ -35,20 +35,9 @@ namespace Graball.Module.Domains
         public override void Run()
         {
             ChooseOption(new Dictionary<string, Action>() {
-                { "View released domain lists", ViewReleasedLists },
-                { "Consult WHOIS", NotImplemented }
-            });
-        }
-
-        /// <summary>
-        /// Lista de domínios liberados.
-        /// </summary>
-        private void ViewReleasedLists()
-        {
-            ChooseOption(new Dictionary<string, Action>() {
                 { "lista-processo-liberacao.txt", () => ParseList("lista-processo-liberacao.txt") },
                 { "lista-processo-competitivo.txt", () => ParseList("lista-processo-competitivo.txt") }
-            });
+            }, "View released domain lists");
         }
 
         /// <summary>
@@ -57,12 +46,18 @@ namespace Graball.Module.Domains
         /// <param name="list">Lista</param>
         private void ParseList(string list)
         {
+            var url = $"https://registro.br/dominio/{list}";
+
+            Output.WriteLine("Requesting url: {0}", url).WriteLine();
+
             ConsoleLoading.Active(true);
 
             var client = new WebClientWithCookie();
-            var loaded = client.Load($"https://registro.br/dominio/{list}");
+            var loaded = client.Load(url);
 
             ConsoleLoading.Active(false);
+
+            Output.WriteLine("Check availability...").WriteLine();
 
             var updated = DateTime.MaxValue;
             foreach (Match match in Regex.Matches(loaded.Html, @"(?<=^#.*\s)[0-9]{4}-[0-9]{2}-[0-9]{2}(?=T[0-9]{2}:[0-9]{2}:[0-9]{2})", RegexOptions.Multiline))

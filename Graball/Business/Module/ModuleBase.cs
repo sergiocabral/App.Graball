@@ -315,7 +315,7 @@ namespace Graball.Business.Module
         /// <returns>Retorna true quando finaliza, e false quando o usuário cancela.</returns>
         protected bool Loop<T>(Func<T, T> loop, T control)
         {
-            Output.WriteLine("_" + Phrases.LOOP_CONTROL.Translate());
+            Output.WriteLine("_" + Phrases.LOOP_CONTROL.Translate()).WriteLine();
             do
             {
                 control = loop(control);
@@ -325,12 +325,12 @@ namespace Graball.Business.Module
                     {
                         case (char)ConsoleKey.Escape:
                             ConsoleLoading.Active(false);
-                            Output.WriteLine("_" + Phrases.LOOP_CANCELED.Translate());
+                            Output.WriteLine().WriteLine("_" + Phrases.LOOP_CANCELED.Translate());
                             return false;
                         case 'p':
                         case 'P':
                             ConsoleLoading.Active(false);
-                            Output.WriteLine("_" + Phrases.LOOP_PAUSED.Translate());
+                            Output.WriteLine().WriteLine("_" + Phrases.LOOP_PAUSED.Translate()).WriteLine();
                             Input.ReadKey();
                             break;
                     }                    

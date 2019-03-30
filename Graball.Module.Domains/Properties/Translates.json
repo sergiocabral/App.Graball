@@ -45,11 +45,20 @@
     ]
   },
   {
-    "Key": "Consult WHOIS",
+    "Key": "Requesting url: {0}",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Consultar WHOIS"
+        "Value": "Acessando url: {0}"
+      }
+    ]
+  },
+  {
+    "Key": "Check availability...",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Verificando disponibilidade..."
       }
     ]
   }
