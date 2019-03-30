@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -304,6 +305,38 @@ namespace Graball.Business.Module
                     ModuleBase.AllModules.Single(a => a.Name == option.Value).Run();
                 }
             } while (true);
+        }
+
+        /// <summary>
+        /// Inicia um loop. 
+        /// </summary>
+        /// <param name="loop">Função do loop. Se retorna null o loop finaliza.</param>
+        /// <param name="control">Argumentos passados e recebidos do loop.</param>
+        /// <returns>Retorna true quando finaliza, e false quando o usuário cancela.</returns>
+        protected bool Loop<T>(Func<T, T> loop, T control)
+        {
+            Output.WriteLine("_" + Phrases.LOOP_CONTROL.Translate());
+            do
+            {
+                control = loop(control);
+                if (control != null)
+                {
+                    switch (Input.HasRead() ? Input.ReadKey() : (char)0)
+                    {
+                        case (char)ConsoleKey.Escape:
+                            ConsoleLoading.Active(false);
+                            Output.WriteLine("_" + Phrases.LOOP_CANCELED.Translate());
+                            return false;
+                        case 'p':
+                        case 'P':
+                            ConsoleLoading.Active(false);
+                            Output.WriteLine("_" + Phrases.LOOP_PAUSED.Translate());
+                            Input.ReadKey();
+                            break;
+                    }                    
+                }
+            } while (control != null);
+            return true;
         }
 
         /// <summary>

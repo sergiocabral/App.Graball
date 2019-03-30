@@ -142,5 +142,32 @@
         "Value": "Finalizado."
       }
     ]
+  },
+  {
+    "Key": "To pause use [P], to stop use [ESC].",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Para pausar use [P], para parar use [ESC]."
+      }
+    ]
+  },
+  {
+    "Key": "Execution canceled by user.",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Execução cancelada pelo usuário."
+      }
+    ]
+  },
+  {
+    "Key": "Execution paused by the user. Press any key to continue.",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Execução pausada pelo usuário. Pressione qualquer tecla para continuar."
+      }
+    ]
   }
 ]

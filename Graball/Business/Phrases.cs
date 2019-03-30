@@ -64,5 +64,20 @@
         /// Operações:
         /// </summary>
         public const string OPERATIONS = "Operations:";
+
+        /// <summary>
+        /// Para pausar use [P], para parar use [ESC].
+        /// </summary>
+        public const string LOOP_CONTROL = "To pause use [P], to stop use [ESC].";
+
+        /// <summary>
+        /// Execução cancelada pelo usuário.
+        /// </summary>
+        public const string LOOP_CANCELED= "Execution canceled by user.";
+
+        /// <summary>
+        /// Execução pausada pelo usuário. Pressione qualquer tecla para continuar.
+        /// </summary>
+        public const string LOOP_PAUSED = "Execution paused by the user. Press any key to continue.";
     }
 }

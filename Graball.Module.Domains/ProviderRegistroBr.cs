@@ -6,6 +6,7 @@ using Graball.Module.Domains.Util;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -72,14 +73,14 @@ namespace Graball.Module.Domains
                     updated = date;
                 }
             }
-            var matches = Regex.Matches(loaded.Html, @"^\w*\.\w*\.br$", RegexOptions.Multiline);
-            foreach (Match match in matches)
+            Loop((IList<Match> matches) =>
             {
                 ConsoleLoading.Active(true);
 
-                var domain = new EntityDomain {
-                    Fullname = match.Value,
-                    Updated = updated                    
+                var domain = new EntityDomain
+                {
+                    Fullname = matches[0].Value,
+                    Updated = updated
                 };
 
                 var status = Database.TableDomain.Value<string>("Status", new Dictionary<string, string>() {
@@ -99,7 +100,17 @@ namespace Graball.Module.Domains
 
                 ConsoleLoading.Active(false);
                 Output.WriteLine("#{0} {1}", domain.Fullname.PadRight(40), domain.Status);
-            }
+
+                matches.RemoveAt(0);
+                if (matches.Count > 0)
+                {
+                    return matches;
+                }
+                else
+                {
+                    return null;
+                }
+            }, Regex.Matches(loaded.Html, @"^\w*\.\w*\.br$", RegexOptions.Multiline).ToList());
             Output.WriteLine();
         }
     }
