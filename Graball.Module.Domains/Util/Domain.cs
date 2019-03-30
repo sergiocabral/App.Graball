@@ -1,4 +1,5 @@
 ﻿using Graball.General.Reflection;
+using Graball.General.Text;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -66,19 +67,26 @@ namespace Graball.Module.Domains.Util
             result.AppendLine(new String('#', 60));
             result.AppendLine();
 
-            using (var stream = new TcpClient(server, port).GetStream())
-            using (var buffered = new BufferedStream(stream))
+            try
             {
-                var writer = new StreamWriter(buffered);
-                writer.WriteLine(domain);
-                writer.Flush();
-
-                var reader = new StreamReader(buffered);
-                string response;
-                while ((response = reader.ReadLine()) != null)
+                using (var stream = new TcpClient(server, port).GetStream())
+                using (var buffered = new BufferedStream(stream))
                 {
-                    result.AppendLine(response);
+                    var writer = new StreamWriter(buffered);
+                    writer.WriteLine(domain);
+                    writer.Flush();
+
+                    var reader = new StreamReader(buffered);
+                    string response;
+                    while ((response = reader.ReadLine()) != null)
+                    {
+                        result.AppendLine(response);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                result.AppendLine($"{"Fail".Translate().ToUpper()}: {ex.Message}");
             }
 
             return result.ToString();

@@ -169,5 +169,14 @@
         "Value": "Execução pausada pelo usuário. Pressione qualquer tecla para continuar."
       }
     ]
+  },
+  {
+    "Key": "Fail",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Falha"
+      }
+    ]
   }
 ]
