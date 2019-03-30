@@ -40,14 +40,11 @@ namespace Graball.General.IO
         private static void Animation(object sender, ElapsedEventArgs e)
         {
             if (position >= sprites.Length) { position = 0; }
-            var backupForegroundColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.White;
             try
             {
                 Console.Write("{0}\b", sprites[position++]);
             }
             catch { }
-            Console.ForegroundColor = backupForegroundColor;
         }
 
         /// <summary>
