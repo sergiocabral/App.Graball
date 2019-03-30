@@ -97,5 +97,41 @@
         "Value": "Consulta para o TLD {0} não implementado."
       }
     ]
+  },
+  {
+    "Key": "Name",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Nome"
+      }
+    ]
+  },
+  {
+    "Key": "Suffix",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Sufixo"
+      }
+    ]
+  },
+  {
+    "Key": "Length",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Comprimento"
+      }
+    ]
+  },
+  {
+    "Key": "Updated",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Atualização"
+      }
+    ]
   }
 ]

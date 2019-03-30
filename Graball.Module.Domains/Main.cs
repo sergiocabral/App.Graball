@@ -72,6 +72,7 @@ namespace Graball.Module.Domains
                         Database.TableDomain.InsertOrUpdate(entity);
 
                         Output.WriteLine().WriteRaw(whois.Trim(), '#').WriteLine().WriteLine();
+                        Output.WriteRaw(entity.ToString(), '*').WriteLine();
                     }
                     else
                     {

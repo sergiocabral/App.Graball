@@ -1,18 +1,918 @@
 [
   {
-    "Key": ".br",
-    "Value": "registro.br"
+    "Key": "ac",
+    "Value": "whois.nic.ac"
   },
   {
-    "Key": ".com",
+    "Key": "ad",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "ae",
+    "Value": "whois.aeda.net.ae"
+  },
+  {
+    "Key": "aero",
+    "Value": "whois.aero"
+  },
+  {
+    "Key": "af",
+    "Value": "whois.nic.af"
+  },
+  {
+    "Key": "ag",
+    "Value": "whois.nic.ag"
+  },
+  {
+    "Key": "ai",
+    "Value": "whois.ai"
+  },
+  {
+    "Key": "al",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "am",
+    "Value": "whois.amnic.net"
+  },
+  {
+    "Key": "as",
+    "Value": "whois.nic.as"
+  },
+  {
+    "Key": "asia",
+    "Value": "whois.nic.asia"
+  },
+  {
+    "Key": "at",
+    "Value": "whois.nic.at"
+  },
+  {
+    "Key": "au",
+    "Value": "whois.aunic.net"
+  },
+  {
+    "Key": "aw",
+    "Value": "whois.nic.aw"
+  },
+  {
+    "Key": "ax",
+    "Value": "whois.ax "
+  },
+  {
+    "Key": "az",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "ba",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "bar",
+    "Value": "whois.nic.bar"
+  },
+  {
+    "Key": "be",
+    "Value": "whois.dns.be"
+  },
+  {
+    "Key": "berlin",
+    "Value": "whois.nic.berlin"
+  },
+  {
+    "Key": "best",
+    "Value": "whois.nic.best"
+  },
+  {
+    "Key": "bg",
+    "Value": "whois.register.bg"
+  },
+  {
+    "Key": "bi",
+    "Value": "whois.nic.bi"
+  },
+  {
+    "Key": "biz",
+    "Value": "whois.neulevel.biz"
+  },
+  {
+    "Key": "bj",
+    "Value": "www.nic.bj"
+  },
+  {
+    "Key": "bo",
+    "Value": "whois.nic.bo"
+  },
+  {
+    "Key": "br",
+    "Value": "whois.nic.br"
+  },
+  {
+    "Key": "br.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "bt",
+    "Value": "whois.netnames.net"
+  },
+  {
+    "Key": "bw",
+    "Value": "whois.nic.net.bw"
+  },
+  {
+    "Key": "by",
+    "Value": "whois.cctld.by"
+  },
+  {
+    "Key": "bz",
+    "Value": "whois.belizenic.bz"
+  },
+  {
+    "Key": "bzh",
+    "Value": "whois-bzh.nic.fr"
+  },
+  {
+    "Key": "ca",
+    "Value": "whois.cira.ca"
+  },
+  {
+    "Key": "cat",
+    "Value": "whois.cat"
+  },
+  {
+    "Key": "cc",
+    "Value": "whois.nic.cc"
+  },
+  {
+    "Key": "cd",
+    "Value": "whois.nic.cd"
+  },
+  {
+    "Key": "ceo",
+    "Value": "whois.nic.ceo"
+  },
+  {
+    "Key": "cf",
+    "Value": "whois.dot.cf"
+  },
+  {
+    "Key": "ch",
+    "Value": "whois.nic.ch "
+  },
+  {
+    "Key": "ci",
+    "Value": "whois.nic.ci"
+  },
+  {
+    "Key": "ck",
+    "Value": "whois.nic.ck"
+  },
+  {
+    "Key": "cl",
+    "Value": "whois.nic.cl"
+  },
+  {
+    "Key": "cloud",
+    "Value": "whois.nic.cloud"
+  },
+  {
+    "Key": "club",
+    "Value": "whois.nic.club"
+  },
+  {
+    "Key": "cn",
+    "Value": "whois.cnnic.net.cn"
+  },
+  {
+    "Key": "cn.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "co",
+    "Value": "whois.nic.co"
+  },
+  {
+    "Key": "co.nl",
+    "Value": "whois.co.nl"
+  },
+  {
+    "Key": "com",
     "Value": "whois.verisign-grs.com"
   },
   {
-    "Key": ".net",
+    "Key": "coop",
+    "Value": "whois.nic.coop"
+  },
+  {
+    "Key": "cx",
+    "Value": "whois.nic.cx"
+  },
+  {
+    "Key": "cy",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "cz",
+    "Value": "whois.nic.cz"
+  },
+  {
+    "Key": "de",
+    "Value": "whois.denic.de"
+  },
+  {
+    "Key": "dk",
+    "Value": "whois.dk-hostmaster.dk"
+  },
+  {
+    "Key": "dm",
+    "Value": "whois.nic.cx"
+  },
+  {
+    "Key": "dz",
+    "Value": "whois.nic.dz"
+  },
+  {
+    "Key": "ec",
+    "Value": "whois.nic.ec"
+  },
+  {
+    "Key": "edu",
+    "Value": "whois.educause.net"
+  },
+  {
+    "Key": "ee",
+    "Value": "whois.tld.ee"
+  },
+  {
+    "Key": "eg",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "es",
+    "Value": "whois.nic.es"
+  },
+  {
+    "Key": "eu",
+    "Value": "whois.eu"
+  },
+  {
+    "Key": "eu.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "eus",
+    "Value": "whois.nic.eus"
+  },
+  {
+    "Key": "fi",
+    "Value": "whois.fi"
+  },
+  {
+    "Key": "fo",
+    "Value": "whois.nic.fo"
+  },
+  {
+    "Key": "fr",
+    "Value": "whois.nic.fr"
+  },
+  {
+    "Key": "gb",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "gb.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "gb.net",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "qc.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "ge",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "gg",
+    "Value": "whois.gg"
+  },
+  {
+    "Key": "gi",
+    "Value": "whois2.afilias-grs.net"
+  },
+  {
+    "Key": "gl",
+    "Value": "whois.nic.gl"
+  },
+  {
+    "Key": "gm",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "gov",
+    "Value": "whois.nic.gov"
+  },
+  {
+    "Key": "gr",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "gs",
+    "Value": "whois.nic.gs"
+  },
+  {
+    "Key": "gy",
+    "Value": "whois.registry.gy"
+  },
+  {
+    "Key": "hamburg",
+    "Value": "whois.nic.hamburg"
+  },
+  {
+    "Key": "hiphop",
+    "Value": "whois.uniregistry.net"
+  },
+  {
+    "Key": "hk",
+    "Value": "whois.hknic.net.hk"
+  },
+  {
+    "Key": "hm",
+    "Value": "whois.registry.hm"
+  },
+  {
+    "Key": "hn",
+    "Value": "whois2.afilias-grs.net"
+  },
+  {
+    "Key": "host",
+    "Value": "whois.nic.host"
+  },
+  {
+    "Key": "hr",
+    "Value": "whois.dns.hr"
+  },
+  {
+    "Key": "ht",
+    "Value": "whois.nic.ht"
+  },
+  {
+    "Key": "hu",
+    "Value": "whois.nic.hu"
+  },
+  {
+    "Key": "hu.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "id",
+    "Value": "whois.pandi.or.id"
+  },
+  {
+    "Key": "ie",
+    "Value": "whois.domainregistry.ie"
+  },
+  {
+    "Key": "il",
+    "Value": "whois.isoc.org.il"
+  },
+  {
+    "Key": "im",
+    "Value": "whois.nic.im"
+  },
+  {
+    "Key": "in",
+    "Value": "whois.inregistry.net"
+  },
+  {
+    "Key": "info",
+    "Value": "whois.afilias.info"
+  },
+  {
+    "Key": "ing",
+    "Value": "domain-registry-whois.l.google.com"
+  },
+  {
+    "Key": "ink",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "int",
+    "Value": "whois.isi.edu"
+  },
+  {
+    "Key": "io",
+    "Value": "whois.nic.io"
+  },
+  {
+    "Key": "iq",
+    "Value": "whois.cmc.iq"
+  },
+  {
+    "Key": "ir",
+    "Value": "whois.nic.ir"
+  },
+  {
+    "Key": "is",
+    "Value": "whois.isnic.is"
+  },
+  {
+    "Key": "it",
+    "Value": "whois.nic.it"
+  },
+  {
+    "Key": "je",
+    "Value": "whois.je"
+  },
+  {
+    "Key": "jobs",
+    "Value": "jobswhois.verisign-grs.com"
+  },
+  {
+    "Key": "jp",
+    "Value": "whois.jprs.jp"
+  },
+  {
+    "Key": "ke",
+    "Value": "whois.kenic.or.ke"
+  },
+  {
+    "Key": "kg",
+    "Value": "whois.domain.kg"
+  },
+  {
+    "Key": "ki",
+    "Value": "whois.nic.ki"
+  },
+  {
+    "Key": "kr",
+    "Value": "whois.kr"
+  },
+  {
+    "Key": "kz",
+    "Value": "whois.nic.kz"
+  },
+  {
+    "Key": "la",
+    "Value": "whois2.afilias-grs.net"
+  },
+  {
+    "Key": "li",
+    "Value": "whois.nic.li"
+  },
+  {
+    "Key": "london",
+    "Value": "whois.nic.london"
+  },
+  {
+    "Key": "lt",
+    "Value": "whois.domreg.lt"
+  },
+  {
+    "Key": "lu",
+    "Value": "whois.restena.lu"
+  },
+  {
+    "Key": "lv",
+    "Value": "whois.nic.lv"
+  },
+  {
+    "Key": "ly",
+    "Value": "whois.lydomains.com"
+  },
+  {
+    "Key": "ma",
+    "Value": "whois.iam.net.ma"
+  },
+  {
+    "Key": "mc",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "md",
+    "Value": "whois.nic.md"
+  },
+  {
+    "Key": "me",
+    "Value": "whois.nic.me"
+  },
+  {
+    "Key": "mg",
+    "Value": "whois.nic.mg"
+  },
+  {
+    "Key": "mil",
+    "Value": "whois.nic.mil"
+  },
+  {
+    "Key": "mk",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "ml",
+    "Value": "whois.dot.ml"
+  },
+  {
+    "Key": "mo",
+    "Value": "whois.monic.mo"
+  },
+  {
+    "Key": "mobi",
+    "Value": "whois.dotmobiregistry.net"
+  },
+  {
+    "Key": "ms",
+    "Value": "whois.nic.ms"
+  },
+  {
+    "Key": "mt",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "mu",
+    "Value": "whois.nic.mu"
+  },
+  {
+    "Key": "museum",
+    "Value": "whois.museum"
+  },
+  {
+    "Key": "mx",
+    "Value": "whois.nic.mx"
+  },
+  {
+    "Key": "my",
+    "Value": "whois.mynic.net.my"
+  },
+  {
+    "Key": "mz",
+    "Value": "whois.nic.mz"
+  },
+  {
+    "Key": "na",
+    "Value": "whois.na-nic.com.na"
+  },
+  {
+    "Key": "name",
+    "Value": "whois.nic.name"
+  },
+  {
+    "Key": "nc",
+    "Value": "whois.nc"
+  },
+  {
+    "Key": "net",
     "Value": "whois.verisign-grs.com"
   },
   {
-    "Key": ".edu",
-    "Value": "whois.verisign-grs.com"
+    "Key": "nf",
+    "Value": "whois.nic.cx"
+  },
+  {
+    "Key": "ng",
+    "Value": "whois.nic.net.ng"
+  },
+  {
+    "Key": "nl",
+    "Value": "whois.domain-registry.nl"
+  },
+  {
+    "Key": "no",
+    "Value": "whois.norid.no"
+  },
+  {
+    "Key": "no.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "nu",
+    "Value": "whois.nic.nu"
+  },
+  {
+    "Key": "nz",
+    "Value": "whois.srs.net.nz"
+  },
+  {
+    "Key": "om",
+    "Value": "whois.registry.om"
+  },
+  {
+    "Key": "ong",
+    "Value": "whois.publicinterestregistry.net"
+  },
+  {
+    "Key": "ooo",
+    "Value": "whois.nic.ooo"
+  },
+  {
+    "Key": "org",
+    "Value": "whois.pir.org"
+  },
+  {
+    "Key": "paris",
+    "Value": "whois-paris.nic.fr"
+  },
+  {
+    "Key": "pe",
+    "Value": "kero.yachay.pe"
+  },
+  {
+    "Key": "pf",
+    "Value": "whois.registry.pf"
+  },
+  {
+    "Key": "pics",
+    "Value": "whois.uniregistry.net"
+  },
+  {
+    "Key": "pl",
+    "Value": "whois.dns.pl"
+  },
+  {
+    "Key": "pm",
+    "Value": "whois.nic.pm"
+  },
+  {
+    "Key": "pr",
+    "Value": "whois.nic.pr"
+  },
+  {
+    "Key": "press",
+    "Value": "whois.nic.press"
+  },
+  {
+    "Key": "pro",
+    "Value": "whois.registrypro.pro"
+  },
+  {
+    "Key": "pt",
+    "Value": "whois.dns.pt"
+  },
+  {
+    "Key": "pub",
+    "Value": "whois.unitedtld.com"
+  },
+  {
+    "Key": "pw",
+    "Value": "whois.nic.pw"
+  },
+  {
+    "Key": "qa",
+    "Value": "whois.registry.qa"
+  },
+  {
+    "Key": "re",
+    "Value": "whois.nic.re"
+  },
+  {
+    "Key": "ro",
+    "Value": "whois.rotld.ro"
+  },
+  {
+    "Key": "rs",
+    "Value": "whois.rnids.rs"
+  },
+  {
+    "Key": "ru",
+    "Value": "whois.tcinet.ru"
+  },
+  {
+    "Key": "sa",
+    "Value": "saudinic.net.sa"
+  },
+  {
+    "Key": "sa.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "sb",
+    "Value": "whois.nic.net.sb"
+  },
+  {
+    "Key": "sc",
+    "Value": "whois2.afilias-grs.net"
+  },
+  {
+    "Key": "se",
+    "Value": "whois.nic-se.se"
+  },
+  {
+    "Key": "se.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "se.net",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "sg",
+    "Value": "whois.nic.net.sg"
+  },
+  {
+    "Key": "sh",
+    "Value": "whois.nic.sh"
+  },
+  {
+    "Key": "si",
+    "Value": "whois.arnes.si"
+  },
+  {
+    "Key": "sk",
+    "Value": "whois.sk-nic.sk"
+  },
+  {
+    "Key": "sm",
+    "Value": "whois.nic.sm"
+  },
+  {
+    "Key": "st",
+    "Value": "whois.nic.st"
+  },
+  {
+    "Key": "so",
+    "Value": "whois.nic.so"
+  },
+  {
+    "Key": "su",
+    "Value": "whois.tcinet.ru"
+  },
+  {
+    "Key": "sx",
+    "Value": "whois.sx"
+  },
+  {
+    "Key": "sy",
+    "Value": "whois.tld.sy"
+  },
+  {
+    "Key": "tc",
+    "Value": "whois.adamsnames.tc"
+  },
+  {
+    "Key": "tel",
+    "Value": "whois.nic.tel"
+  },
+  {
+    "Key": "tf",
+    "Value": "whois.nic.tf"
+  },
+  {
+    "Key": "th",
+    "Value": "whois.thnic.net"
+  },
+  {
+    "Key": "tj",
+    "Value": "whois.nic.tj"
+  },
+  {
+    "Key": "tk",
+    "Value": "whois.nic.tk"
+  },
+  {
+    "Key": "tl",
+    "Value": "whois.domains.tl"
+  },
+  {
+    "Key": "tm",
+    "Value": "whois.nic.tm"
+  },
+  {
+    "Key": "tn",
+    "Value": "whois.ati.tn"
+  },
+  {
+    "Key": "to",
+    "Value": "whois.tonic.to"
+  },
+  {
+    "Key": "top",
+    "Value": "whois.nic.top"
+  },
+  {
+    "Key": "tp",
+    "Value": "whois.domains.tl"
+  },
+  {
+    "Key": "tr",
+    "Value": "whois.nic.tr"
+  },
+  {
+    "Key": "travel",
+    "Value": "whois.nic.travel"
+  },
+  {
+    "Key": "tw",
+    "Value": "whois.twnic.net.tw"
+  },
+  {
+    "Key": "tv",
+    "Value": "whois.nic.tv"
+  },
+  {
+    "Key": "tz",
+    "Value": "whois.tznic.or.tz"
+  },
+  {
+    "Key": "ua",
+    "Value": "whois.ua"
+  },
+  {
+    "Key": "ug",
+    "Value": "whois.co.ug"
+  },
+  {
+    "Key": "uk",
+    "Value": "whois.nic.uk"
+  },
+  {
+    "Key": "uk.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "uk.net",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "ac.uk",
+    "Value": "whois.ja.net"
+  },
+  {
+    "Key": "gov.uk",
+    "Value": "whois.ja.net"
+  },
+  {
+    "Key": "us",
+    "Value": "whois.nic.us"
+  },
+  {
+    "Key": "us.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "uy",
+    "Value": "nic.uy"
+  },
+  {
+    "Key": "uy.com",
+    "Value": "whois.centralnic.com"
+  },
+  {
+    "Key": "uz",
+    "Value": "whois.cctld.uz"
+  },
+  {
+    "Key": "va",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "vc",
+    "Value": "whois2.afilias-grs.net"
+  },
+  {
+    "Key": "ve",
+    "Value": "whois.nic.ve"
+  },
+  {
+    "Key": "vg",
+    "Value": "ccwhois.ksregistry.net"
+  },
+  {
+    "Key": "vu",
+    "Value": "vunic.vu"
+  },
+  {
+    "Key": "wang",
+    "Value": "whois.nic.wang"
+  },
+  {
+    "Key": "wf",
+    "Value": "whois.nic.wf"
+  },
+  {
+    "Key": "wiki",
+    "Value": "whois.nic.wiki"
+  },
+  {
+    "Key": "ws",
+    "Value": "whois.website.ws"
+  },
+  {
+    "Key": "xxx",
+    "Value": "whois.nic.xxx"
+  },
+  {
+    "Key": "xyz",
+    "Value": "whois.nic.xyz"
+  },
+  {
+    "Key": "yu",
+    "Value": "whois.ripe.net"
+  },
+  {
+    "Key": "za.com",
+    "Value": "whois.centralnic.com"
   }
 ]

@@ -88,22 +88,17 @@ namespace Graball.Module.Domains.Util
         /// Consulta o Whois para um domínio.
         /// </summary>
         /// <param name="domain">Domínio.</param>
-        /// <param name="tld">Responsável pelo domínio.</param>
         /// <param name="acceptRedirect">Opcional. Quando true aceita redirecionamento para outros WHOIS com mais informações.</param>
         /// <returns>Status</returns>
-        public static string Whois(string domain, string tld = null, bool acceptRedirect = true)
+        public static string Whois(string domain, bool acceptRedirect = true)
         {
-            if (tld == null)
-            {
-                tld = Regex.Match(domain, @"\.[^\.]*$").Value;
-            }
+            var suffix1 = domain.Substring(domain.IndexOf(".") + 1);
+            var suffix2 = suffix1.Substring(suffix1.IndexOf(".") + 1);
+            var server = WhoisServers.ContainsKey(suffix1) ? WhoisServers[suffix1] : WhoisServers.ContainsKey(suffix2) ? WhoisServers[suffix2] : null;
 
-            if (!WhoisServers.ContainsKey(tld))
-            {
-                return null;
-            }
+            if (server == null) { return null; }
 
-            var whois = WhoisRaw(domain, WhoisServers[tld]);
+            var whois = WhoisRaw(domain, server);
 
             if (whois == null)
             {

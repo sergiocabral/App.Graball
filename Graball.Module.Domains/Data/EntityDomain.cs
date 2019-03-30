@@ -1,5 +1,8 @@
-﻿using Graball.Module.Domains.Util;
+﻿using Graball.General.Text;
+using Graball.Module.Domains.Util;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Graball.Module.Domains.Data
@@ -54,7 +57,19 @@ namespace Graball.Module.Domains.Data
         /// <returns>Texto.</returns>
         public override string ToString()
         {
-            return Fullname;
+            var padding = 13;
+            padding = this.Fullname.Length > padding ? this.Fullname.Length + 2 : padding;
+            StringBuilder result = new StringBuilder();
+            result.AppendLine(string.Format("{0}", this.Fullname.ToUpper().PadLeft(padding)));
+            result.AppendLine(string.Format("{0}", new String('^', this.Fullname.Length).PadLeft(padding)));
+            result.AppendLine(string.Format("{0}: {1}", "Name".Translate().PadLeft(padding), this.Name));
+            result.AppendLine(string.Format("{0}: {1}", "Suffix".Translate().PadLeft(padding), this.Suffix));
+            result.AppendLine(string.Format("{0}: {1}", "TLD".Translate().PadLeft(padding), this.TLD));
+            result.AppendLine(string.Format("{0}: {1}", "Length".Translate().PadLeft(padding), this.Length));
+            result.AppendLine(string.Format("{0}: {1}", "Status".Translate().PadLeft(padding), this.Status));
+            result.AppendLine(string.Format("{0}: {1:yyyy-MM-dd HH:mm:ss}", "Updated".Translate().PadLeft(padding), this.Updated));
+
+            return result.ToString();
         }
     }
 }

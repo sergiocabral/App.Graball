@@ -96,7 +96,7 @@ namespace Graball.Module.Domains
                 }
 
                 ConsoleLoading.Active(false);
-                Output.WriteLine("#{0} {1}", domain.Fullname.PadRight(40), domain.Status);
+                Output.WriteLine("{2} ** {0} {1}", domain.Fullname.PadRight(40), domain.Status, domain.Status == Domain.Status.Available ? "" : "#");
 
                 matches.RemoveAt(0);
                 if (matches.Count > 0)
