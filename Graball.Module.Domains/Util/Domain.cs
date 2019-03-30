@@ -1,5 +1,6 @@
 ﻿using Graball.General.Reflection;
 using Graball.General.Text;
+using Graball.General.Web;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,94 @@ namespace Graball.Module.Domains.Util
             Available = 2,
             WaitingRelease = 4,
             Reserved = 8
+        }
+
+        /// <summary>
+        /// Formas de obter Whois.
+        /// </summary>
+        public enum WhoisService
+        {
+            Normal,
+            WebsiteWhoisCom
+        }
+
+        public static IDictionary<string, string> whoisServers = null;
+        /// <summary>
+        /// Lista de servidores para Whois.
+        /// </summary>
+        public static IDictionary<string, string> WhoisServers
+        {
+            get
+            {
+                if (whoisServers == null)
+                {
+                    var json = Assembly.GetExecutingAssembly().GetResourceString("WhoisServers.json");
+                    using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+                    {
+                        var serializer = new DataContractJsonSerializer(typeof(IDictionary<string, string>));
+                        whoisServers = (IDictionary<string, string>)serializer.ReadObject(stream);
+                    }
+                }
+                return whoisServers;
+            }
+        }
+
+        /// <summary>
+        /// Extrai as chaves de Whois
+        /// </summary>
+        /// <param name="whois">Texto whois.</param>
+        /// <returns>Chaves Whois</returns>
+        public static IDictionary<string, IList<string>> ExtractWhoisKeys(string whois)
+        {
+            if (whois == null) { return null; }
+
+            var result = new Dictionary<string, IList<string>>();
+            foreach (var lineRaw in whois.Split('\n'))
+            {
+                var line = lineRaw.Trim();
+                if (!Regex.IsMatch(line, @"^\w+.*:.*$")) { continue; }
+                var key = line.Substring(0, line.IndexOf(":")).Trim().ToLower();
+                var value = line.Substring(line.IndexOf(":") + 1).Trim();
+                if (!result.ContainsKey(key))
+                {
+                    result[key] = new List<string>();
+                }
+                result[key].Add(value);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Calcula o próximo domínio.
+        /// </summary>
+        /// <param name="domain">Domínio.</param>
+        /// <returns>Nome de domínio.</returns>
+        public static string Next(string domain)
+        {
+            var result = new StringBuilder();
+
+            var chars = domain.ToLower().ToCharArray();
+            Array.Reverse(chars);
+
+            var overflow = true;
+            foreach (var c in chars)
+            {
+                var letter = !overflow ? c : (char)((byte)c + 1);
+
+                overflow = letter > 'z';
+                if (overflow)
+                {
+                    letter = 'a';
+                }
+
+                result.Insert(0, letter);
+            }
+            if (overflow)
+            {
+                result.Insert(0, 'a');
+            }
+
+            return result.ToString();
         }
 
         /// <summary>
@@ -59,10 +148,29 @@ namespace Graball.Module.Domains.Util
         /// Consulta o Whois para um domínio.
         /// </summary>
         /// <param name="domain">Domínio.</param>
-        /// <param name="server">Responsável pelo domínio.</param>
+        /// <param name="mode">Modo de consulta.</param>
+        /// <returns>Whois</returns>
+        public static string Whois(string domain, WhoisService mode = WhoisService.Normal)
+        {
+            switch (mode)
+            {
+                case WhoisService.Normal:
+                    return WhoisByServer(domain, true);
+                case WhoisService.WebsiteWhoisCom:
+                    return WhoisByWebsiteWhoisCom(domain);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// Consulta Whois. Usa conexão em servidor WHOIS
+        /// </summary>
+        /// <param name="domain">Domínio.</param>
+        /// <param name="server">Servidor que responde pelo domínio.</param>
         /// <param name="port">Porta de conexão.</param>
-        /// <returns>Status</returns>
-        public static string WhoisRaw(string domain, string server = null, int port = 43)
+        /// <returns>Retorn do Whois.</returns>
+        public static string WhoisByServer(string domain, string server = null, int port = 43)
         {
             StringBuilder result = new StringBuilder();
 
@@ -98,53 +206,21 @@ namespace Graball.Module.Domains.Util
         }
 
         /// <summary>
-        /// Calcula o próximo domínio.
+        /// Consulta Whois. Usa conexão em servidor WHOIS
         /// </summary>
         /// <param name="domain">Domínio.</param>
-        /// <returns>Nome de domínio.</returns>
-        public static string Next(string domain)
-        {
-            var result = new StringBuilder();
-
-            var chars = domain.ToLower().ToCharArray();
-            Array.Reverse(chars);
-
-            var overflow = true;
-            foreach (var c in chars)
-            {
-                var letter = !overflow ? c : (char)((byte)c + 1);
-
-                overflow = letter > 'z';
-                if (overflow)
-                {
-                    letter = 'a';
-                }
-
-                result.Insert(0, letter);
-            }
-            if (overflow)
-            {
-                result.Insert(0, 'a');
-            }
-
-            return result.ToString();
-        }
-        
-        /// <summary>
-        /// Consulta o Whois para um domínio.
-        /// </summary>
-        /// <param name="domain">Domínio.</param>
-        /// <param name="acceptRedirect">Opcional. Quando true aceita redirecionamento para outros WHOIS com mais informações.</param>
-        /// <returns>Status</returns>
-        public static string Whois(string domain, bool acceptRedirect = true)
+        /// <param name="acceptRedirect">Quando true aceita redirecionamento para outros WHOIS com mais informações.</param>
+        /// <returns>Retorn do Whois.</returns>
+        public static string WhoisByServer(string domain, bool acceptRedirect)
         {
             var suffix1 = domain.Substring(domain.IndexOf(".") + 1);
             var suffix2 = suffix1.Substring(suffix1.IndexOf(".") + 1);
+
             var server = WhoisServers.ContainsKey(suffix1) ? WhoisServers[suffix1] : WhoisServers.ContainsKey(suffix2) ? WhoisServers[suffix2] : null;
-
             if (server == null) { return null; }
+            server = server.Split(',')[0];
 
-            var whois = WhoisRaw(domain, server);
+            var whois = WhoisByServer(domain, server);
 
             if (whois == null)
             {
@@ -155,56 +231,24 @@ namespace Graball.Module.Domains.Util
 
             if (keys.ContainsKey("registrar whois server"))
             {
-                whois += Environment.NewLine + WhoisRaw(domain, keys["registrar whois server"][0]);
+                whois += Environment.NewLine + WhoisByServer(domain, keys["registrar whois server"][0]);
             }
 
             return whois;
         }
 
         /// <summary>
-        /// Extrai as chaves de Whois
+        /// Consulta Whois. Usa o website whois.com
+        /// Usa Captcha
         /// </summary>
-        /// <param name="whois">Texto whois.</param>
-        /// <returns>Chaves Whois</returns>
-        public static IDictionary<string, IList<string>> ExtractWhoisKeys(string whois)
+        /// <param name="domain">Domínio.</param>
+        /// <returns>Retorn do Whois.</returns>
+        public static string WhoisByWebsiteWhoisCom(string domain)
         {
-            if (whois == null) { return null; }
-
-            var result = new Dictionary<string, IList<string>>();
-            foreach (var lineRaw in whois.Split('\n'))
-            {
-                var line = lineRaw.Trim();
-                if (!Regex.IsMatch(line, @"^\w+.*:.*$")) { continue; }
-                var key = line.Substring(0, line.IndexOf(":")).Trim().ToLower();
-                var value = line.Substring(line.IndexOf(":") + 1).Trim();
-                if (!result.ContainsKey(key))
-                {
-                    result[key] = new List<string>();
-                }
-                result[key].Add(value);
-            }
-            return result;
-        }
-
-        public static IDictionary<string, string> whoisServers = null;
-        /// <summary>
-        /// Lista de servidores para Whois.
-        /// </summary>
-        public static IDictionary<string, string> WhoisServers
-        {
-            get
-            {
-                if (whoisServers == null)
-                {
-                    var json = Assembly.GetExecutingAssembly().GetResourceString("WhoisServers.json");
-                    using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-                    {
-                        var serializer = new DataContractJsonSerializer(typeof(IDictionary<string, string>));
-                        whoisServers = (IDictionary<string, string>)serializer.ReadObject(stream);
-                    }
-                }
-                return whoisServers;
-            }
+            var client = new WebClientWithCookie();
+            var result = client.Load($"https://www.whois.com/whois/{domain}");
+            var whois = Regex.Match(result.Html, @"(?<=\<pre[^\>]*\>).*(?=\</pre>)", RegexOptions.Singleline).Value;
+            return string.IsNullOrWhiteSpace(whois) ? null : whois;
         }
     }
 }

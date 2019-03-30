@@ -72,7 +72,7 @@ namespace Graball.Module.Domains
                 var entity = new EntityDomain(current + suffix);
                 var values = Database.TableDomain.Values(new Dictionary<string, string> { { "Fullname", "{0} = {1}" } }, entity);
 
-                if (values == null || ((DateTime)values["Updated"]).Date < DateTime.Now.Date)
+                if (values == null || ((DateTime)values["Updated"]).Date < DateTime.Now.Date.AddDays(-30))
                 {
                     var whois = Domain.Whois(entity.Fullname);
                     if (whois == null)
