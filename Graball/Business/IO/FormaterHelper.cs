@@ -143,7 +143,10 @@ namespace Graball.Business.IO
 
                 if (currentChar == CharNewLine)                         //É marca de nova linha
                 {                                                      
-                    currentText.Append(Environment.NewLine);           
+                    currentText.Append(Environment.NewLine);
+                    write(currentText.ToString(), lastMask());
+                    currentText.Clear();
+                    marks.Clear();
                 }                                                      
                 else if (                                              
                     isMark(currentChar) &&                              //É uma marca

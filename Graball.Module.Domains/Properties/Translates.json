@@ -126,6 +126,15 @@
     ]
   },
   {
+    "Key": "Domain Name",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Nome de domínio"
+      }
+    ]
+  },
+  {
     "Key": "Updated",
     "Value": [
       {

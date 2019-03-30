@@ -60,10 +60,13 @@ namespace Graball.Module.Domains
                 {
                     ConsoleLoading.Active(true);
                     Output.WriteLine();
+
+
+                    var i = 0;
                     var count = Database.TableDomain.Search(Loop((SQLiteDataReader reader) =>
                     {
                         var entity = new EntityDomain(reader);
-                        Output.WriteLine("{2} ** {0} {1}", entity.Fullname.ToLower().Replace(domain.ToLower(), $"*{domain.ToLower()}*").PadRight(40), entity.Status, entity.Status == Domain.Status.Available ? "#" : "");
+                        Output.Write(entity.ToString(i++ == 0, Domain.Status.WaitingRelease | Domain.Status.Reserved, domain));
                     }), new Dictionary<string, string>()
                     {
                         { "Fullname", "LOWER({0}) LIKE LOWER({1})" },

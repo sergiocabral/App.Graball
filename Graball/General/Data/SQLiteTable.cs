@@ -169,6 +169,54 @@ SELECT {select}
         }
 
         /// <summary>
+        /// Retorna o valor de um campo do primeiro registro.
+        /// </summary>
+        /// <param name="fields">Campos usados no filtro com sua máscra de comparação.</param>
+        /// <param name="entity">Entidade</param>
+        /// <param name="conjunction">Junção dos termos comparados: AND ou OR</param>
+        /// <returns>Total de registros.</returns>
+        public virtual IDictionary<string, object> Values(IDictionary<string, string> fields = null, TTypeOfTable entity = default(TTypeOfTable), string conjunction = "AND")
+        {
+            using (var command = Connection.CreateCommand())
+            {
+                if (fields != null)
+                {
+                    foreach (var field in fields)
+                    {
+                        var property = typeof(TTypeOfTable).GetProperty(field.Key);
+                        command.AddParameter(field.Key, property.PropertyType.IsEnum ? property.GetValue(entity).ToString() : property.GetValue(entity));
+                    }
+                }
+
+                var where = fields == null || fields.Keys.Count == 0 ? "(1 = 1)" : string.Join($" {conjunction} ", fields.Select(a => "(" + string.Format(a.Value, a.Key, ":" + a.Key) + ")").ToArray());
+
+                command.CommandText = $@"
+SELECT *
+  FROM {NameOfTable}
+ WHERE {where}
+ LIMIT 1;
+".Trim();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        var values = new Dictionary<string, object>();
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            values[reader.GetName(i)] = reader.GetValue(i);
+                        }
+                        return values;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Contabiliza o total de registros.
         /// </summary>
         /// <param name="fields">Campos usados no filtro com sua máscra de comparação.</param>

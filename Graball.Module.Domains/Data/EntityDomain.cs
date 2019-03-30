@@ -89,5 +89,40 @@ namespace Graball.Module.Domains.Data
 
             return result.ToString();
         }
+
+        /// <summary>
+        /// Representação da instância como texto.
+        /// Formato para tabela.
+        /// </summary>
+        /// <param name="header">Indica se deve exibir cabeçalho.</param>
+        /// <param name="highlightName">Destaque para o nome</param>
+        /// <param name="highlightStatus">Destaque para o status.</param>
+        /// <returns>Texto.</returns>
+        public string ToString(bool header, Domain.Status highlightStatus = Domain.Status.Undefined, string highlightName = null)
+        {
+            StringBuilder result = new StringBuilder();
+
+            if (header)
+            {
+                result.AppendLine(string.Format("{0} {1} | {2} | {3}",
+                    "#",
+                    "Updated".Translate().PadRight(15),
+                    "Status".Translate().PadRight(14),
+                    "Domain Name".Translate()));
+                result.AppendLine(string.Format("{0}-{1}-|-{2}-|-{3}",
+                    "#",
+                    "".PadRight(15, '-'),
+                    "".PadRight(14, '-'),
+                    "".PadRight(40, '-')));
+            }
+
+            result.AppendLine(string.Format("{0} {1} | {2} | {3}",
+                (this.Status & highlightStatus) == highlightStatus ? "" : "#",
+                this.Updated.ToString("yyyy-MM-dd").PadRight(15),
+                this.Status.ToString().PadRight(14),
+                string.IsNullOrWhiteSpace(highlightName) ? this.Fullname.ToLower() : this.Fullname.ToLower().Replace(highlightName.ToLower(), $"*{highlightName.ToLower()}*")));
+
+            return result.ToString();
+        }
     }
 }

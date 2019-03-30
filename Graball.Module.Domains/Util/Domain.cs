@@ -22,10 +22,11 @@ namespace Graball.Module.Domains.Util
         /// </summary>
         public enum Status
         {
-            Undefined,
-            Registered,
-            Available,
-            WaitingRelease
+            Undefined = 0,
+            Registered = 1,
+            Available = 2,
+            WaitingRelease = 4,
+            Reserved = 8
         }
 
         /// <summary>
@@ -40,9 +41,13 @@ namespace Graball.Module.Domains.Util
             {
                 return Status.Registered;
             }
-            else if (whois.IndexOf("waiting") >= 0)
+            else if (whois.IndexOf("release process:") >= 0)
             {
                 return Status.WaitingRelease;
+            }
+            else if (whois.IndexOf("reserved:") >= 0)
+            {
+                return Status.Reserved;
             }
             else
             {

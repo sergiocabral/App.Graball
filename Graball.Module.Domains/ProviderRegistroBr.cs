@@ -69,6 +69,7 @@ namespace Graball.Module.Domains
                     updated = date;
                 }
             }
+            var i = 0;
             Loop((IList<Match> matches) =>
             {
                 ConsoleLoading.Active(true);
@@ -79,14 +80,15 @@ namespace Graball.Module.Domains
                     Updated = updated
                 };
 
-                var status = Database.TableDomain.Value<string>("Status", new Dictionary<string, string>() {
+                var values = Database.TableDomain.Values(new Dictionary<string, string>() {
                     { "Fullname", "{0} = {1}" },
                     { "Updated", "{0} >= {1}" }
                 }, domain);
 
-                if (!string.IsNullOrWhiteSpace(status))
+                if (!string.IsNullOrWhiteSpace((string)values["Status"]))
                 {
-                    domain.Status = (Domain.Status)Enum.Parse(typeof(Domain.Status), status);
+                    domain.Status = (Domain.Status)Enum.Parse(typeof(Domain.Status), (string)values["Status"]);
+                    domain.Updated = (DateTime)values["Updated"];
                 }
                 else
                 {
@@ -96,7 +98,7 @@ namespace Graball.Module.Domains
                 }
 
                 ConsoleLoading.Active(false);
-                Output.WriteLine("{2} ** {0} {1}", domain.Fullname.PadRight(40), domain.Status, domain.Status == Domain.Status.Available ? "" : "#");
+                Output.Write(domain.ToString(i++ == 0, Domain.Status.Available));
 
                 matches.RemoveAt(0);
                 if (matches.Count > 0)
