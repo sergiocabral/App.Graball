@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Graball.Module.Domains
 {
@@ -102,32 +103,42 @@ namespace Graball.Module.Domains
         {
             do
             {
-                var domain = InputText("Enter your search term:");
-                if (!string.IsNullOrWhiteSpace(domain))
+                var input = InputText("Enter your search term or length of name:").Split(' ');
+                var hasNumber = Regex.IsMatch(input[0], @"^[0-9]{1,2}$");
+                var hasText = !hasNumber || input.Length > 1;
+                var number = hasNumber ? int.Parse(input[0]) : -1;
+                var text = input.Length == 1 ? input[0] : input[1];
+
+                if (!string.IsNullOrWhiteSpace(text))
                 {
                     ConsoleLoading.Active(true);
                     Output.WriteLine();
 
+                    var fields = new Dictionary<string, string>() { { "Status", "{0} <> {1}" }, };
+                    if (hasText) { fields["Fullname"] = "LOWER({0}) LIKE LOWER({1})"; }
+                    if (hasNumber) { fields["Length"] = "{0} = {1}"; }
 
                     var i = 0;
-                    var count = Database.TableDomain.Search(Loop((SQLiteDataReader reader) =>
-                    {
-                        var entity = new EntityDomain(reader);
-                        Output.Write(entity.ToString(i++ == 0, Domain.Status.WaitingRelease | Domain.Status.Reserved, domain));
-                    }), new Dictionary<string, string>()
-                    {
-                        { "Fullname", "LOWER({0}) LIKE LOWER({1})" },
-                        { "Status", "{0} <> {1}" }
-                    }, new EntityDomain
-                    {
-                        Fullname = $"%{domain}%",
-                        Status = Domain.Status.Registered
-                    }, "Fullname ASC");
+                    var count = 
+                        Database.TableDomain.Search(
+                            Loop((SQLiteDataReader reader) => {
+                                var entity = new EntityDomain(reader);
+                                Output.Write(entity.ToString(i++ == 0, Domain.Status.WaitingRelease | Domain.Status.Reserved, hasText ? text : null));
+                            }),
+                            fields,
+                            new EntityDomain
+                            {
+                                Fullname = text[0] == '.' ? $"%{text}" : $"%{text}%",
+                                Length = number,
+                                Status = Domain.Status.Registered
+                            }, 
+                            "Fullname ASC");
 
-                    if (count == 0)
+                    if (i > 0)
                     {
-                        Output.WriteLine("#" + "The search returned no results.".Translate());
+                        Output.WriteLine();
                     }
+                    Output.WriteLine("#" + "The search returned {0:n0} results.".Translate(), count);
                     Output.WriteLine();
                 }
                 else

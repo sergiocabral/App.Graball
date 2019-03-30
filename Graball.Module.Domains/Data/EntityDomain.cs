@@ -44,28 +44,35 @@ namespace Graball.Module.Domains.Data
         /// </summary>
         public virtual string Fullname {
             get => fullname;
-            set => fullname = value == null ? value : value.Trim().ToLower();
+            set
+            {
+                fullname = value == null ? value : value.Trim().ToLower();
+                Name = Regex.Match(Fullname, @"^[^\.]*", RegexOptions.IgnoreCase).Value;
+                Suffix = Regex.Match(Fullname, @"\..*", RegexOptions.IgnoreCase).Value;
+                TLD = Regex.Match(Fullname, @"\.[^\.]*$", RegexOptions.IgnoreCase).Value;
+                Length = Name.Length;
+            }
         }
 
         /// <summary>
         /// Nome antes do primeiro ponto.
         /// </summary>
-        public virtual string Name { get => Regex.Match(Fullname, @"^[^\.]*", RegexOptions.IgnoreCase).Value; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Sufixo apos o primeiro ponto.
         /// </summary>
-        public virtual string Suffix { get => Regex.Match(Fullname, @"\..*", RegexOptions.IgnoreCase).Value; }
+        public virtual string Suffix { get; set; }
 
         /// <summary>
         /// Sufixo depois do último ponto.
         /// </summary>
-        public virtual string TLD { get => Regex.Match(Fullname, @"\.[^\.]*$", RegexOptions.IgnoreCase).Value; }
+        public virtual string TLD { get; set; }
 
         /// <summary>
         /// Comprimento do nome.
         /// </summary>
-        public virtual int Length { get => Name.Length; }
+        public virtual int Length { get; set; }
 
         /// <summary>
         /// Status de disponibilidade.

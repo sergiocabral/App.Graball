@@ -153,20 +153,20 @@
     ]
   },
   {
-    "Key": "Enter your search term:",
+    "Key": "Enter your search term or length of name:",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Digite o termo de pesquisa:"
+        "Value": "Digite o termo de pesquisa ou o comprimento do nome:"
       }
     ]
   },
   {
-    "Key": "The search returned no results.",
+    "Key": "The search returned {0:n0} results.",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "A pesquisa não retornou resultados."
+        "Value": "A pesquisa retornou {0:n0} resultados."
       }
     ]
   },
