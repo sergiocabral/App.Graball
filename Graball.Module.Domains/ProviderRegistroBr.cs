@@ -1,5 +1,6 @@
 ﻿using Graball.Business.Module;
 using Graball.General.IO;
+using Graball.General.Text;
 using Graball.General.Web;
 using Graball.Module.Domains.Data;
 using Graball.Module.Domains.Util;
@@ -35,9 +36,9 @@ namespace Graball.Module.Domains
         public override void Run()
         {
             ChooseOption(new Dictionary<string, Action>() {
-                { "lista-processo-liberacao.txt", () => ParseList("lista-processo-liberacao.txt") },
-                { "lista-processo-competitivo.txt", () => ParseList("lista-processo-competitivo.txt") }
-            }, "View released domain lists");
+                { string.Format("Domain list: {0}".Translate(), "lista-processo-liberacao.txt"), () => ParseList("lista-processo-liberacao.txt") },
+                { string.Format("Domain list: {0}".Translate(), "lista-processo-competitivo.txt"), () => ParseList("lista-processo-competitivo.txt") }
+            });
         }
 
         /// <summary>
@@ -85,11 +86,12 @@ namespace Graball.Module.Domains
 
                 if (!string.IsNullOrWhiteSpace(status))
                 {
-                    domain.Status = status;
+                    domain.Status = (Domain.Status)Enum.Parse(typeof(Domain.Status), status);
                 }
                 else
                 {
-                    domain.Status = Domain.GetStatus(domain.Fullname, domain.TLD).ToString();
+                    domain.Status = Domain.GetStatus(Domain.Whois(domain.Fullname));
+                    domain.Updated = DateTime.Now;
                     Database.TableDomain.InsertOrUpdate(domain);
                 }
 

@@ -96,8 +96,8 @@ DELETE
                 PropertyInfo propertyIdentity = null;
                 var fields = new List<string>();
                 foreach (var property in typeof(TTypeOfTable).GetProperties())
-                {
-                    command.AddParameter(property.Name, property.GetValue(entity));
+                {                    
+                    command.AddParameter(property.Name, property.PropertyType.IsEnum ? property.GetValue(entity).ToString() : property.GetValue(entity));
                     if (property.Name == NameOfFieldIdentity)
                     {
                         propertyIdentity = property;

@@ -18,29 +18,38 @@
     ]
   },
   {
-    "Key": "Search on internet",
+    "Key": "Services on the Internet",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Pesquisar na internet"
+        "Value": "Serviços na internet"
       }
     ]
   },
   {
-    "Key": "Search the local database",
+    "Key": "Consult WHOIS",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Pesquisar no banco de dados local"
+        "Value": "Consultar WHOIS"
       }
     ]
   },
   {
-    "Key": "View released domain lists",
+    "Key": "Local database",
     "Value": [
       {
         "Key": "pt-BR",
-        "Value": "Ver listas de domínios liberados"
+        "Value": "Banco de dados local"
+      }
+    ]
+  },
+  {
+    "Key": "Domain list: {0}",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Lista de domínios: {0}"
       }
     ]
   },
@@ -59,6 +68,33 @@
       {
         "Key": "pt-BR",
         "Value": "Verificando disponibilidade..."
+      }
+    ]
+  },
+  {
+    "Key": "Services",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Serviços"
+      }
+    ]
+  },
+  {
+    "Key": "WHOIS Consultation. Enter the domain:",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Consulta de WHOIS. Digite o domínio:"
+      }
+    ]
+  },
+  {
+    "Key": "Query for the TLD {0} not implemented.",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Consulta para o TLD {0} não implementado."
       }
     ]
   }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Graball.Module.Domains.Util;
+using System;
 using System.Text.RegularExpressions;
 
 namespace Graball.Module.Domains.Data
@@ -8,10 +9,14 @@ namespace Graball.Module.Domains.Data
     /// </summary>
     public class EntityDomain : EntityDomainInterface
     {
+        private string fullname;
         /// <summary>
         /// Nome completo do domínio.
         /// </summary>
-        public virtual string Fullname { get; set; }
+        public virtual string Fullname {
+            get => fullname;
+            set => fullname = value == null ? value : value.Trim().ToLower();
+        }
 
         /// <summary>
         /// Nome antes do primeiro ponto.
@@ -36,7 +41,7 @@ namespace Graball.Module.Domains.Data
         /// <summary>
         /// Status de disponibilidade.
         /// </summary>
-        public virtual string Status { get; set; }
+        public virtual Domain.Status Status { get; set; }
 
         /// <summary>
         /// Última atualização na tabela.

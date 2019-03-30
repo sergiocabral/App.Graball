@@ -266,6 +266,28 @@ namespace Graball.Business.Module
         }
 
         /// <summary>
+        /// Recebe um texto do usuário.
+        /// </summary>
+        /// <param name="title">Título.</param>
+        public string InputText(string title)
+        {
+            Output.WriteLine(title.Translate());
+            Output.Write($"?> ");
+
+            var answer = Input.Read();
+
+            if (!string.IsNullOrWhiteSpace(answer))
+            {
+                Output.WriteLine($"@{answer}");
+            }
+            else
+            {
+                Output.WriteLine($"_{Phrases.CHOOSE_BLANK.Translate()}").WriteLine();
+            }
+            return answer;
+        }
+
+        /// <summary>
         /// Exibe uma lista para seleção.
         /// </summary>
         /// <param name="options">Opções.</param>

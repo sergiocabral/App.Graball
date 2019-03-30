@@ -2,5 +2,17 @@
   {
     "Key": ".br",
     "Value": "registro.br"
+  },
+  {
+    "Key": ".com",
+    "Value": "whois.verisign-grs.com"
+  },
+  {
+    "Key": ".net",
+    "Value": "whois.verisign-grs.com"
+  },
+  {
+    "Key": ".edu",
+    "Value": "whois.verisign-grs.com"
   }
 ]

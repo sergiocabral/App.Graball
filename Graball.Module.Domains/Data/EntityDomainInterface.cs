@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Graball.Module.Domains.Util;
+using System;
 
 namespace Graball.Module.Domains.Data
 {
@@ -35,7 +36,7 @@ namespace Graball.Module.Domains.Data
         /// <summary>
         /// Status de disponibilidade.
         /// </summary>
-        string Status { get; }
+        Domain.Status Status { get; }
 
         /// <summary>
         /// Última atualização na tabela.

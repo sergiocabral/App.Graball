@@ -21,38 +21,52 @@ namespace Graball.Module.Domains.Util
         /// </summary>
         public enum Status
         {
+            Undefined,
             Registered,
-            Available
+            Available,
+            WaitingRelease
         }
 
         /// <summary>
         /// Verifica o status de um domínio.
         /// </summary>
-        /// <param name="domain">Domínio.</param>
-        /// <param name="tld">Responsável pelo domínio.</param>
+        /// <param name="whois">Informações do WHOIS</param>
         /// <returns>Status</returns>
-        public static Status GetStatus(string domain, string tld = null)
+        public static Status GetStatus(string whois)
         {
-            var whois = Whois(domain, tld);
-            return Regex.IsMatch(whois, @"^owner:", RegexOptions.Multiline) ? Status.Registered : Status.Available;
+            var keys = ExtractWhoisKeys(whois);
+            if (keys.ContainsKey("domain name") || keys.ContainsKey("owner"))
+            {
+                return Status.Registered;
+            }
+            else if (whois.IndexOf("waiting") >= 0)
+            {
+                return Status.WaitingRelease;
+            }
+            else
+            {
+                return Status.Available;
+            }
         }
 
         /// <summary>
         /// Consulta o Whois para um domínio.
         /// </summary>
         /// <param name="domain">Domínio.</param>
-        /// <param name="tld">Responsável pelo domínio.</param>
+        /// <param name="server">Responsável pelo domínio.</param>
+        /// <param name="port">Porta de conexão.</param>
         /// <returns>Status</returns>
-        public static string Whois(string domain, string tld = null)
+        public static string WhoisRaw(string domain, string server = null, int port = 43)
         {
             StringBuilder result = new StringBuilder();
 
-            if (tld == null)
-            {
-                tld = Regex.Match(domain, @"\.[^\.]*$").Value;
-            }
+            result.AppendLine();
+            result.AppendLine(new String('%', 60));
+            result.AppendLine(string.Format("{0}:{1} - {2}", server, port, domain));
+            result.AppendLine(new String('%', 60));
+            result.AppendLine();
 
-            using (var stream = new TcpClient(WhoisServers[tld], 43).GetStream())
+            using (var stream = new TcpClient(server, port).GetStream())
             using (var buffered = new BufferedStream(stream))
             {
                 var writer = new StreamWriter(buffered);
@@ -68,6 +82,67 @@ namespace Graball.Module.Domains.Util
             }
 
             return result.ToString();
+        }
+
+        /// <summary>
+        /// Consulta o Whois para um domínio.
+        /// </summary>
+        /// <param name="domain">Domínio.</param>
+        /// <param name="tld">Responsável pelo domínio.</param>
+        /// <param name="acceptRedirect">Opcional. Quando true aceita redirecionamento para outros WHOIS com mais informações.</param>
+        /// <returns>Status</returns>
+        public static string Whois(string domain, string tld = null, bool acceptRedirect = true)
+        {
+            if (tld == null)
+            {
+                tld = Regex.Match(domain, @"\.[^\.]*$").Value;
+            }
+
+            if (!WhoisServers.ContainsKey(tld))
+            {
+                return null;
+            }
+
+            var whois = WhoisRaw(domain, WhoisServers[tld]);
+
+            if (whois == null)
+            {
+                return null;
+            }
+
+            var keys = ExtractWhoisKeys(whois);
+
+            if (keys.ContainsKey("registrar whois server"))
+            {
+                whois += Environment.NewLine + WhoisRaw(domain, keys["registrar whois server"][0]);
+            }
+
+            return whois;
+        }
+
+        /// <summary>
+        /// Extrai as chaves de Whois
+        /// </summary>
+        /// <param name="whois">Texto whois.</param>
+        /// <returns>Chaves Whois</returns>
+        public static IDictionary<string, IList<string>> ExtractWhoisKeys(string whois)
+        {
+            if (whois == null) { return null; }
+
+            var result = new Dictionary<string, IList<string>>();
+            foreach (var lineRaw in whois.Split('\n'))
+            {
+                var line = lineRaw.Trim();
+                if (!Regex.IsMatch(line, @"^\w+.*:.*$")) { continue; }
+                var key = line.Substring(0, line.IndexOf(":")).Trim().ToLower();
+                var value = line.Substring(line.IndexOf(":") + 1).Trim();
+                if (!result.ContainsKey(key))
+                {
+                    result[key] = new List<string>();
+                }
+                result[key].Add(value);
+            }
+            return result;
         }
 
         public static IDictionary<string, string> whoisServers = null;
