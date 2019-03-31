@@ -45,6 +45,15 @@
     ]
   },
   {
+    "Key": "Consult WHOIS with Dictionary",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Consultar WHOIS com Dicionário"
+      }
+    ]
+  },
+  {
     "Key": "Local database",
     "Value": [
       {
@@ -185,6 +194,24 @@
       {
         "Key": "pt-BR",
         "Value": "Modos de consulta:"
+      }
+    ]
+  },
+  {
+    "Key": "The dictionary file not exists: {0}",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "O arquivo do dicionário não existe: {0}"
+      }
+    ]
+  },
+  {
+    "Key": "The dictionary file is not valid: {0}",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "O arquivo do dicionário não é válido: {0}"
       }
     ]
   }

@@ -133,7 +133,10 @@ namespace Graball.Module.Domains.Util
         public static Status GetStatus(string whois)
         {
             var keys = ExtractWhoisKeys(whois);
-            if (keys.ContainsKey("domain name") || keys.ContainsKey("owner") || whois.IndexOf("\"availability\":\"registered\"") >= 0)
+            if (whois.IndexOf("\"availability\":\"unknown\"") >= 0) {
+                return Status.Undefined;
+            }
+            else if (keys.ContainsKey("domain name") || keys.ContainsKey("owner") || whois.IndexOf("\"availability\":\"registered\"") >= 0)
             {
                 return Status.Registered;
             }
@@ -283,7 +286,7 @@ namespace Graball.Module.Domains.Util
             var names = string.Join(',', domains.Select(a => a.Substring(0, (a + ".").IndexOf("."))).ToArray());
 
             var client = new WebClientWithCookie();
-            var result = client.Load($"https://check.instantdomainsearch.com/bulk/?names={names}&tlds={suffix}&hash={hash(domains[0], 27)}");
+            var result = client.Load($"https://check.instantdomainsearch.com/bulk/?names={names}&tlds={suffix}&hash={hash(name + ".com", 27)}");
             return string.IsNullOrWhiteSpace(result.Html) ? null : result.Html;
         }
         
