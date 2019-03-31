@@ -71,8 +71,64 @@ namespace Graball.Module.Domains
             Output.WriteLine();
             var initial = InputText("Initial domain:");
             if (string.IsNullOrWhiteSpace(initial)) { return; }
-            Output.WriteLine();
 
+            Output.WriteLine();
+            if (mode == 0)
+            {
+                WhoisBruteForceWhois(initial, suffix);
+            }
+            else
+            {
+                WhoisBruteForceWebsiteInstantDomainSearchCom(initial, suffix);
+            }
+            Output.WriteLine();
+        }
+
+        /// <summary>
+        /// Consulta Whois usando força bruta no modo comum. Consultando lotes no WebsiteInstantDomainSearchCom
+        /// </summary>
+        /// <param name="initial">Nome inicial</param>
+        /// <param name="suffix">TLD</param>
+        /// <param name="block">Tamanho do bloco para consultar.</param>
+        private void WhoisBruteForceWebsiteInstantDomainSearchCom(string initial, string suffix, int block = 1000)
+        {
+            var list = new List<string>();
+            string whois = string.Empty;
+            var i = 0;
+            Loop((string current) =>
+            {
+                if (list.Count == 0)
+                {
+                    while (list.Count < block)
+                    {
+                        list.Add(current + suffix);
+                        current = Domain.Next(current);
+                    };
+                    whois = Domain.WhoisByWebsiteInstantDomainSearchCom(list.ToArray());
+                }
+                    
+                var entity = new EntityDomain
+                {
+                    Fullname = list[0],
+                    Status = Domain.GetStatus(Regex.Match(whois, list[0].Replace(".", "\\.") + @"[^\}]*", RegexOptions.Singleline).Value),
+                    Updated = DateTime.Now
+                };
+                list.RemoveAt(0);
+
+                Database.TableDomain.InsertOrUpdate(entity);
+                Output.Write(entity.ToString(i++ == 0, Domain.Status.Available));
+
+                return current;
+            }, initial);
+        }
+
+        /// <summary>
+        /// Consulta Whois usando força bruta no modo comum. Consultando cada nome no servidor WHOIS
+        /// </summary>
+        /// <param name="initial">Nome inicial</param>
+        /// <param name="suffix">TLD</param>
+        private void WhoisBruteForceWhois(string initial, string suffix)
+        {
             var i = 0;
             Loop((string current) =>
             {
@@ -81,7 +137,7 @@ namespace Graball.Module.Domains
 
                 if (values == null || ((DateTime)values["Updated"]).Date < DateTime.Now.Date.AddDays(-30))
                 {
-                    var whois = Domain.Whois(entity.Fullname, mode == 0 ? Domain.WhoisService.Normal : Domain.WhoisService.WebsiteInstantDomainSearchCom);
+                    var whois = Domain.Whois(entity.Fullname, Domain.WhoisService.Normal);
                     if (whois == null)
                     {
                         Output.WriteLine("!" + "Could not query suffix: {0}".Translate(), suffix.ToUpper());
@@ -99,7 +155,6 @@ namespace Graball.Module.Domains
                 Output.Write(entity.ToString(i++ == 0, Domain.Status.Available));
                 return Domain.Next(current);
             }, initial);
-            Output.WriteLine();
         }
 
         /// <summary>
@@ -120,7 +175,7 @@ namespace Graball.Module.Domains
                     ConsoleLoading.Active(true);
                     Output.WriteLine();
 
-                    var fields = new Dictionary<string, string>() { { "Status", "{0} <> {1}" }, };
+                    var fields = new Dictionary<string, string>() { { "Status", "{0} = {1}" }, };
                     if (hasText) { fields["Fullname"] = "LOWER({0}) LIKE LOWER({1})"; }
                     if (hasNumber) { fields["Length"] = "{0} = {1}"; }
 
@@ -136,7 +191,7 @@ namespace Graball.Module.Domains
                             {
                                 Fullname = text[0] == '.' ? $"%{text}" : $"%{text}%",
                                 Length = number,
-                                Status = Domain.Status.Registered
+                                Status = Domain.Status.Available
                             }, 
                             "Fullname ASC");
 

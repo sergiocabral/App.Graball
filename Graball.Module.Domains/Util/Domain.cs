@@ -4,6 +4,7 @@ using Graball.General.Web;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -103,7 +104,12 @@ namespace Graball.Module.Domains.Util
             {
                 var letter = !overflow ? c : (char)((byte)c + 1);
 
-                overflow = letter > 'z';
+                if (letter == (byte)'z' + 1)
+                {
+                    letter = '0';
+                }
+
+                overflow = letter == (byte)'9' + 1;
                 if (overflow)
                 {
                     letter = 'a';
@@ -258,9 +264,9 @@ namespace Graball.Module.Domains.Util
         /// Consulta Whois. Usa o website instantdomainsearch.com
         /// Usa Captcha
         /// </summary>
-        /// <param name="domain">Domínio.</param>
+        /// <param name="domains">Domínio.</param>
         /// <returns>Retorn do Whois.</returns>
-        public static string WhoisByWebsiteInstantDomainSearchCom(string domain)
+        public static string WhoisByWebsiteInstantDomainSearchCom(params string[] domains)
         {
             string hash(string e, int t) {
                 int n, r, o;
@@ -272,11 +278,12 @@ namespace Graball.Module.Domains.Util
                 return n.ToString();
             }
 
-            var name = domain.Substring(0, domain.IndexOf("."));
-            var suffix = domain.Substring(domain.IndexOf(".") + 1);
+            var name = domains[0].Substring(0, domains[0].IndexOf("."));
+            var suffix = domains[0].Substring(domains[0].IndexOf(".") + 1);
+            var names = string.Join(',', domains.Select(a => a.Substring(0, (a + ".").IndexOf("."))).ToArray());
 
             var client = new WebClientWithCookie();
-            var result = client.Load($"https://check.instantdomainsearch.com/bulk/?names={name}&tlds={suffix}&hash={hash(domain, 27)}");
+            var result = client.Load($"https://check.instantdomainsearch.com/bulk/?names={names}&tlds={suffix}&hash={hash(domains[0], 27)}");
             return string.IsNullOrWhiteSpace(result.Html) ? null : result.Html;
         }
         
