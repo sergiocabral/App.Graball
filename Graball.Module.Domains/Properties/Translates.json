@@ -214,5 +214,23 @@
         "Value": "O arquivo do dicionário não é válido: {0}"
       }
     ]
+  },
+  {
+    "Key": "Domain Availability",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Disponibilidade de domínio"
+      }
+    ]
+  },
+  {
+    "Key": "Enter a domain name to verify:",
+    "Value": [
+      {
+        "Key": "pt-BR",
+        "Value": "Digite um nome de domínio para verificar:"
+      }
+    ]
   }
 ]

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -46,12 +47,52 @@ namespace Graball.Module.Domains
         public override void Run()
         {
             ChooseOption(new Dictionary<string, Action>() {
-                { "Local database", LocalDatabase },                
+                { "Local database", LocalDatabase },
+                { "Domain Availability", DomainAvailability },
                 { "Consult WHOIS", Whois },
                 { "Consult WHOIS with Dictionary", WhoisDicionary},
                 { "Consult WHOIS with Brute Force", WhoisBruteForce },
                 { "Services on the Internet", () => ChooseModule(Properties.Resources.ContextModuleProvider, "Services") },
             });
+        }
+
+        private void DomainAvailability()
+        {
+            do
+            {
+                var name = InputText("Enter a domain name to verify:").ToLower();
+                if (string.IsNullOrWhiteSpace(name)) { return; }
+                Output.WriteLine();
+
+                var i = 0;
+                Loop((IList<string> list) =>
+                {
+                    if (list.Count == 0) { return null; }
+
+                    var entity = new EntityDomain(name + "." + list[0]);
+                    var values = Database.TableDomain.Values(new Dictionary<string, string> { { "Fullname", "{0} = {1}" } }, entity);
+
+                    if (values == null || ((DateTime)values["Updated"]).Date < DateTime.Now.Date.AddDays(-30))
+                    {
+                        var whois = Domain.Whois(entity.Fullname);
+                        entity.Status = Domain.GetStatus(whois);
+                        entity.Updated = DateTime.Now;
+                        Database.TableDomain.InsertOrUpdate(entity);
+                    }
+                    else
+                    {
+                        entity.Status = (Domain.Status)Enum.Parse(typeof(Domain.Status), (string)values["Status"]);
+                        entity.Updated = (DateTime)values["Updated"];
+                    }
+
+                    Output.Write(entity.ToString(i++ == 0, Domain.Status.Available));
+
+                    list.RemoveAt(0);
+                    return list;
+                }, Domain.WhoisServers.Select(a => a.Key).ToList());
+
+                Output.WriteLine();
+            } while (true);
         }
 
         /// <summary>
