@@ -1,0 +1,282 @@
+#################### ###################################################################################################################################################
+### Graball v1.0 ### ###################################################################################################################################################
+#################### ###################################################################################################################################################
+
+System component loaded: Graball.Output.Console v1.0
+System component loaded: Graball.Output.File v1.0
+System component loaded: Graball.Input.CommandLine v1.0
+System component loaded: Graball.Input.Console v1.0
+System component loaded: Graball.Input.File v1.0
+System component loaded: Graball.Module.Domains v1.0
+
+Available modules:
+ 1) Internet domains
+
+Choose or input blank to exit: 1) Internet domains
+
+Operations:
+ 1) Local database
+ 2) Domain Availability
+ 3) Consult WHOIS
+ 4) Consult WHOIS with Dictionary
+ 5) Consult WHOIS with Brute Force
+ 6) Services on the Internet
+
+Choose or input blank to exit: 2) Domain Availability
+
+Enter a domain name to verify:
+> drone
+
+To pause use [P], to stop use [ESC].
+
+ Updated         | Status         | Domain Name
+-----------------|----------------|-----------------------------------------
+ 2022-06-24      | Registered     | drone.ac
+ 2022-06-24      | Available      | drone.ad
+ 2022-06-24      | Registered     | drone.ae
+ 2022-06-24      | Registered     | drone.aero
+ 2022-06-24      | Registered     | drone.af
+ 2022-06-24      | Registered     | drone.ag
+ 2022-06-24      | Available      | drone.ai
+ 2022-06-24      | Available      | drone.al
+ 2022-06-24      | Registered     | drone.am
+ 2022-06-24      | Available      | drone.as
+ 2022-06-24      | Registered     | drone.asia
+ 2022-06-24      | Available      | drone.at
+ 2022-06-24      | Available      | drone.au
+ 2022-06-24      | Available      | drone.aw
+ 2022-06-24      | Available      | drone.ax
+ 2022-06-24      | Available      | drone.az
+ 2022-06-24      | Available      | drone.ba
+ 2022-06-24      | Registered     | drone.bar
+ 2022-06-24      | Available      | drone.be
+ 2022-06-24      | Registered     | drone.berlin
+ 2022-06-24      | Available      | drone.best
+ 2022-06-24      | Registered     | drone.bg
+ 2022-06-24      | Registered     | drone.bi
+ 2022-06-24      | Registered     | drone.biz
+ 2022-06-24      | Available      | drone.bj
+ 2022-06-24      | Available      | drone.bo
+ 2022-06-24      | Available      | drone.br
+ 2022-06-24      | Available      | drone.br.com
+ 2022-06-24      | Available      | drone.bt
+ 2022-06-24      | Registered     | drone.bw
+ 2022-06-24      | Registered     | drone.by
+ 2022-06-24      | Available      | drone.bz
+ 2022-06-24      | Available      | drone.bzh
+ 2022-06-24      | Registered     | drone.ca
+ 2022-06-24      | Available      | drone.cat
+ 2022-06-24      | Registered     | drone.cc
+ 2022-06-24      | Registered     | drone.cd
+ 2022-06-24      | Registered     | drone.ceo
+ 2022-06-24      | Registered     | drone.cf
+ 2022-06-24      | Available      | drone.ch
+ 2022-06-24      | Registered     | drone.ci
+ 2022-06-24      | Available      | drone.ck
+ 2022-06-24      | Registered     | drone.cl
+ 2022-06-24      | Registered     | drone.cloud
+ 2022-06-24      | Registered     | drone.club
+ 2022-06-24      | Registered     | drone.cn
+ 2022-06-24      | Registered     | drone.cn.com
+ 2022-06-24      | Registered     | drone.co
+ 2022-06-24      | Registered     | drone.co.nl
+ 2022-06-24      | Registered     | drone.com
+ 2022-06-24      | Available      | drone.coop
+ 2022-06-24      | Registered     | drone.cx
+ 2022-06-24      | Available      | drone.cy
+ 2022-06-24      | Available      | drone.cz
+ 2022-06-24      | Available      | drone.de
+ 2022-06-24      | Available      | drone.dk
+ 2022-06-24      | Registered     | drone.dm
+ 2022-06-24      | Available      | drone.dz
+ 2022-06-24      | Available      | drone.ec
+ 2022-06-24      | Available      | drone.edu
+ 2022-06-24      | Available      | drone.ee
+ 2022-06-24      | Available      | drone.eg
+ 2022-06-24      | Available      | drone.es
+ 2022-06-24      | Available      | drone.eu
+ 2022-06-24      | Registered     | drone.eu.com
+ 2022-06-24      | Available      | drone.eus
+ 2022-06-24      | Available      | drone.fi
+ 2022-06-24      | Registered     | drone.fo
+ 2022-06-24      | Available      | drone.fr
+ 2022-06-24      | Available      | drone.gb
+ 2022-06-24      | Available      | drone.gb.com
+ 2022-06-24      | Registered     | drone.gb.net
+ 2022-06-24      | Available      | drone.qc.com
+ 2022-06-24      | Available      | drone.ge
+ 2022-06-24      | Available      | drone.gg
+ 2022-06-24      | Available      | drone.gi
+ 2022-06-24      | Registered     | drone.gl
+ 2022-06-24      | Available      | drone.gm
+ 2022-06-24      | Available      | drone.gov
+ 2022-06-24      | Available      | drone.gr
+ 2022-06-24      | Registered     | drone.gs
+ 2022-06-24      | Registered     | drone.gy
+ 2022-06-24      | Available      | drone.hamburg
+ 2022-06-24      | Registered     | drone.hiphop
+ 2022-06-24      | Registered     | drone.hk
+ 2022-06-24      | Available      | drone.hm
+ 2022-06-24      | Available      | drone.hn
+ 2022-06-24      | Available      | drone.host
+ 2022-06-24      | Registered     | drone.hr
+ 2022-06-24      | Registered     | drone.ht
+ 2022-06-24      | Available      | drone.hu
+ 2022-06-24      | Available      | drone.hu.com
+ 2022-06-24      | Registered     | drone.id
+ 2022-06-24      | Registered     | drone.ie
+ 2022-06-24      | Available      | drone.il
+ 2022-06-24      | Registered     | drone.im
+ 2022-06-24      | Available      | drone.in
+ 2022-06-24      | Registered     | drone.info
+ 2022-06-24      | Available      | drone.ing
+ 2022-06-24      | Available      | drone.ink
+ 2022-06-24      | Available      | drone.int
+ 2022-06-24      | Registered     | drone.io
+ 2022-06-24      | Available      | drone.iq
+ 2022-06-24      | Available      | drone.ir
+ 2022-06-24      | Available      | drone.is
+ 2022-06-24      | Available      | drone.it
+ 2022-06-24      | Available      | drone.je
+ 2022-06-24      | Available      | drone.jobs
+ 2022-06-24      | Available      | drone.jp
+ 2022-06-24      | Registered     | drone.ke
+ 2022-06-24      | Available      | drone.kg
+ 2022-06-24      | Available      | drone.ki
+ 2022-06-24      | Registered     | drone.kr
+ 2022-06-24      | Available      | drone.kz
+ 2022-06-24      | Available      | drone.la
+ 2022-06-24      | Available      | drone.li
+ 2022-06-24      | Registered     | drone.london
+ 2022-06-24      | Available      | drone.lt
+ 2022-06-24      | Available      | drone.lu
+ 2022-06-24      | Available      | drone.lv
+ 2022-06-24      | Available      | drone.ly
+ 2022-06-24      | Registered     | drone.ma
+ 2022-06-24      | Available      | drone.mc
+ 2022-06-24      | Available      | drone.md
+ 2022-06-24      | Registered     | drone.me
+ 2022-06-24      | Registered     | drone.mg
+ 2022-06-24      | Available      | drone.mil
+ 2022-06-24      | Available      | drone.mk
+ 2022-06-24      | Available      | drone.ml
+ 2022-06-24      | Available      | drone.mo
+ 2022-06-24      | Registered     | drone.mobi
+ 2022-06-24      | Registered     | drone.ms
+ 2022-06-24      | Available      | drone.mt
+ 2022-06-24      | Registered     | drone.mu
+ 2022-06-24      | Available      | drone.museum
+ 2022-06-24      | Available      | drone.mx
+ 2022-06-24      | Available      | drone.my
+ 2022-06-24      | Registered     | drone.mz
+ 2022-06-24      | Registered     | drone.na
+ 2022-06-24      | Available      | drone.name
+ 2022-06-24      | Available      | drone.nc
+ 2022-06-24      | Registered     | drone.net
+ 2022-06-24      | Registered     | drone.nf
+ 2022-06-24      | Registered     | drone.ng
+ 2022-06-24      | Registered     | drone.nl
+ 2022-06-24      | Available      | drone.no
+ 2022-06-24      | Available      | drone.no.com
+ 2022-06-24      | Available      | drone.nu
+ 2022-06-24      | Available      | drone.nz
+ 2022-06-24      | Available      | drone.om
+ 2022-06-24      | Registered     | drone.ong
+ 2022-06-24      | Registered     | drone.ooo
+ 2022-06-24      | Registered     | drone.org
+ 2022-06-24      | Available      | drone.paris
+ 2022-06-24      | Registered     | drone.pe
+ 2022-06-24      | Available      | drone.pf
+ 2022-06-24      | Registered     | drone.pics
+ 2022-06-24      | Registered     | drone.pl
+ 2022-06-24      | Available      | drone.pm
+ 2022-06-24      | Available      | drone.pr
+ 2022-06-24      | Available      | drone.press
+ 2022-06-24      | Registered     | drone.pro
+ 2022-06-24      | Available      | drone.pt
+ 2022-06-24      | Available      | drone.pub
+ 2022-06-24      | Registered     | drone.pw
+ 2022-06-24      | Registered     | drone.qa
+ 2022-06-24      | Available      | drone.re
+ 2022-06-24      | Registered     | drone.ro
+ 2022-06-24      | Registered     | drone.rs
+ 2022-06-24      | Available      | drone.ru
+ 2022-06-24      | Available      | drone.sa
+ 2022-06-24      | Registered     | drone.sa.com
+ 2022-06-24      | Registered     | drone.sb
+ 2022-06-24      | Available      | drone.sc
+ 2022-06-24      | Available      | drone.se
+ 2022-06-24      | Available      | drone.se.com
+ 2022-06-24      | Available      | drone.se.net
+ 2022-06-24      | Available      | drone.sg
+ 2022-06-24      | Registered     | drone.sh
+ 2022-06-24      | Available      | drone.si
+ 2022-06-24      | Available      | drone.sk
+ 2022-06-24      | Available      | drone.sm
+ 2022-06-24      | Registered     | drone.st
+ 2022-06-24      | Registered     | drone.so
+ 2022-06-24      | Available      | drone.su
+ 2022-06-24      | Registered     | drone.sx
+ 2022-06-24      | Registered     | drone.sy
+ 2022-06-24      | Available      | drone.tc
+ 2022-06-24      | Registered     | drone.tel
+ 2022-06-24      | Available      | drone.tf
+ 2022-06-24      | Available      | drone.th
+ 2022-06-24      | Available      | drone.tj
+ 2022-06-24      | Available      | drone.tk
+ 2022-06-24      | Available      | drone.tl
+ 2022-06-24      | Available      | drone.tm
+ 2022-06-24      | Available      | drone.tn
+ 2022-06-24      | Available      | drone.to
+ 2022-06-24      | Registered     | drone.top
+ 2022-06-24      | Available      | drone.tp
+ 2022-06-24      | Available      | drone.tr
+ 2022-06-24      | Registered     | drone.travel
+ 2022-06-24      | Registered     | drone.tw
+ 2022-06-24      | Registered     | drone.tv
+ 2022-06-24      | Available      | drone.tz
+ 2022-06-24      | Available      | drone.ua
+ 2022-06-24      | Available      | drone.ug
+ 2022-06-24      | Registered     | drone.uk
+ 2022-06-24      | Registered     | drone.uk.com
+ 2022-06-24      | Registered     | drone.uk.net
+ 2022-06-24      | Available      | drone.ac.uk
+ 2022-06-24      | Available      | drone.gov.uk
+ 2022-06-24      | Registered     | drone.us
+ 2022-06-24      | Registered     | drone.us.com
+ 2022-06-24      | Available      | drone.uy
+ 2022-06-24      | Available      | drone.uy.com
+ 2022-06-24      | Registered     | drone.uz
+ 2022-06-24      | Available      | drone.va
+ 2022-06-24      | Registered     | drone.vc
+ 2022-06-24      | Available      | drone.ve
+ 2022-06-24      | Available      | drone.vg
+ 2022-06-24      | Available      | drone.vu
+ 2022-06-24      | Registered     | drone.wang
+ 2022-06-24      | Available      | drone.wf
+ 2022-06-24      | Available      | drone.wiki
+ 2022-06-24      | Registered     | drone.ws
+ 2022-06-24      | Registered     | drone.xxx
+ 2022-06-24      | Registered     | drone.xyz
+ 2022-06-24      | Available      | drone.yu
+ 2022-06-24      | Registered     | drone.za.com
+
+Enter a domain name to verify:
+> (blank)
+
+Operations:
+ 1) Local database
+ 2) Domain Availability
+ 3) Consult WHOIS
+ 4) Consult WHOIS with Dictionary
+ 5) Consult WHOIS with Brute Force
+ 6) Services on the Internet
+
+Choose or input blank to exit: (blank)
+
+Available modules:
+ 1) Internet domains
+
+Choose or input blank to exit: (blank)
+
+Finished.

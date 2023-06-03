@@ -1,0 +1,15 @@
+#################### #################################################################################
+### Graball v1.0 ### #################################################################################
+#################### #################################################################################
+
+System component loaded: Graball.Output.Console v1.0
+System component loaded: Graball.Output.File v1.0
+System component loaded: Graball.Input.CommandLine v1.0
+System component loaded: Graball.Input.Console v1.0
+System component loaded: Graball.Input.File v1.0
+System component loaded: Graball.Module.Domains v1.0
+
+Available modules:
+ 1) Internet domains
+
+Choose or input blank to exit: 
